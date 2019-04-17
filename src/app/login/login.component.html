@@ -1,0 +1,25 @@
+<mat-toolbar color="primary" class="reg-title">
+    <h2>Login</h2>
+</mat-toolbar>
+
+
+<form action="" class="reg-form" (ngSubmit)="onSubmit()">
+  
+    <mat-form-field class="full-width">
+        <input matInput placeholder="Email" type="text" [formControl]="email" required>
+        <mat-hint>Enter your Email adress</mat-hint>
+    </mat-form-field>
+    <mat-form-field class="full-width">
+      <input matInput placeholder="Password" type="text" [formControl]="password" required>
+      <mat-hint>Enter your password</mat-hint>
+  </mat-form-field>
+
+    <button mat-raised-button color="primary">Log in</button>
+    <button mat-button color="primary">Register</button>
+
+
+  <!-- <span>
+    Value: {{ email.value }}
+  </span> -->
+
+</form>
