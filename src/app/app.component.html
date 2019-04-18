@@ -1,8 +1,18 @@
+<!-- top header -->
 <header>
     <section class="main-title">
         <span>Bookstore</span>
     </section>
 </header>
+
+<!-- nav -->
+<nav class="navbar">
+    <div class="navbar-section">
+        <a mat-raised-button color="link" class="navbar-section-item" routerLink="/">Books</a>
+        <a mat-raised-button color="link" class="navbar-section-item" href="#">Something</a>
+        <a mat-raised-button color="link" class="navbar-section-item" routerLink="/login">Login</a>
+    </div>
+</nav>
 
 <div *ngIf="currentUser">
 

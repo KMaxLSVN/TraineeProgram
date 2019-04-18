@@ -1,10 +1,10 @@
-.log-wrapper{
+.reg-wrapper{
     display: flex;
     align-items: center;
     flex-direction: column;
 
-    .log-form,
-    .log-title{
+    .reg-form,
+    .reg-title{
         min-width: 150px;
         max-width: 500px;
         width: 100%;
@@ -17,7 +17,8 @@
             padding: 15px 0;
         }
     }
-    button[type="submit"] {
-        margin-right: 50px;
+    .reg-btn {
+        display: flex;
+        justify-content: space-between;
     }
 }

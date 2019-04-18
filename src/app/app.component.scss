@@ -9,3 +9,16 @@
         color: #3f51b5;
     }
 }
+
+.navbar{
+    width: 100%;
+    background-color: #e8eaf6;
+    &-section{
+        display: flex;
+        justify-content: space-around;
+        padding: 10px 0;
+        &-item{
+            width: 150px;
+        }
+    }
+}

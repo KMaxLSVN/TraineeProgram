@@ -7,14 +7,17 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
+import { RegisterComponent } from './register/register.component';
 import { BooksComponent } from './books/books.component';
 import { BookComponent } from './book/book.component';
 import { AuthenticationService } from './_services/authentication.service';
+import { UserService } from './_services/user.service';
 
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 
 import { HttpClientModule }   from '@angular/common/http';
 
@@ -23,6 +26,7 @@ const appRoutes: Routes = [
   { path: '', component: BooksComponent },
   { path: 'book/:id', component: BookComponent },
   { path: 'login', component: LoginComponent, pathMatch: 'full' },
+  { path: 'register', component: RegisterComponent, pathMatch: 'full' },
   { path: 'about', redirectTo: '/', pathMatch: 'full' },
   { path: 'contact', redirectTo: '/', pathMatch: 'full' },
 
@@ -35,6 +39,7 @@ const appRoutes: Routes = [
   declarations: [
     AppComponent,
     LoginComponent,
+    RegisterComponent,
     BooksComponent,
     BookComponent,
   ],
@@ -50,10 +55,14 @@ const appRoutes: Routes = [
     MatFormFieldModule,
     MatToolbarModule,
     MatButtonModule,
+    MatCardModule,
 
     HttpClientModule,
   ],
-  providers: [AuthenticationService],
+  providers: [
+    AuthenticationService,
+    UserService,
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { AuthenticationService } from '../_services/authentication.service';
+import { AuthenticationService } from '../_services/';
 import { Router } from '@angular/router';
-
 
 
 @Component({
@@ -11,16 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.scss']
 
 })
-// export class FormComponent implements OnInit {
 
-//   name = new FormControl('');
-
-//   constructor() { }
-
-//   ngOnInit() {
-//   }
-
-// }
 export class LoginComponent  implements OnInit  {
 
   email = new FormControl('');
@@ -47,11 +37,6 @@ export class LoginComponent  implements OnInit  {
     this.router.navigate(['/books'])
   }
 
-
-  
-
-  
-  
 }
 
 

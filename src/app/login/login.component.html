@@ -1,25 +1,31 @@
-<mat-toolbar color="primary" class="reg-title">
-    <h2>Login</h2>
-</mat-toolbar>
+<mat-card>
 
+  <mat-card-content class="log-wrapper">
 
-<form action="" class="reg-form">
-  
-    <mat-form-field class="full-width">
-        <input matInput placeholder="Email" type="text" [formControl]="email" required>
-        <mat-hint>Enter your Email adress</mat-hint>
-    </mat-form-field>
-    <mat-form-field class="full-width">
-      <input matInput placeholder="Password" type="text" [formControl]="password" required>
-      <mat-hint>Enter your password</mat-hint>
-  </mat-form-field>
+      <mat-toolbar color="primary" class="log-title">
+          <h2>Login</h2>
+      </mat-toolbar>
+      
+      <form action="" class="log-form">
+        
+          <mat-form-field class="full-width">
+              <input matInput placeholder="Email" type="email" id="inputEmail" [formControl]="email" required>
+              <mat-hint>Enter your Email adress</mat-hint>
+          </mat-form-field>
+          <mat-form-field class="full-width">
+            <input matInput placeholder="Password" type="password" id="inputPassword" [formControl]="password" required>
+            <mat-hint>Enter your password</mat-hint>
+          </mat-form-field>
+      
+          <button mat-raised-button color="primary" (click)="login()" type="submit">Log in</button>
+          <button mat-button color="primary" type="button" routerLink="/register">Register</button>
+      
+        <!-- <span>
+          Value: {{ email.value }}
+        </span> -->
+        
+      </form>
 
-    <button mat-raised-button color="primary" (click)="login()">Log in</button>
-    <button mat-button color="primary">Register</button>
+  </mat-card-content>
 
-
-  <!-- <span>
-    Value: {{ email.value }}
-  </span> -->
-
-</form>
+</mat-card>

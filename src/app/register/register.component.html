@@ -1,0 +1,38 @@
+<mat-card>
+    <mat-card-content class="reg-wrapper">
+
+        <mat-toolbar color="primary" class="reg-title">
+            <h2>Registration</h2>
+        </mat-toolbar>
+        
+        <form action="" class="reg-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+
+            <mat-form-field class="full-width">
+                <input matInput placeholder="Firstname" type="name" id="inputFirstname" formControlName="firstName" required>
+                <mat-hint>Enter your password</mat-hint>
+            </mat-form-field>
+
+            <mat-form-field class="full-width">
+                <input matInput placeholder="Lastname" type="name" id="inputLastname" formControlName="lastName" required>
+                <mat-hint>Enter your password</mat-hint>
+            </mat-form-field>
+
+            <mat-form-field class="full-width">
+                <input matInput placeholder="Email" type="email" id="inputEmail" formControlName="email" required>
+                <mat-hint>Enter your Email adress</mat-hint>
+            </mat-form-field>
+
+            <mat-form-field class="full-width">
+                <input matInput placeholder="Password" type="password" id="inputPassword" formControlName="password" required>
+                <mat-hint>Enter your password</mat-hint>
+            </mat-form-field>
+
+            <div class="reg-btn">
+                <button mat-raised-button color="primary" type="button" routerLink="/login">Back</button>
+                <button mat-raised-button color="primary" type="button" routerLink="/">Register</button>
+            </div>
+        
+        </form>
+          
+    </mat-card-content>
+</mat-card>
