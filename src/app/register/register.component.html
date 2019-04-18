@@ -5,7 +5,7 @@
             <h2>Registration</h2>
         </mat-toolbar>
         
-        <form action="" class="reg-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <form  class="reg-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
 
             <mat-form-field class="full-width">
                 <input matInput placeholder="Firstname" type="name" id="inputFirstname" formControlName="firstName" required>
@@ -29,7 +29,7 @@
 
             <div class="reg-btn">
                 <button mat-raised-button color="primary" type="button" routerLink="/login">Back</button>
-                <button mat-raised-button color="primary" type="button" routerLink="/">Register</button>
+                <input type="submit" value="Register">
             </div>
         
         </form>

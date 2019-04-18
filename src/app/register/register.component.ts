@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 
 import { AuthenticationService } from '../_services/';
+import { UserService } from '../_services';
 import { User } from '../_models/';
 
 @Component({
@@ -20,6 +21,7 @@ import { User } from '../_models/';
       private formBuilder: FormBuilder,
       private router: Router,
       private service: AuthenticationService,
+      private userService: UserService,
     ){
       if (this.service.currentUserValue) { 
         this.router.navigate(['/']);
@@ -40,7 +42,7 @@ import { User } from '../_models/';
     }
 
     onSubmit() {
-
+        this.userService.register(this.registerForm.value)
     }
   
   }

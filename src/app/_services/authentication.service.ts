@@ -26,7 +26,7 @@ export class AuthenticationService {
     login(email: string, password: string) {
         let user = new User();
         user.email = email;
-        user.isAdmin = email === "admin@admin.com" ;
+        user.isAdmin = email === "admin@admin.com";
         this.currentUserSubject.next(user);
         localStorage.setItem('currentUser', JSON.stringify(user));
         return user;

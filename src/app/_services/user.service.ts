@@ -13,6 +13,9 @@ export class UserService {
     ){}
 
     register( user: User) {
-        return ;
+        console.log(user);
+        localStorage.setItem('registerUser', JSON.stringify(user));
+
+        return user;
     }
 }
