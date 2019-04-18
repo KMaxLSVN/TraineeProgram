@@ -1,2 +1,0 @@
-# TraineeProgram
-Angular
