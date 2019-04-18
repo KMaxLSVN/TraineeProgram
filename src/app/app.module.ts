@@ -21,8 +21,8 @@ import { HttpClientModule }   from '@angular/common/http';
 
 const appRoutes: Routes = [
   { path: '', component: BooksComponent },
-  { path: 'book', component: BookComponent },
-  { path: 'login', component: LoginComponent },
+  { path: 'book/:id', component: BookComponent },
+  { path: 'login', component: LoginComponent, pathMatch: 'full' },
   { path: 'about', redirectTo: '/', pathMatch: 'full' },
   { path: 'contact', redirectTo: '/', pathMatch: 'full' },
 

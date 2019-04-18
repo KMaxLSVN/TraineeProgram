@@ -5,7 +5,10 @@
 </header>
 
 <div *ngIf="currentUser">
-    <div>{{_service.currentUser.value.email}}></div>
+
+    <div contenteditable="true">Hello {{currentUser.email}}</div>
+    <!-- <div [(ngModel)]="emailRender">One more</div> -->
+
     <button (click)="logout()">Logout</button>
 </div>
 <router-outlet></router-outlet>

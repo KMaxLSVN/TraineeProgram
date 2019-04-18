@@ -29,6 +29,7 @@ export class AuthenticationService {
         user.isAdmin = email === "admin@admin.com" ;
         this.currentUserSubject.next(user);
         localStorage.setItem('currentUser', JSON.stringify(user));
+        return user;
     }
 
     logout() {
