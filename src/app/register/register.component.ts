@@ -6,6 +6,7 @@ import { AuthenticationService } from '../_services/';
 import { UserService } from '../_services';
 import { User } from '../_models/';
 
+
 @Component({
     selector: 'app-register',
     templateUrl: './register.component.html',
@@ -22,6 +23,7 @@ import { User } from '../_models/';
       private router: Router,
       private service: AuthenticationService,
       private userService: UserService,
+
     ){
       if (this.service.currentUserValue) { 
         this.router.navigate(['/']);
@@ -42,7 +44,9 @@ import { User } from '../_models/';
     }
 
     onSubmit() {
-        this.userService.register(this.registerForm.value)
+        this.userService.register(this.registerForm.value);
+
+        this.router.navigate(['/login']);
     }
   
   }

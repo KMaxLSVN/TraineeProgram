@@ -3,19 +3,62 @@ import { HttpClient } from '@angular/common/http';
 
 import { User } from '../_models';
 
+import { ToastrService } from 'ngx-toastr';
+
 @Injectable({ 
     providedIn: 'root' 
 })
 export class UserService {
 
     constructor(
-        private http: HttpClient
+        private http: HttpClient,
+
+        private toastr: ToastrService,
     ){}
 
-    register( user: User) {
-        console.log(user);
-        localStorage.setItem('registerUser', JSON.stringify(user));
+    register(user: User) {
+        let usersBase: User[] = JSON.parse(localStorage.getItem('registerUser'));
+        if (!usersBase) {
+            localStorage.setItem('registerUser', JSON.stringify([user]));
+            this.toastr.success('This is just the beginning','First user!');
+            this.toastr.info('User Base was created!','LocalStorage');
+        } else {
+            const isUserExist = usersBase.find((item, index: number) => {
+                if (item.email === user.email) {
+                    return true;
+                }
+                return false;
+            })
+            if (isUserExist) {
+                this.toastr.warning('', 'Email allready exist');
+                return;
+            }
+            usersBase.push(user);
+            localStorage.setItem('registerUser', JSON.stringify(usersBase));
+            this.toastr.success('Congratulations!','You have been registered');
+        }
 
         return user;
     }
+
+// register( user: User) {
+//     let usersBase: User[] = JSON.parse(localStorage.getItem('registerUser'));
+//     if ( !usersBase ) {
+//         localStorage.setItem('registerUser', JSON.stringify([user]));
+//     } else {
+//         usersBase.filter(function(item) {
+//             if (item.email === user.email) {
+//                 alert('Email allready exist');
+//             } else {
+//                 usersBase.push(JSON.parse(localStorage.getItem('registerUser')));
+//                 localStorage.setItem('registerUser', JSON.stringify([usersBase]));
+//             }
+//         })
+//     }
+
+//     return user;
+// }
+
+
 }
+

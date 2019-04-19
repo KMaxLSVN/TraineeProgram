@@ -21,6 +21,8 @@ import { MatCardModule } from '@angular/material/card';
 
 import { HttpClientModule }   from '@angular/common/http';
 
+import { ToastrModule } from 'ngx-toastr';
+
 
 const appRoutes: Routes = [
   { path: '', component: BooksComponent },
@@ -58,6 +60,9 @@ const appRoutes: Routes = [
     MatCardModule,
 
     HttpClientModule,
+
+    ToastrModule,
+    ToastrModule.forRoot(),
   ],
   providers: [
     AuthenticationService,
