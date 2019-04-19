@@ -6,7 +6,7 @@ import { User } from '../_models';
 import { ToastrService } from 'ngx-toastr';
 
 @Injectable({ 
-    providedIn: 'root' 
+    providedIn: 'root',
 })
 export class UserService {
 
@@ -20,6 +20,7 @@ export class UserService {
         let usersBase: User[] = JSON.parse(localStorage.getItem('registerUser'));
         if (!usersBase) {
             localStorage.setItem('registerUser', JSON.stringify([user]));
+            // Message to user
             this.toastr.success('This is just the beginning','First user!');
             this.toastr.info('User Base was created!','LocalStorage');
         } else {
@@ -30,11 +31,12 @@ export class UserService {
                 return false;
             })
             if (isUserExist) {
-                this.toastr.warning('', 'Email allready exist');
+                this.toastr.warning('Email allready exist');
                 return;
             }
             usersBase.push(user);
             localStorage.setItem('registerUser', JSON.stringify(usersBase));
+            // Message to user
             this.toastr.success('Congratulations!','You have been registered');
         }
 
