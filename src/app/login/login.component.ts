@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { AuthenticationService } from '../_services/';
 import { Router } from '@angular/router';

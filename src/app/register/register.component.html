@@ -5,31 +5,48 @@
             <h2>Registration</h2>
         </mat-toolbar>
         
-        <form  class="reg-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <form novalidate class="reg-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
 
             <mat-form-field class="full-width">
-                <input matInput placeholder="Firstname" type="name" id="inputFirstname" formControlName="firstName" required>
-                <mat-hint>Enter your password</mat-hint>
+                <input matInput
+                    placeholder="First Name"
+                    type="name"
+                    id="inputFirstname"
+                    formControlName="firstName"
+                    required>
+                <mat-error>You must enter a value</mat-error>
             </mat-form-field>
 
             <mat-form-field class="full-width">
-                <input matInput placeholder="Lastname" type="name" id="inputLastname" formControlName="lastName" required>
-                <mat-hint>Enter your password</mat-hint>
+                <input matInput
+                    placeholder="Last Name"
+                    type="name"
+                    id="inputLastname"
+                    formControlName="lastName"
+                    required>
             </mat-form-field>
 
             <mat-form-field class="full-width">
-                <input matInput placeholder="Email" type="email" id="inputEmail" formControlName="email" required>
-                <mat-hint>Enter your Email adress</mat-hint>
+                <input matInput
+                    placeholder="Email"
+                    type="email"
+                    id="inputEmail"
+                    formControlName="email"
+                    required>
             </mat-form-field>
 
             <mat-form-field class="full-width">
-                <input matInput placeholder="Password" type="password" id="inputPassword" formControlName="password" required>
-                <mat-hint>Enter your password</mat-hint>
+                <input matInput
+                    placeholder="Password"
+                    type="password"
+                    id="inputPassword"
+                    formControlName="password"
+                    required>
             </mat-form-field>
 
             <div class="reg-btn">
                 <button mat-raised-button color="primary" type="button" routerLink="/login">Back</button>
-                <input type="submit" value="Register">
+                <button mat-raised-button color="primary" type="submit">Register</button>
             </div>
         
         </form>

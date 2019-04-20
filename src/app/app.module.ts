@@ -22,20 +22,7 @@ import { MatCardModule } from '@angular/material/card';
 import { HttpClientModule }   from '@angular/common/http';
 
 import { ToastrModule } from 'ngx-toastr';
-
-
-const appRoutes: Routes = [
-  { path: '', component: BooksComponent },
-  { path: 'book/:id', component: BookComponent },
-  { path: 'login', component: LoginComponent, pathMatch: 'full' },
-  { path: 'register', component: RegisterComponent, pathMatch: 'full' },
-  { path: 'about', redirectTo: '/', pathMatch: 'full' },
-  { path: 'contact', redirectTo: '/', pathMatch: 'full' },
-
-  // otherwise redirect to home
-  { path: '**', redirectTo: '/' },
-];
-
+import { NotFoundComponent } from './not-found/not-found.component';
 
 @NgModule({
   declarations: [
@@ -44,10 +31,10 @@ const appRoutes: Routes = [
     RegisterComponent,
     BooksComponent,
     BookComponent,
+    NotFoundComponent,
   ],
   imports: [
     BrowserModule,
-    RouterModule.forRoot(appRoutes),
     AppRoutingModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
