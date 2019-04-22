@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators, } from '@angular/forms';
 
 import { AuthenticationService } from '../_services/';
 import { UserService } from '../_services';
@@ -52,15 +52,14 @@ import { User } from '../_models/';
       return this.registerForm.controls
     }
 
-    getErrorMessage(inputType, pattern){
-      return inputType.hasError('required') ? 'You must enter a value' : inputType.hasError(pattern) ? 'Not a valid value' : '';
-    }
-
     onSubmit() {
         console.log(this.registerForm);
-        this.userService.register(this.registerForm.value);
-
-        this.router.navigate(['/login']);
+        if (this.registerForm.invalid){
+          return;
+        } else{
+          this.userService.register(this.registerForm.value);
+          this.router.navigate(['/login']);
+        }
     }
   
   }

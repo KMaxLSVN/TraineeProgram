@@ -40,7 +40,7 @@ export class UserService {
             this.toastr.success('Congratulations!','You have been registered');
         }
 
-        return user;
+        return usersBase;
     }
 
 // register( user: User) {
@@ -61,6 +61,7 @@ export class UserService {
 //     return user;
 // }
 
+    
 
 }
 

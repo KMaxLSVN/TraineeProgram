@@ -14,7 +14,8 @@
                     id="inputFirstname"
                     formControlName="firstName"
                     required>
-                <mat-error *ngIf="f.firstName.invalid">{{getErrorMessage(this.f.firstName, 'pattern')}}</mat-error>
+                <mat-error *ngIf="f.firstName.errors?.required">You must enter a value</mat-error>
+                <mat-error *ngIf="f.firstName.invalid && f.firstName.dirty">Not a valid value</mat-error>
             </mat-form-field>
 
             <mat-form-field class="full-width">
@@ -24,7 +25,8 @@
                     id="inputLastname"
                     formControlName="lastName"
                     required>
-                <mat-error *ngIf="f.lastName.invalid">{{getErrorMessage(this.f.lastName, 'pattern')}}</mat-error>
+                <mat-error *ngIf="f.lastName.errors?.required">You must enter a value</mat-error>
+                <mat-error *ngIf="f.lastName.invalid && f.lastName.dirty">Not a valid value</mat-error>
             </mat-form-field>
 
             <mat-form-field class="full-width">
@@ -34,7 +36,8 @@
                     id="inputEmail"
                     formControlName="email"
                     required>
-                <mat-error *ngIf="f.email.invalid">{{getErrorMessage(this.f.email, 'pattern')}}</mat-error>
+                <mat-error *ngIf="f.email.errors?.required">You must enter a value</mat-error>
+                <mat-error *ngIf="f.email.invalid && f.email.dirty">Not a valid value</mat-error>
             </mat-form-field>
 
             <mat-form-field class="full-width">
@@ -44,7 +47,9 @@
                     id="inputPassword"
                     formControlName="password"
                     required>
-                <mat-error *ngIf="f.password.invalid">{{getErrorMessage(this.f.password, 'minlength')}}</mat-error>
+                <mat-error *ngIf="f.password.errors?.required">You must enter a value</mat-error>
+                <mat-error *ngIf="f.password.errors?.minlength">Password must be at least 3 characters long</mat-error>
+                <mat-error *ngIf="f.password.invalid && f.password.dirty">Not a valid value</mat-error>
             </mat-form-field>
 
             <div class="reg-btn">

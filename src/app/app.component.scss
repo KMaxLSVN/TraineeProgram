@@ -13,12 +13,24 @@
 .navbar{
     width: 100%;
     background-color: #e8eaf6;
-    &-section{
+    &-section,
+    &-currentUser{
         display: flex;
-        justify-content: space-around;
-        padding: 10px 0;
+        justify-content: space-between;
+        padding: 10px 20px;
         &-item{
             width: 150px;
+            color: #5c928d;
+        }
+    }
+    &-currentUser{
+        &-item.currentUserName{
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+            font-size: 30px;
+            width: 50%;
+            i{
+                color: #3f51b5;
+            }
         }
     }
 }
