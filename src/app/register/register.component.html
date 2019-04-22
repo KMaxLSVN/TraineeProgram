@@ -14,7 +14,7 @@
                     id="inputFirstname"
                     formControlName="firstName"
                     required>
-                <mat-error>You must enter a value</mat-error>
+                <mat-error *ngIf="f.firstName.invalid">{{getErrorMessage(this.f.firstName, 'pattern')}}</mat-error>
             </mat-form-field>
 
             <mat-form-field class="full-width">
@@ -24,6 +24,7 @@
                     id="inputLastname"
                     formControlName="lastName"
                     required>
+                <mat-error *ngIf="f.lastName.invalid">{{getErrorMessage(this.f.lastName, 'pattern')}}</mat-error>
             </mat-form-field>
 
             <mat-form-field class="full-width">
@@ -33,6 +34,7 @@
                     id="inputEmail"
                     formControlName="email"
                     required>
+                <mat-error *ngIf="f.email.invalid">{{getErrorMessage(this.f.email, 'pattern')}}</mat-error>
             </mat-form-field>
 
             <mat-form-field class="full-width">
@@ -42,11 +44,12 @@
                     id="inputPassword"
                     formControlName="password"
                     required>
+                <mat-error *ngIf="f.password.invalid">{{getErrorMessage(this.f.password, 'minlength')}}</mat-error>
             </mat-form-field>
 
             <div class="reg-btn">
                 <button mat-raised-button color="primary" type="button" routerLink="/login">Back</button>
-                <button mat-raised-button color="primary" type="submit">Register</button>
+                <button mat-raised-button color="primary" type="submit" [disabled]="registerForm.invalid">Register</button>
             </div>
         
         </form>

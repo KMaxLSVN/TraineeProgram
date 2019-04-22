@@ -32,18 +32,32 @@ import { User } from '../_models/';
   
     ngOnInit() {
       this.registerForm = this.formBuilder.group({
-        firstName: ['', Validators.required],
-        lastName: ['', Validators.required],
-        email: ['', Validators.required],
-        password: ['', Validators.minLength(3)]
+        firstName: ['', [Validators.required,
+                        Validators.pattern("^[A-za-z0-9_-]{2,15}$")]
+      ],
+        lastName: ['', [Validators.required,
+                        Validators.pattern("^[a-z0-9_-]{2,15}$")]
+      ],
+        email: ['', [Validators.required,
+                    // Validators.email,]
+                    Validators.pattern("[a-zA-Z_]+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}")]
+      ],
+        password: ['', [Validators.required,
+                        Validators.minLength(3)]
+      ]
       })
     }
 
-    get f() {
+    get f() { 
       return this.registerForm.controls
     }
 
+    getErrorMessage(inputType, pattern){
+      return inputType.hasError('required') ? 'You must enter a value' : inputType.hasError(pattern) ? 'Not a valid value' : '';
+    }
+
     onSubmit() {
+        console.log(this.registerForm);
         this.userService.register(this.registerForm.value);
 
         this.router.navigate(['/login']);
