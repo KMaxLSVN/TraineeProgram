@@ -8,14 +8,10 @@ import { NotFoundComponent } from './not-found/not-found.component';
 import { AddBookComponent } from './add-book/add-book.component';
 import { UsersBaseComponent } from './users-base/users-base.component';
 
-const adminRoutes: Routes = [
-  { path: 'add', component: AddBookComponent },
-  { path: 'db', component: UsersBaseComponent },
-];
 
 const routes: Routes = [
   // Home page
-  { path: '', component: BooksComponent, pathMatch: 'full', children: adminRoutes },
+  { path: '', component: BooksComponent, pathMatch: 'full'},
   // Components pages
   { path: 'login', component: LoginComponent, pathMatch: 'full' },
   { path: 'register', component: RegisterComponent, pathMatch: 'full' },
