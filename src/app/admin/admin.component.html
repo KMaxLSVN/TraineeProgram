@@ -1,0 +1,45 @@
+<mat-card>
+  <mat-toolbar color="warn">
+    <mat-toolbar-row>
+      <span>Add book</span>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <div class="wrapper">
+
+      <mat-form-field appearance="outline">
+          <mat-label>Enter book's ID</mat-label>
+          <input matInput
+            placeholder="ID"
+            [(ngModel)]="id">
+      </mat-form-field>
+    
+      <mat-form-field appearance="outline">
+          <mat-label>Enter title</mat-label>
+          <input matInput
+            placeholder="Title"
+            [(ngModel)]="title">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+          <mat-label>Enter author</mat-label>
+          <input matInput
+            placeholder="Author"
+            [(ngModel)]="author">
+      </mat-form-field>
+      
+      <mat-form-field appearance="outline">
+          <mat-label>Enter price</mat-label>
+          <input matInput
+            placeholder="Price"
+            type="number"
+            [(ngModel)]="price">
+      </mat-form-field>
+    
+      <button mat-raised-button>Add</button>
+
+  </div>
+</mat-card>
+<nav>
+    <button mat-raised-button routerLink="/add">Add book</button>
+    <button mat-raised-button routerLink="/db">Users base</button>
+</nav>

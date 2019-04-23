@@ -5,6 +5,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { User } from '../_models/users';
+import { ToastrService } from 'ngx-toastr';
 
 @Injectable()
 export class AuthenticationService {
@@ -14,6 +15,7 @@ export class AuthenticationService {
     constructor(
         private http: HttpClient,
         private router: Router,
+        private toastr: ToastrService,
         ) {
         this.currentUserSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('currentUser')));
         this.currentUser = this.currentUserSubject.asObservable();
@@ -29,6 +31,14 @@ export class AuthenticationService {
         return this.currentUserSubject.value;
     }
 
+    public get isAdmin(): boolean {
+        var user: User = this.currentUserValue;
+        if (!user) {
+            return false;
+        }
+        return user.isAdmin;
+    }
+
     login(email: string, password: string) {
         let user = new User();
         user.email = email;
@@ -42,14 +52,14 @@ export class AuthenticationService {
             }
             return false;
         })
-        debugger
         if(isUserExist || (user.email === "admin@admin.com" && user.password === "777") ) {
             localStorage.setItem('currentUser', JSON.stringify(user));
             this.currentUserSubject.next(user);
+            this.toastr.success(`Have a nice day ${user.email}!`);
             this.router.navigate(['/']);
             return;
         } else {
-            alert('You have to register');
+            this.toastr.warning('Register please');
             this.router.navigate(['/register']);
         }
 

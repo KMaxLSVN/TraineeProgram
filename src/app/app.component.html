@@ -8,14 +8,21 @@
 <!-- nav -->
 <nav class="navbar">
     <div class="navbar-section">
-        <a mat-raised-button color="link" class="navbar-section-item" routerLink="/">Books</a>
-        <a mat-raised-button color="link" class="navbar-section-item" routerLink="/">Something</a>
-        <a mat-raised-button color="link" class="navbar-section-item" routerLink="/login">Login</a>
-    </div>
-    <div *ngIf="currentUser"  class="navbar-currentUser">
-        <div class="navbar-currentUser-item currentUserName" contenteditable="true">Hello <i>{{currentUser.email}}</i> </div>
-        <a mat-raised-button color="link" class="navbar-currentUser-item" (click)="logout()">Logout</a>
+        <div class="navbar-section-wrapper">
+            <a mat-raised-button color="link" class="navbar-section-item" routerLink="/">Books</a>
+        </div>
+        <div class="navbar-section-wrapper">
+            <a mat-raised-button color="link" class="navbar-section-item" routerLink="/">Something</a>
+        </div>
+        <div class="navbar-section-wrapper">
+            <a *ngIf="!currentUser" mat-raised-button color="link" class="navbar-section-item" routerLink="/login">Login</a>
+            <div *ngIf="currentUser" class="navbar-section-currentUser">
+                <div class="navbar-currentUser-item" contenteditable="true"><i>{{currentUser.email}}</i></div>
+                <a  mat-raised-button color="link" class="navbar-currentUser-item" (click)="logout()">Logout</a>
+            </div>
+        </div>
     </div>
 </nav>
+
 
 <router-outlet></router-outlet>

@@ -13,23 +13,35 @@
 .navbar{
     width: 100%;
     background-color: #e8eaf6;
-    &-section,
-    &-currentUser{
+    &-section{
         display: flex;
         justify-content: space-between;
         padding: 10px 20px;
-        &-item{
-            width: 150px;
-            color: #5c928d;
-        }
-    }
-    &-currentUser{
-        &-item.currentUserName{
-            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
-            font-size: 30px;
-            width: 50%;
-            i{
-                color: #3f51b5;
+        &-wrapper{
+            width: 33%;
+            display: flex;
+            &:nth-child(2){
+                justify-content: center;
+            }
+            &:nth-child(3){
+                justify-content: flex-end;
+            }
+            .navbar-section-item{
+                width: 150px;
+                color: #5c928d;
+            }
+            .navbar-section-currentUser{
+                display: flex;
+                align-items: flex-end;
+                font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                font-size: 30px;
+                .navbar-currentUser-item{
+                    color: #5c928d;
+                    i{
+                        color: #3f51b5;
+                        margin-right: 10px;
+                    }
+                }
             }
         }
     }

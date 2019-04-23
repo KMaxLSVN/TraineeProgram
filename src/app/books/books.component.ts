@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
+import { AuthenticationService } from '../_services';
 
 @Component({
     selector: 'app-books',
@@ -6,8 +7,13 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./books.component.scss']
   })
   export class BooksComponent implements OnInit {
+    public isAdmin: boolean;
 
-    constructor() { }
+    constructor(
+      private authService: AuthenticationService,
+    ) {
+      this.isAdmin = this.authService.isAdmin;
+    }
   
     ngOnInit() {
     }

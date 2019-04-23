@@ -31,7 +31,7 @@ export class UserService {
                 return false;
             })
             if (isUserExist) {
-                this.toastr.warning('Email allready exist');
+                this.toastr.warning('This Email is taken!');
                 return;
             }
             usersBase.push(user);

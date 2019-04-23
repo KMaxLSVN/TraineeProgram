@@ -41,18 +41,13 @@ export class LoginComponent  implements OnInit  {
     return this.loginForm.controls;
   }
   
-  login(){
-    console.log(this.service.login(this.f.email.value, this.f.password.value));
-    this.service.login(this.f.email.value, this.f.password.value);
-  }
-
   onSubmit(){
-    console.log(this.loginForm);
     if (this.loginForm.invalid){
       return;
-    } else {
-      this.login();
-    }
+    } else {      
+      this.service.login(this.f.email.value, this.f.password.value);
+    }    
+    return console.log(this.loginForm);;
   }
 
 }

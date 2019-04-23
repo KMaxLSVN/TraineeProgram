@@ -1,3 +1,35 @@
-p {
-    font-size: 56px;
+.header-title{
+    span{
+        font-size: 60px;
+    }
+}
+
+.books-container{
+    background-color: #c5cae9;
+    .wrapper{
+        display: flex;
+        padding: 10px;
+        .item-container{
+            background-color: #8c9eff;
+            display: flex;
+            flex-direction: column;
+            padding: 5px;
+            border: 2px solid #5865ab;
+            border-radius: 5px;
+            &:hover{
+                cursor: pointer;
+                background-color: #b0bbf7;
+            }
+            .book-cover{
+                padding: 10px;
+            }
+            .book-title,
+            .book-author,
+            .book-price {
+                display: flex;
+                justify-content: center;
+                padding: 20xp;
+            }
+        }
+    }
 }

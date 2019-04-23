@@ -14,6 +14,6 @@ export class BookSevice {
         return this.data;
     }
     addData( id: number, title: string, author: string, price: number) {
-        this.data.push(new Book(id, title, author, price));
+        this.data.push(new Book());
     }
 }

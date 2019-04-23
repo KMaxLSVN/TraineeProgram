@@ -10,6 +10,8 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { BooksComponent } from './books/books.component';
 import { BookComponent } from './book/book.component';
+import { NotFoundComponent } from './not-found/not-found.component';
+import { AdminComponent } from './admin/admin.component';
 import { AuthenticationService } from './_services/authentication.service';
 import { UserService } from './_services/user.service';
 
@@ -22,7 +24,8 @@ import { MatCardModule } from '@angular/material/card';
 import { HttpClientModule }   from '@angular/common/http';
 
 import { ToastrModule } from 'ngx-toastr';
-import { NotFoundComponent } from './not-found/not-found.component';
+import { AddBookComponent } from './add-book/add-book.component';
+import { UsersBaseComponent } from './users-base/users-base.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +35,9 @@ import { NotFoundComponent } from './not-found/not-found.component';
     BooksComponent,
     BookComponent,
     NotFoundComponent,
+    AdminComponent,
+    AddBookComponent,
+    UsersBaseComponent,
   ],
   imports: [
     BrowserModule,
