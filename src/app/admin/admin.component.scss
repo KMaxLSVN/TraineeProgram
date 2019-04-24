@@ -1,12 +1,28 @@
-.wrapper{
-    display: flex;
-    justify-content: center;
-    align-items: baseline;
-    padding: 20px;
-    button{
-        height: 60px;
+.wrapper {
+    height: 400px;
+    .side-menu{
+        padding: 10px 10px;
+        background-color: #ffe0b2;
+        display: flex;
+        justify-content: center;
+        .side-menu-item{
+            display: flex;
+            flex-direction: column;
+            button{
+                margin: 20px 0 0;
+            }
+            &.btn-hide{
+                display: flex;
+                align-items: center;
+                width: 100%;
+            }
+        }
     }
-    &>*{
-        margin-right: 20px;
+    .side-content{
+        padding: 10px 10px;
+        background-color: #ffccbc;
+        .side-content-item{
+            margin: 0 0 20px;
+        }
     }
 }

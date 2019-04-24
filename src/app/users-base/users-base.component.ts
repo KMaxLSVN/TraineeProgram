@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { LocalStorage } from '../_services/local-storage.service';
+import { User } from '../_models';
+import { MatTableDataSource } from '@angular/material';
+
 
 @Component({
   selector: 'app-users-base',
@@ -7,9 +11,27 @@ import { Component, OnInit } from '@angular/core';
 })
 export class UsersBaseComponent implements OnInit {
 
-  constructor() { }
+  displayedColumns: string[] = ['position', 'firstName', 'lastName', 'email', 'password', 'actions'];
+  // dataSource: User[] = this.dbShift(this.db.getAllUsers());
+  dataSource = new MatTableDataSource(this.dbShift(this.db.getAllUsers()));
+
+  constructor(
+    private db: LocalStorage,
+  ) { 
+    
+  }
 
   ngOnInit() {
   }
+
+  private applyFilter( value: any){
+    this.dataSource.filter = value.trim().toLowerCase();
+  }
+
+  private dbShift(users: User[]){
+      users.shift();
+      return users;
+  }
+
 
 }

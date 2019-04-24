@@ -21,13 +21,19 @@ export class LocalStorage {
         return this.users;
     }
 
-    deleteUser():User[] {
+    deleteUser(chosenUsers):User[] {
+        for(let i=0; i<=this.users.length; i++){
+            if( chosenUsers == this.users[i] ) {
+                this.users.splice(i, 1);
+            }
+        }
+        console.log('user delete');
         return;
     }
 
     addUser(user: User, isAdmin?: 'admin'):User[] {
         user.isAdmin = !!isAdmin;
-        this.users.push(user);
+        isAdmin ? this.users.unshift(user) : this.users.push(user);
         this.saveToLocalStorage(this.users);
         return this.users;
     }

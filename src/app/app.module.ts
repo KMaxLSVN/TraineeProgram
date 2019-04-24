@@ -20,6 +20,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatTableModule} from '@angular/material/table';
 
 import { HttpClientModule }   from '@angular/common/http';
 
@@ -51,6 +53,8 @@ import { UsersBaseComponent } from './users-base/users-base.component';
     MatToolbarModule,
     MatButtonModule,
     MatCardModule,
+    MatSidenavModule,
+    MatTableModule,
 
     HttpClientModule,
 
