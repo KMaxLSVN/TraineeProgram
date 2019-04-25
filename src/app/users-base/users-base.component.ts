@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { LocalStorage } from '../_services/local-storage.service';
 import { User } from '../_models';
-import { MatTableDataSource } from '@angular/material';
+import { MatTableDataSource, MatPaginator } from '@angular/material';
 
 
 @Component({
@@ -12,26 +12,44 @@ import { MatTableDataSource } from '@angular/material';
 export class UsersBaseComponent implements OnInit {
 
   displayedColumns: string[] = ['position', 'firstName', 'lastName', 'email', 'password', 'actions'];
-  // dataSource: User[] = this.dbShift(this.db.getAllUsers());
-  dataSource = new MatTableDataSource(this.dbShift(this.db.getAllUsers()));
+  dataSource: MatTableDataSource<any>;
+  @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(
     private db: LocalStorage,
+    @Inject(LocalStorage) public data: any,
   ) { 
-    
+    this.dataSource = new MatTableDataSource(this.getUserBase());
   }
 
   ngOnInit() {
+    this.dataSource.paginator = this.paginator;
   }
 
-  private applyFilter( value: any){
+  private applyFilter(value: any){
     this.dataSource.filter = value.trim().toLowerCase();
   }
 
-  private dbShift(users: User[]){
-      users.shift();
-      return users;
+  private getUserBase(){
+    let userBase = [...this.db.getAllUsers()];
+    userBase.shift();
+    console.log('User base without admin:', userBase);
+    console.log('DB', localStorage.getItem('registerUser'));
+    return userBase;
   }
 
+  removeUser(index: number){
+    const data = this.dataSource.data;
+    data.splice(index, 1);
+    this.dataSource.data = data;
+  }
+
+  delete(): void {
+    this.db.deleteUser(this.data);
+  }
+
+  removeAllUsers(){
+    this.dataSource.data = [];
+  }
 
 }

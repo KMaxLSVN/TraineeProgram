@@ -27,7 +27,7 @@ export class LocalStorage {
                 this.users.splice(i, 1);
             }
         }
-        console.log('user delete');
+        console.log('user delete', chosenUsers);
         return;
     }
 

@@ -22,12 +22,19 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatTableModule} from '@angular/material/table';
+import {MatIconModule} from '@angular/material/icon';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatPaginatorModule} from '@angular/material/paginator';
 
 import { HttpClientModule }   from '@angular/common/http';
 
 import { ToastrModule } from 'ngx-toastr';
+
 import { AddBookComponent } from './add-book/add-book.component';
 import { UsersBaseComponent } from './users-base/users-base.component';
+import { AddComponent } from './users-base/dialogs/add/add.component';
+import { DeleteComponent } from './users-base/dialogs/delete/delete.component';
+import { EditComponent } from './users-base/dialogs/edit/edit.component';
 
 @NgModule({
   declarations: [
@@ -40,6 +47,9 @@ import { UsersBaseComponent } from './users-base/users-base.component';
     AdminComponent,
     AddBookComponent,
     UsersBaseComponent,
+    AddComponent,
+    DeleteComponent,
+    EditComponent,
   ],
   imports: [
     BrowserModule,
@@ -55,6 +65,9 @@ import { UsersBaseComponent } from './users-base/users-base.component';
     MatCardModule,
     MatSidenavModule,
     MatTableModule,
+    MatIconModule,
+    MatTooltipModule,
+    MatPaginatorModule,
 
     HttpClientModule,
 
