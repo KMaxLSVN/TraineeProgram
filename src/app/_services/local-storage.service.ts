@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import { User } from '../_models';
+import { Observable } from 'rxjs';
+import { of } from 'rxjs';
+import { ToastrService } from 'ngx-toastr';
 
 const DB_KEY = 'registerUser';
 
@@ -7,28 +10,38 @@ const DB_KEY = 'registerUser';
     providedIn: 'root',
 })
 
-
 export class LocalStorage {
     private users : User[] = JSON.parse(localStorage.getItem(DB_KEY)) || [];
 
-    constructor(){
-        if(!this.users.find((item) => item.email === 'admin@admin.com')){
+    constructor(
+        private toastr: ToastrService,
+    ){
+        if(!this.getAllUsers().find((item) => item.email === 'admin@admin.com')){
             this.createAdmin('admin@admin.com', '777');
         }
     }
 
     getAllUsers():User[] {
-        return this.users;
+        // this.users = JSON.parse(localStorage.getItem(DB_KEY)) || [];
+        this.users.shift();
+        return [...this.users];
     }
 
-    deleteUser(chosenUsers):User[] {
-        for(let i=0; i<=this.users.length; i++){
-            if( chosenUsers == this.users[i] ) {
-                this.users.splice(i, 1);
-            }
-        }
-        console.log('user delete', chosenUsers);
-        return;
+    deleteUser(currentUser: User): Observable<User[]> {
+        const userIndex = this.users.indexOf(currentUser);        
+        this.users.splice(userIndex, 1);
+        this.toastr.info(`${currentUser.email} is removed`);
+        return of(this.users);
+
+        // ---Variant №2:---
+        // for(let i=0; i<=this.users.length; i++){
+        //     if( currentUsers == this.users[i] ) {
+        //         this.users.splice(i, 1);
+        //         return;
+        //     }
+        // }
+        // console.log('user delete', chosenUsers);
+        // return;
     }
 
     addUser(user: User, isAdmin?: 'admin'):User[] {

@@ -1,0 +1,12 @@
+.container{
+    display: flex;
+    flex-direction: column;
+    min-width: 400px;
+    & > *{
+        width: 100%;
+    }
+
+    .button-section{
+        justify-content: space-between;
+    }
+}

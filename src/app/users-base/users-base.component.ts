@@ -1,7 +1,10 @@
 import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { LocalStorage } from '../_services/local-storage.service';
 import { User } from '../_models';
-import { MatTableDataSource, MatPaginator } from '@angular/material';
+import { MatTableDataSource, MatPaginator, MatDialog } from '@angular/material';
+import { AddComponent } from './dialogs/add/add.component';
+import { Observable } from 'rxjs';
+import { DeleteComponent } from './dialogs/delete/delete.component';
 
 
 @Component({
@@ -17,7 +20,7 @@ export class UsersBaseComponent implements OnInit {
 
   constructor(
     private db: LocalStorage,
-    @Inject(LocalStorage) public data: any,
+    public dialog: MatDialog,
   ) { 
     this.dataSource = new MatTableDataSource(this.getUserBase());
   }
@@ -31,21 +34,28 @@ export class UsersBaseComponent implements OnInit {
   }
 
   private getUserBase(){
-    let userBase = [...this.db.getAllUsers()];
-    userBase.shift();
-    console.log('User base without admin:', userBase);
-    console.log('DB', localStorage.getItem('registerUser'));
+    let userBase = this.db.getAllUsers();
     return userBase;
   }
 
-  removeUser(index: number){
-    const data = this.dataSource.data;
-    data.splice(index, 1);
-    this.dataSource.data = data;
+  addNew(){
+    const dialogRef = this.dialog.open(AddComponent);
   }
 
-  delete(): void {
-    this.db.deleteUser(this.data);
+  deleteItem(){
+    const dialogRef = this.dialog.open(DeleteComponent);
+  }
+
+  // removeUser(index: number){
+  //   const data = this.dataSource.data;
+  //   data.splice(index, 1);
+  //   this.dataSource.data = data;
+  // }
+
+  delete(user: User) {
+      this.db.deleteUser(user).subscribe(data => {
+      this.dataSource.data = data;
+    });
   }
 
   removeAllUsers(){
