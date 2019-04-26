@@ -25,6 +25,7 @@ import {MatTableModule} from '@angular/material/table';
 import {MatIconModule} from '@angular/material/icon';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatDialogModule} from '@angular/material/dialog';
 
 import { HttpClientModule }   from '@angular/common/http';
 
@@ -68,11 +69,17 @@ import { EditComponent } from './users-base/dialogs/edit/edit.component';
     MatIconModule,
     MatTooltipModule,
     MatPaginatorModule,
+    MatDialogModule,
 
     HttpClientModule,
 
     ToastrModule,
     ToastrModule.forRoot(),
+  ],
+  entryComponents: [
+    AddComponent,
+    EditComponent,
+    DeleteComponent
   ],
   providers: [
     AuthenticationService,

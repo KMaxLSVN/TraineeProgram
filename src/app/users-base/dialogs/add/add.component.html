@@ -1,3 +1,36 @@
-<p>
-  add works!
-</p>
+<div class="container">
+
+  <h3 mat-dialog-title>Add new user</h3>
+
+  <form >
+    <mat-form-field color="primary" appearance="fill">
+      <input type="text"
+            matInput>
+      <mat-hint>First Name</mat-hint>
+    </mat-form-field>
+
+    <mat-form-field color="primary" appearance="fill">
+      <input type="text"
+            matInput>
+      <mat-hint>Last Name</mat-hint>
+    </mat-form-field>
+    
+    <mat-form-field color="primary" appearance="fill">
+      <input type="email"
+            matInput>
+      <mat-hint>Email</mat-hint>
+    </mat-form-field>
+    
+    <mat-form-field color="primary" appearance="fill">
+      <input type="password"
+            matInput>
+      <mat-hint>Password</mat-hint>
+    </mat-form-field>
+
+    <section mat-dialog-actions class="button-section">
+      <button mat-stroked-button color="primary">Save</button>
+      <button mat-stroked-button color="warn" (click)="close()">Cancel</button>
+    </section>
+  </form>
+
+</div>
