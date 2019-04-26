@@ -13,17 +13,21 @@ export class DeleteComponent implements OnInit {
     public dialogRef: MatDialogRef<DeleteComponent>,
     public db: LocalStorage,
     @Inject(MAT_DIALOG_DATA) public data: any,
-  ) { }
+  ) { 
+    console.log(this.data);
+   }
 
   ngOnInit() {
+    console.log(this.data);
   }
 
   close(): void{
+    this.confirmDelete(false);
     this.dialogRef.close();
   }
 
-  confirmDelete(): void {
-      
+  confirmDelete(status: boolean): void {
+      this.data.cb(status)
   }
 
 }

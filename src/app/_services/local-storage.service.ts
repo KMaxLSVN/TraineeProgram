@@ -11,27 +11,32 @@ const DB_KEY = 'registerUser';
 })
 
 export class LocalStorage {
-    private users : User[] = JSON.parse(localStorage.getItem(DB_KEY)) || [];
+    private users : User[]
 
     constructor(
         private toastr: ToastrService,
     ){
-        if(!this.getAllUsers().find((item) => item.email === 'admin@admin.com')){
+        if(!this.isAdminAdded()){
             this.createAdmin('admin@admin.com', '777');
         }
     }
 
-    getAllUsers():User[] {
-        // this.users = JSON.parse(localStorage.getItem(DB_KEY)) || [];
-        this.users.shift();
+    getAllUsers(withoutAdmin: boolean = true):User[] {
+        this.users = JSON.parse(localStorage.getItem(DB_KEY)) || [];
+        if(this.isAdminAdded() && withoutAdmin){
+            this.users.shift();
+        }
         return [...this.users];
     }
 
     deleteUser(currentUser: User): Observable<User[]> {
-        const userIndex = this.users.indexOf(currentUser);        
-        this.users.splice(userIndex, 1);
+        let users = this.getAllUsers();
+        const userIndex = users.indexOf(currentUser);  
+
+        users.splice(userIndex, 1);
         this.toastr.info(`${currentUser.email} is removed`);
-        return of(this.users);
+        this.saveToLocalStorage(users);
+        return of(users);
 
         // ---Variant №2:---
         // for(let i=0; i<=this.users.length; i++){
@@ -46,13 +51,15 @@ export class LocalStorage {
 
     addUser(user: User, isAdmin?: 'admin'):User[] {
         user.isAdmin = !!isAdmin;
-        isAdmin ? this.users.unshift(user) : this.users.push(user);
-        this.saveToLocalStorage(this.users);
-        return this.users;
+        let usersBase = this.getAllUsers(false);
+        isAdmin ? usersBase.unshift(user) : usersBase.push(user);
+        console.log(usersBase);
+        this.saveToLocalStorage(usersBase);
+        return usersBase;
     }
 
     getUserByEmail(email: string) {
-        return this.users.find((item: User, index: number) => {
+        return this.getAllUsers(false).find((item: User, index: number) => {
             if(item.email === email){
                 return true;
             }
@@ -69,5 +76,10 @@ export class LocalStorage {
         admin.password = password;
         admin.isAdmin = true;
         this.addUser(admin, 'admin');
+    }
+
+    private isAdminAdded(): boolean{
+        const isAdmin = (JSON.parse(localStorage.getItem(DB_KEY)) || []).some((item) => item.email === 'admin@admin.com');
+        return isAdmin;
     }
 }

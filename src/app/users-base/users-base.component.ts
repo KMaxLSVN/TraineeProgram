@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewChild, Inject } from '@angular/core';
 import { LocalStorage } from '../_services/local-storage.service';
 import { User } from '../_models';
-import { MatTableDataSource, MatPaginator, MatDialog } from '@angular/material';
+import { MatTableDataSource, MatPaginator, MatDialog, MatDialogConfig } from '@angular/material';
 import { AddComponent } from './dialogs/add/add.component';
 import { Observable } from 'rxjs';
 import { DeleteComponent } from './dialogs/delete/delete.component';
@@ -43,7 +43,7 @@ export class UsersBaseComponent implements OnInit {
   }
 
   deleteItem(){
-    const dialogRef = this.dialog.open(DeleteComponent);
+    const dialogRef = this.dialog.open(DeleteComponent, {});
   }
 
   // removeUser(index: number){
@@ -53,9 +53,14 @@ export class UsersBaseComponent implements OnInit {
   // }
 
   delete(user: User) {
-      this.db.deleteUser(user).subscribe(data => {
-      this.dataSource.data = data;
-    });
+    const dialogConfig = new MatDialogConfig();
+
+    dialogConfig.data = {
+        id: 1,
+        title: 'Angular For Beginners'
+    };
+      const dialogRef = this.dialog.open(DeleteComponent, dialogConfig);
+      
   }
 
   removeAllUsers(){
