@@ -38,7 +38,7 @@ export class UsersBaseComponent implements OnInit {
     return userBase;
   }
 
-  addNew(){
+  addNew(): void{
     const dialogRef = this.dialog.open(AddComponent);
   }
 
@@ -56,7 +56,7 @@ export class UsersBaseComponent implements OnInit {
     const dialogConfig = new MatDialogConfig();
 
     dialogConfig.data = {
-        id: 1,
+        name: this.dataSource.data,
         title: 'Angular For Beginners'
     };
       const dialogRef = this.dialog.open(DeleteComponent, dialogConfig);

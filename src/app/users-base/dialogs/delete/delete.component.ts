@@ -14,7 +14,6 @@ export class DeleteComponent implements OnInit {
     public db: LocalStorage,
     @Inject(MAT_DIALOG_DATA) public data: any,
   ) { 
-    console.log(this.data);
    }
 
   ngOnInit() {
@@ -27,7 +26,7 @@ export class DeleteComponent implements OnInit {
   }
 
   confirmDelete(status: boolean): void {
-      this.data.cb(status)
+      // this.data.cb(status)
   }
 
 }
