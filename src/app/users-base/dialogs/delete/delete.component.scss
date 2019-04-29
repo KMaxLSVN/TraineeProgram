@@ -6,6 +6,15 @@
         width: 100%;
     }
 
+    .mat-dialog-content div{
+        font-size: 20px;
+        font-family: 'Times New Roman', Times, serif;
+        padding-bottom: 10px;
+        i{
+            color: red;
+        }
+    }
+
     .button-section{
         justify-content: space-between;
     }

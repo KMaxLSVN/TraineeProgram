@@ -2,12 +2,13 @@
 
     <h3 mat-dialog-title>Are you sure?</h3>
     <div mat-dialog-content>
-        <div>Delete {{data?.name}}</div>
+        <div>You are going to delete user <i>{{data?.name[0].firstName}}</i></div>
+        <div>User's email is <i>{{data?.name[0].email}}</i></div>
     </div>
 
     <div mat-dialog-actions class="button-section">
-      <button mat-stroked-button color="accent" (click)="confirmDelete(true)">Delete</button>
-      <button mat-stroked-button color="warn" (click)="close()">Cancel</button>
+      <button mat-stroked-button color="accent" (click)="confirmDelete(true)">Yes, I know that</button>
+      <button mat-stroked-button color="warn" (click)="close()">Oops, my fault</button>
     </div>
 
 </div>

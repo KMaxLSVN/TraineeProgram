@@ -2,33 +2,42 @@
 
   <h3 mat-dialog-title>Add new user</h3>
 
-  <form >
+  <form [formGroup]="addFrom" novalidate (ngSubmit)="submit()">
     <mat-form-field color="primary" appearance="fill">
+      <mat-label>First name</mat-label>
       <input type="text"
-            matInput>
-      <mat-hint>First Name</mat-hint>
+            matInput
+            required
+            formControlName="firstName">
+      <mat-hint>Enter first name</mat-hint>
     </mat-form-field>
 
     <mat-form-field color="primary" appearance="fill">
+      <mat-label>Last name</mat-label>
       <input type="text"
-            matInput>
-      <mat-hint>Last Name</mat-hint>
+            matInput
+            formControlName="lastName">
+      <mat-hint>Enter last name</mat-hint>
     </mat-form-field>
     
     <mat-form-field color="primary" appearance="fill">
+      <mat-label>Email</mat-label>
       <input type="email"
-            matInput>
-      <mat-hint>Email</mat-hint>
+            matInput
+            formControlName="email">
+      <mat-hint>Enter email</mat-hint>
     </mat-form-field>
     
     <mat-form-field color="primary" appearance="fill">
+      <mat-label>Password</mat-label>
       <input type="password"
-            matInput>
-      <mat-hint>Password</mat-hint>
+            matInput
+            formControlName="password">
+      <mat-hint>Enter password</mat-hint>
     </mat-form-field>
 
     <section mat-dialog-actions class="button-section">
-      <button mat-stroked-button color="primary">Save</button>
+      <button mat-stroked-button color="primary" [disabled]="addFrom.invalid" type="submit">Add</button>
       <button mat-stroked-button color="warn" (click)="close()">Cancel</button>
     </section>
   </form>
