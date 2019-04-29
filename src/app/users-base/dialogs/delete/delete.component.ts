@@ -26,7 +26,8 @@ export class DeleteComponent implements OnInit {
   }
 
   confirmDelete(status: boolean): void {
-      // this.data.cb(status)
+      this.data.callback(status);
+      this.dialogRef.close();
   }
 
 }

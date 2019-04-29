@@ -31,11 +31,14 @@ export class LocalStorage {
 
     deleteUser(currentUser: User): Observable<User[]> {
         let users = this.getAllUsers();
-        const userIndex = users.indexOf(currentUser);  
-
-        users.splice(userIndex, 1);
-        this.toastr.info(`${currentUser.email} is removed`);
-        this.saveToLocalStorage(users);
+        for(let i=0; i<=this.users.length; i++){
+            if( currentUser.email == this.users[i].email ) {
+                users.splice(i, 1);
+                this.toastr.info(`${currentUser.email} is removed`);
+                this.saveToLocalStorage(users);
+                break;
+            }
+        }
         return of(users);
 
         // ---Variant №2:---

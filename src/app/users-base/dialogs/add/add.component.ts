@@ -34,7 +34,7 @@ export class AddComponent implements OnInit {
           Validators.required,
           Validators.email
         ]),
-      passwrod: new FormControl(null, Validators.required)
+      password: new FormControl(null, Validators.required)
 
     });
   }

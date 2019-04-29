@@ -5,6 +5,7 @@ import { MatTableDataSource, MatPaginator, MatDialog, MatDialogConfig } from '@a
 import { AddComponent } from './dialogs/add/add.component';
 import { Observable } from 'rxjs';
 import { DeleteComponent } from './dialogs/delete/delete.component';
+import { DataSource } from '@angular/cdk/table';
 
 
 @Component({
@@ -53,11 +54,15 @@ export class UsersBaseComponent implements OnInit {
   // }
 
   delete(user: User) {
-    const dialogConfig = new MatDialogConfig();
+    let dialogConfig: MatDialogConfig = {};
+    let _this = this;
 
     dialogConfig.data = {
-        name: this.dataSource.data,
-        title: 'Angular For Beginners'
+        name: user,
+        title: 'Angular For Beginners',
+        callback(status: boolean){
+          _this.db.deleteUser(user).subscribe((foo: any) => _this.dataSource.data = foo);
+        }
     };
       const dialogRef = this.dialog.open(DeleteComponent, dialogConfig);
       
