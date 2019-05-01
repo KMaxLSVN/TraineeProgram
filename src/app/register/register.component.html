@@ -2,7 +2,7 @@
     <mat-card-content class="reg-wrapper">
 
         <mat-toolbar color="primary" class="reg-title">
-            <h2>Registration</h2>
+            <h2>{{title}}</h2>
         </mat-toolbar>
         
         <form novalidate class="reg-form" [formGroup]="registerForm" (ngSubmit)="onSubmit()">
@@ -53,8 +53,10 @@
             </mat-form-field>
 
             <div class="reg-btn">
-                <button mat-raised-button color="primary" type="button" routerLink="/login">Back</button>
-                <button mat-raised-button color="primary" type="submit" [disabled]="registerForm.invalid">Register</button>
+                <button mat-raised-button color="primary" type="button" routerLink="/login" *ngIf="state === 'registration'">Back</button>
+                <button mat-raised-button color="warn" type="button" *ngIf="state === 'add'">Cancel</button>
+                <button mat-raised-button color="warn" type="button" *ngIf="state === 'edit'">Cancel</button>
+                <button mat-raised-button color="primary" type="submit" [disabled]="registerForm.invalid">{{btnName}}</button>
             </div>
         
         </form>

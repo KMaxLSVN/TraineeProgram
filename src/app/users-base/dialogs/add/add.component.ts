@@ -18,11 +18,7 @@ export class AddComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public data,
     private formBuilder: FormBuilder,
 
-
-  ) {
-
-
-  }
+  ) {}
 
 
   ngOnInit() {
@@ -45,6 +41,12 @@ export class AddComponent implements OnInit {
 
   close(): void{
     this.dialogRef.close();
+  }
+
+  formAction(data){
+    console.log(data);
+    this.close();
+
   }
 
 }

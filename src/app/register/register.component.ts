@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, } from '@angular/forms';
 
@@ -13,6 +13,13 @@ import { User } from '../_models/';
     styleUrls: ['./register.component.scss']
   })
   export class RegisterComponent implements OnInit {
+
+    @Input() title = 'Registration';
+    @Input() btnName: string = 'Register';
+    @Input() state: string = 'registration';
+
+    @Output() postForm: EventEmitter<any> = new EventEmitter;
+
 
     registerForm: FormGroup;
 
@@ -46,6 +53,12 @@ import { User } from '../_models/';
                         Validators.minLength(3)]
       ]
       })
+
+      this.title = this.setName(this.state).title;
+      this.btnName = this.setName(this.state).btnName;
+      
+        
+      
     }
 
     get f() { 
@@ -56,10 +69,52 @@ import { User } from '../_models/';
         console.log(this.registerForm);
         if (this.registerForm.invalid){
           return;
-        } else{
-          this.userService.register(this.registerForm.value);
-          this.router.navigate(['/login']);
         }
+        this.setName(this.state).confirm();
+        this.onPostForm();
+    }
+
+    setName(stateType){
+      switch(stateType){
+        case 'add':
+          return {
+            title: 'Add User',
+            btnName: 'Add',
+            confirm: () => {
+              console.log(this);
+              this.addUser(false);
+            }
+          };
+        case 'edit':
+          return {
+            title: 'Edit User',
+            btnName: 'Edit',
+            confirm: this.editUser
+          };
+        default:
+         return {
+           title: 'Registeration',
+           btnName: 'Register',
+           confirm: this.addUser
+          };
+      }
+    }
+
+    private addUser(ifRedirect: boolean = true){
+      this.userService.register(this.registerForm.value);
+      if(ifRedirect){
+        this.router.navigate(['/login']);
+      }
+    }
+
+    private editUser(){
+      console.log('edit');
+    }
+
+    private onPostForm(){
+      this.postForm.emit({
+        state: this.state
+      })
     }
   
   }
