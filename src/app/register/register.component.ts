@@ -1,10 +1,12 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, Inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, } from '@angular/forms';
+
 
 import { AuthenticationService } from '../_services/';
 import { UserService } from '../_services';
 import { User } from '../_models/';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
 
 @Component({
@@ -31,6 +33,9 @@ import { User } from '../_models/';
       private service: AuthenticationService,
       private userService: UserService,
 
+      public dialogRef: MatDialogRef<RegisterComponent>,
+      @Inject(MAT_DIALOG_DATA) public data: any
+
     ){
       if (this.service.currentUserValue) { 
         this.router.navigate(['/']);
@@ -54,15 +59,15 @@ import { User } from '../_models/';
       ]
       })
 
-      this.title = this.setName(this.state).title;
-      this.btnName = this.setName(this.state).btnName;
+      this.title = this.setTypeForm(this.state).title;
+      this.btnName = this.setTypeForm(this.state).btnName;
       
-        
+      
       
     }
 
     get f() { 
-      return this.registerForm.controls
+      return this.registerForm.controls;
     }
 
     onSubmit() {
@@ -70,11 +75,11 @@ import { User } from '../_models/';
         if (this.registerForm.invalid){
           return;
         }
-        this.setName(this.state).confirm();
+        this.setTypeForm(this.state).confirm();
         this.onPostForm();
     }
 
-    setName(stateType){
+    setTypeForm(stateType){
       switch(stateType){
         case 'add':
           return {
@@ -89,21 +94,32 @@ import { User } from '../_models/';
           return {
             title: 'Edit User',
             btnName: 'Edit',
-            confirm: this.editUser
+            confirm: () => {
+              this.editUser();
+            }
           };
         default:
          return {
            title: 'Registeration',
            btnName: 'Register',
-           confirm: this.addUser
+           confirm: () => {
+             this.addUser();
+           }
           };
       }
     }
 
-    private addUser(ifRedirect: boolean = true){
+    onCancel(): void{
+      this.dialogRef.close();
+    }
+
+    private addUser(ifRedirect: boolean = true): void {
+      debugger
       this.userService.register(this.registerForm.value);
       if(ifRedirect){
         this.router.navigate(['/login']);
+      } else{
+        this.dialogRef.close(this.registerForm.value);
       }
     }
 

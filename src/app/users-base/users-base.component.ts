@@ -5,7 +5,7 @@ import { MatTableDataSource, MatPaginator, MatDialog, MatDialogConfig } from '@a
 import { AddComponent } from './dialogs/add/add.component';
 import { Observable } from 'rxjs';
 import { DeleteComponent } from './dialogs/delete/delete.component';
-import { DataSource } from '@angular/cdk/table';
+import { filter } from 'rxjs/operators';
 
 
 @Component({
@@ -21,8 +21,10 @@ export class UsersBaseComponent implements OnInit {
 
   constructor(
     private db: LocalStorage,
-    public dialog: MatDialog,
-  ) { 
+    private dialog: MatDialog,
+    
+
+  ) {
     this.dataSource = new MatTableDataSource(this.getUserBase());
   }
 
@@ -40,28 +42,25 @@ export class UsersBaseComponent implements OnInit {
   }
 
   addNew(): void{
-    const dialogRef = this.dialog.open(AddComponent);
+    const addCompDialogRef = this.dialog.open(AddComponent);
+
+    addCompDialogRef.afterClosed().pipe(filter(result => result)).subscribe( result => {      
+      console.warn(`Dialog close. Result: ${result}`);
+      this.getUserBase().push(result);
+    })
   }
 
-  deleteItem(){
-    const dialogRef = this.dialog.open(DeleteComponent, {});
-  }
-
-  // removeUser(index: number){
-  //   const data = this.dataSource.data;
-  //   data.splice(index, 1);
-  //   this.dataSource.data = data;
-  // }
-
-  delete(user: User) {
+  deleteItem(user: User) {
     let dialogConfig: MatDialogConfig = {};
     let _this = this;
 
     dialogConfig.data = {
+        title: 'Remove user',
         name: user,
-        title: 'Angular For Beginners',
         callback(status: boolean){
-          _this.db.deleteUser(user).subscribe((foo: any) => _this.dataSource.data = foo);
+          if(status){
+            _this.db.deleteUser(user).subscribe((foo: any) => _this.dataSource.data = foo);
+          }
         }
     };
       const dialogRef = this.dialog.open(DeleteComponent, dialogConfig);
