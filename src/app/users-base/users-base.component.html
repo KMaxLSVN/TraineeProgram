@@ -39,7 +39,7 @@
         <!-- Actions Column -->
         <ng-container matColumnDef="actions">
             <th mat-header-cell *matHeaderCellDef class="table-cell-center">
-                <button mat-icon-button color="primary" matTooltip="Add new user" (click)="addNew()">
+                <button mat-icon-button color="primary" matTooltip="Add new user" (click)="addItem()">
                     <mat-icon>add</mat-icon>
                 </button>
                 <button mat-icon-button color="warn" matTooltip="Remove all" (click)="removeAllUsers()">
@@ -51,7 +51,7 @@
                     <mat-icon class="material-icons">edit</mat-icon>
                 </button>
                 <button mat-icon-button color="warn" (click)="deleteItem(element)" matTooltip="Remove this user">
-                    <mat-icon class="material-icons" >delete</mat-icon>
+                    <mat-icon class="material-icons">delete</mat-icon>
                 </button>
             </td>
         </ng-container>

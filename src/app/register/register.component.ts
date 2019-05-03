@@ -22,6 +22,8 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
     @Output() postForm: EventEmitter<any> = new EventEmitter;
 
+    @Output() onChangeUserBase: EventEmitter<{}> = new EventEmitter();
+
 
     registerForm: FormGroup;
 
@@ -43,6 +45,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
      }
   
     ngOnInit() {
+
       this.registerForm = this.formBuilder.group({
         firstName: ['', [Validators.required,
                         Validators.pattern("^[A-za-z0-9_-]{2,15}$")]
@@ -60,9 +63,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
       })
 
       this.title = this.setTypeForm(this.state).title;
-      this.btnName = this.setTypeForm(this.state).btnName;
-      
-      
+      this.btnName = this.setTypeForm(this.state).btnName;      
       
     }
 
@@ -70,16 +71,17 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
       return this.registerForm.controls;
     }
 
-    onSubmit() {
+    public onSubmit() {
         console.log(this.registerForm);
         if (this.registerForm.invalid){
           return;
         }
         this.setTypeForm(this.state).confirm();
         this.onPostForm();
+        this.onChangeUserBase.emit(this.data);
     }
 
-    setTypeForm(stateType){
+    public setTypeForm(stateType){
       switch(stateType){
         case 'add':
           return {
@@ -109,17 +111,17 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
       }
     }
 
-    onCancel(): void{
+    public onCancel(): void{
       this.dialogRef.close();
     }
 
+
     private addUser(ifRedirect: boolean = true): void {
-      debugger
-      this.userService.register(this.registerForm.value);
+      let data = this.userService.register(this.registerForm.value);
       if(ifRedirect){
         this.router.navigate(['/login']);
-      } else{
-        this.dialogRef.close(this.registerForm.value);
+      } else {
+        this.dialogRef.close(data);
       }
     }
 

@@ -46,7 +46,10 @@ export class AddComponent implements OnInit {
   formAction(data){
     console.log(data);
     this.close();
+  }
 
+  registerSubmit(data){
+    console.log(data);
   }
 
 }

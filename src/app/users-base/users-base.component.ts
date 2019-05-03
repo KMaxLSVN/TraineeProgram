@@ -6,12 +6,13 @@ import { AddComponent } from './dialogs/add/add.component';
 import { Observable } from 'rxjs';
 import { DeleteComponent } from './dialogs/delete/delete.component';
 import { filter } from 'rxjs/operators';
+import { RegisterComponent } from '../register/register.component';
 
 
 @Component({
   selector: 'app-users-base',
   templateUrl: './users-base.component.html',
-  styleUrls: ['./users-base.component.scss']
+  styleUrls: ['./users-base.component.scss'],
 })
 export class UsersBaseComponent implements OnInit {
 
@@ -46,8 +47,18 @@ export class UsersBaseComponent implements OnInit {
 
     addCompDialogRef.afterClosed().pipe(filter(result => result)).subscribe( result => {      
       console.warn(`Dialog close. Result: ${result}`);
-      this.getUserBase().push(result);
     })
+  }
+
+  addItem(): void{
+    this.dialog
+      .open(AddComponent)
+      .afterClosed()
+      .pipe(filter(result => result))
+      .subscribe( result => {
+        console.warn(result);
+        this.dataSource.data = result;
+      });
   }
 
   deleteItem(user: User) {
@@ -59,7 +70,7 @@ export class UsersBaseComponent implements OnInit {
         name: user,
         callback(status: boolean){
           if(status){
-            _this.db.deleteUser(user).subscribe((foo: any) => _this.dataSource.data = foo);
+            _this.db.deleteUser(user).subscribe((result: any) => _this.dataSource.data = result);
           }
         }
     };
