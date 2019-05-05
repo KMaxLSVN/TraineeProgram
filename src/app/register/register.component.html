@@ -56,7 +56,7 @@
                 <button mat-raised-button color="primary" type="button" routerLink="/login" *ngIf="state === 'registration'">Back</button>
                 <button mat-raised-button color="warn" type="button" *ngIf="state === 'add'" (click)="onCancel()">Cancel</button>
                 <button mat-raised-button color="warn" type="button" *ngIf="state === 'edit'" (click)="onCancel()">Cancel</button>
-                <button mat-raised-button color="primary" mat-dialog-close type="submit" [disabled]="registerForm.invalid">{{btnName}}</button>
+                <button mat-raised-button color="primary" type="submit" [disabled]="registerForm.invalid">{{btnName}}</button>
             </div>
         
         </form>

@@ -51,14 +51,25 @@ export class UsersBaseComponent implements OnInit {
   }
 
   addItem(): void{
-    this.dialog
-      .open(AddComponent)
-      .afterClosed()
-      .pipe(filter(result => result))
-      .subscribe( result => {
+    console.log('123');
+    let dialogConfig: MatDialogConfig = {};
+    let _this = this;
+
+    dialogConfig.data = {
+      title: 'Add user',
+      callback(result){
         console.warn(result);
-        this.dataSource.data = result;
-      });
+        _this.dataSource.data.push(result);
+      }
+  };
+
+    this.dialog
+      .open(AddComponent, dialogConfig)
+      // .afterClosed()
+      // .pipe(filter(result => result))
+      // .subscribe( result => {
+      //   console.warn(result);
+      // });
   }
 
   deleteItem(user: User) {

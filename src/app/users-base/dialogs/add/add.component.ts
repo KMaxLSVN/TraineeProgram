@@ -11,6 +11,7 @@ import {FormControl, Validators, FormGroup, FormBuilder} from '@angular/forms';
 export class AddComponent implements OnInit {
 
   addForm: FormGroup;
+  formData: any;
 
   constructor(
 
@@ -40,16 +41,19 @@ export class AddComponent implements OnInit {
   }
 
   close(): void{
-    this.dialogRef.close();
+    this.dialogRef.close(this.formData);
   }
 
   formAction(data){
     console.log(data);
-    this.close();
+    // this.data.callback(data.data);
+
+    // this.close();
   }
 
   registerSubmit(data){
     console.log(data);
+    this.data.callback(data);
   }
 
 }

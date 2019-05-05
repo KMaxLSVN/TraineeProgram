@@ -78,7 +78,7 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
         }
         this.setTypeForm(this.state).confirm();
         this.onPostForm();
-        this.onChangeUserBase.emit(this.data);
+        this.onChangeUserBase.emit(this.registerForm.value);
     }
 
     public setTypeForm(stateType){
@@ -131,7 +131,8 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
     private onPostForm(){
       this.postForm.emit({
-        state: this.state
+        state: this.state,
+        data: this.registerForm.value
       })
     }
   
