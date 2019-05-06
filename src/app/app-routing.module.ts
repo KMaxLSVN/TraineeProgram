@@ -7,12 +7,14 @@ import { BookComponent } from './book/book.component';
 import { NotFoundComponent } from './not-found/not-found.component';
 import { AddBookComponent } from './add-book/add-book.component';
 import { UsersBaseComponent } from './users-base/users-base.component';
+import { HomeComponent } from './pages/home/home.component';
 
 
 const routes: Routes = [
   // Home page
-  { path: '', component: BooksComponent, pathMatch: 'full'},
-  // Components pages
+  { path: '', component: HomeComponent, pathMatch: 'full'},
+  // Pages
+  { path: 'books', component: BooksComponent, pathMatch: 'full' },
   { path: 'login', component: LoginComponent, pathMatch: 'full' },
   { path: 'register', component: RegisterComponent, pathMatch: 'full' },
   { path: 'book/:id', component: BookComponent, pathMatch: 'full' },

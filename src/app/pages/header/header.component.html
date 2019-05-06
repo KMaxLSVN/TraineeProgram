@@ -1,0 +1,25 @@
+<!-- top header -->
+<header>
+    <section class="main-title">
+        <span>Bookstore</span>
+    </section>
+</header>
+
+<!-- nav -->
+<nav class="navbar">
+    <div class="navbar-section">
+        <div class="navbar-section-wrapper">
+            <a mat-raised-button color="link" class="navbar-section-item" routerLink="/">Home</a>
+        </div>
+        <div class="navbar-section-wrapper">
+            <a mat-raised-button color="link" class="navbar-section-item" routerLink="/books">Books</a>
+        </div>
+        <div class="navbar-section-wrapper">
+            <a *ngIf="!currentUser" mat-raised-button color="link" class="navbar-section-item" routerLink="/login">Login</a>
+            <div *ngIf="currentUser" class="navbar-section-currentUser">
+                <div class="navbar-currentUser-item" contenteditable="true"><i>{{currentUser.email}}</i></div>
+                <a  mat-raised-button color="link" class="navbar-currentUser-item" (click)="logout()">Logout</a>
+            </div>
+        </div>
+    </div>
+</nav>

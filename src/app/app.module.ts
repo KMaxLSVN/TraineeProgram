@@ -20,12 +20,13 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
-import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatTableModule} from '@angular/material/table';
-import {MatIconModule} from '@angular/material/icon';
-import {MatTooltipModule} from '@angular/material/tooltip';
-import {MatPaginatorModule} from '@angular/material/paginator';
-import {MatDialogModule} from '@angular/material/dialog';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatTableModule } from '@angular/material/table';
+import { MatIconModule } from '@angular/material/icon';
+import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatCheckboxModule, MatStepperModule } from '@angular/material';
 
 import { HttpClientModule }   from '@angular/common/http';
 
@@ -36,6 +37,8 @@ import { UsersBaseComponent } from './users-base/users-base.component';
 import { AddComponent } from './users-base/dialogs/add/add.component';
 import { DeleteComponent } from './users-base/dialogs/delete/delete.component';
 import { EditComponent } from './users-base/dialogs/edit/edit.component';
+import { HeaderComponent } from './pages/header/header.component';
+import { HomeComponent } from './pages/home/home.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +54,8 @@ import { EditComponent } from './users-base/dialogs/edit/edit.component';
     AddComponent,
     DeleteComponent,
     EditComponent,
+    HeaderComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -70,6 +75,8 @@ import { EditComponent } from './users-base/dialogs/edit/edit.component';
     MatTooltipModule,
     MatPaginatorModule,
     MatDialogModule,
+    MatCheckboxModule,
+    MatStepperModule,
 
     HttpClientModule,
 

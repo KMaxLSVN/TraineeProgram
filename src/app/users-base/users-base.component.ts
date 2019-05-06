@@ -7,6 +7,7 @@ import { Observable } from 'rxjs';
 import { DeleteComponent } from './dialogs/delete/delete.component';
 import { filter } from 'rxjs/operators';
 import { RegisterComponent } from '../register/register.component';
+import { EditComponent } from './dialogs/edit/edit.component';
 
 
 @Component({
@@ -51,7 +52,6 @@ export class UsersBaseComponent implements OnInit {
   }
 
   addItem(): void{
-    console.log('123');
     let dialogConfig: MatDialogConfig = {};
     let _this = this;
 
@@ -59,7 +59,8 @@ export class UsersBaseComponent implements OnInit {
       title: 'Add user',
       callback(result){
         console.warn(result);
-        _this.dataSource.data.push(result);
+        // _this.dataSource.data.push(result);
+        _this.dataSource.data = [..._this.dataSource.data, result];
       }
   };
 
@@ -70,6 +71,23 @@ export class UsersBaseComponent implements OnInit {
       // .subscribe( result => {
       //   console.warn(result);
       // });
+  }
+
+  editItem(user: User){
+    let dialogConfig: MatDialogConfig = {};
+
+    dialogConfig.data = {
+      title: 'Edit user',
+      user: user,
+    }
+
+    this.dialog.open(EditComponent, dialogConfig)
+              .afterClosed()
+              .pipe(filter(result => result))
+              .subscribe(result => {
+                this.dataSource.data = this.db.updateUser(result);
+              });
+
   }
 
   deleteItem(user: User) {

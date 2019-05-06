@@ -6,8 +6,10 @@
         <div>User's email is <i>{{data?.name.email}}</i></div>
     </div>
 
+    <mat-checkbox [(ngModel)]="checked">I'm not kidding</mat-checkbox>
+
     <div mat-dialog-actions class="button-section">
-      <button mat-stroked-button color="accent" (click)="confirmDelete(true)">Yes, I know that</button>
+      <button mat-stroked-button color="accent" (click)="confirmDelete(true)" [disabled]="!checked">Yes, I know that</button>
       <button mat-stroked-button color="warn" (click)="close()">Oops, my fault</button>
     </div>
 

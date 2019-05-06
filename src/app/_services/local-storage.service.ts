@@ -11,7 +11,7 @@ const DB_KEY = 'registerUser';
 })
 
 export class LocalStorage {
-    private users : User[]
+    private users: User[]
 
     constructor(
         private toastr: ToastrService,
@@ -21,7 +21,7 @@ export class LocalStorage {
         }
     }
 
-    getAllUsers(withoutAdmin: boolean = true):User[] {
+    getAllUsers(withoutAdmin: boolean = true): User[] {
         this.users = JSON.parse(localStorage.getItem(DB_KEY)) || [];
         if(this.isAdminAdded() && withoutAdmin){
             this.users.shift();
@@ -40,19 +40,24 @@ export class LocalStorage {
             }
         }
         return of(users);
-
-        // ---Variant №2:---
-        // for(let i=0; i<=this.users.length; i++){
-        //     if( currentUsers == this.users[i] ) {
-        //         this.users.splice(i, 1);
-        //         return;
-        //     }
-        // }
-        // console.log('user delete', chosenUsers);
-        // return;
     }
 
-    addUser(user: User, isAdmin?: 'admin'):User[] {
+    updateUser(currentUser: User): User[]{
+        let users: User[] = this.getAllUsers();
+        for(let i=0; i<=users.length; i++){
+            if(currentUser.email == users[i].email){
+                this.toastr.info(`${users[i].firstName} first name was change on ${currentUser.firstName}`);
+                this.toastr.info(`${users[i].lastName} last name was change on ${currentUser.lastName}`);
+                users[i].firstName = currentUser.firstName;
+                users[i].lastName = currentUser.lastName;
+                this.saveToLocalStorage(users)
+                break;
+            }
+        }
+        return users;
+    }
+
+    addUser(user: User, isAdmin?: 'admin'): User[] {
         user.isAdmin = !!isAdmin;
         let usersBase = this.getAllUsers(false);
         isAdmin ? usersBase.unshift(user) : usersBase.push(user);
@@ -69,12 +74,12 @@ export class LocalStorage {
         })
     }
 
-    private saveToLocalStorage(users :User[]){
+    private saveToLocalStorage(users: User[]){
         localStorage.setItem(DB_KEY, JSON.stringify(users));
     }
 
     private createAdmin(email: string, password: string){
-        let admin = new User();
+        let admin: User = <User>{};
         admin.email = email;
         admin.password = password;
         admin.isAdmin = true;

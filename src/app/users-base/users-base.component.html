@@ -42,12 +42,9 @@
                 <button mat-icon-button color="primary" matTooltip="Add new user" (click)="addItem()">
                     <mat-icon>add</mat-icon>
                 </button>
-                <button mat-icon-button color="warn" matTooltip="Remove all" (click)="removeAllUsers()">
-                    <mat-icon>clear_all</mat-icon>
-                </button>
             </th>
             <td mat-cell *matCellDef="let element; let i = index" class="table-cell-center">
-                <button mat-icon-button color="accent" matTooltip="Edit user">
+                <button mat-icon-button color="accent" (click)="editItem(element)" matTooltip="Edit user">
                     <mat-icon class="material-icons">edit</mat-icon>
                 </button>
                 <button mat-icon-button color="warn" (click)="deleteItem(element)" matTooltip="Remove this user">
