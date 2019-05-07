@@ -1,0 +1,29 @@
+<div class="container">
+
+    <h3 mat-dialog-title>Edit user</h3>
+  
+    <form [formGroup]="editForm" novalidate (ngSubmit)="submit()">
+       <!--Form Inputs  -->
+      <mat-form-field color="primary" appearance="fill">
+        <mat-label>First name</mat-label>
+        <input type="text"
+              matInput
+              formControlName="firstName">
+        <mat-hint>Enter new first name</mat-hint>
+      </mat-form-field>
+  
+      <mat-form-field color="primary" appearance="fill">
+        <mat-label>Last name</mat-label>
+        <input type="text"
+              matInput
+              formControlName="lastName">
+        <mat-hint>Enter new last name</mat-hint>
+      </mat-form-field>
+      <!-- Button section -->
+      <section mat-dialog-actions class="button-section">
+          <button mat-stroked-button color="primary" [disabled]="editForm.invalid" type="submit">Update</button>
+          <button mat-stroked-button color="warn" (click)="close()">Cancel</button>
+      </section>  
+    </form>
+  
+  </div>

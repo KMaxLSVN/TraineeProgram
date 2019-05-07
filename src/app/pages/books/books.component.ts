@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AuthenticationService } from '../_services';
+import { AuthenticationService } from '../../shared/_services';
 
 @Component({
     selector: 'app-books',

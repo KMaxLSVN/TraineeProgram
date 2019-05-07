@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { AuthenticationService } from '../_services';
+import { AuthenticationService } from '../../shared/_services';
 
 
 
@@ -12,7 +12,7 @@ export class AdminComponent implements OnInit {
   @Input() isAdmin: boolean;
 
   showAddBook: boolean = false;
-  showUserBase: boolean = false;
+  showUserList: boolean = false;
 
   constructor() {
   }
@@ -22,6 +22,5 @@ export class AdminComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log('admin.component -- ', this.isAdmin);
   }
 }

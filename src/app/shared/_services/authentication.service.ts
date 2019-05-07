@@ -8,7 +8,9 @@ import { User } from '../_models/users';
 import { ToastrService } from 'ngx-toastr';
 import { LocalStorage } from './local-storage.service';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root',
+})
 export class AuthenticationService {
     private currentUserSubject: BehaviorSubject<User>
     public currentUser: Observable<User>
@@ -48,7 +50,7 @@ export class AuthenticationService {
         localStorage.setItem('currentUser', JSON.stringify(currentUser));
         this.currentUserSubject.next(currentUser);
         this.toastr.success(`Have a nice day ${currentUser.email}!`);
-        this.router.navigate(['/']);
+        this.router.navigate(['/books']);
         
 
 

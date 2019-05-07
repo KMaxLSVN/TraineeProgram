@@ -1,4 +1,4 @@
-<!-- <div class="container">
+<div class="container">
 
   <h3 mat-dialog-title>Add new user</h3>
 
@@ -7,7 +7,6 @@
       <mat-label>First name</mat-label>
       <input type="text"
             matInput
-            required
             formControlName="firstName">
       <mat-hint>Enter first name</mat-hint>
     </mat-form-field>
@@ -35,12 +34,12 @@
             formControlName="password">
       <mat-hint>Enter password</mat-hint>
     </mat-form-field>
-
     <section mat-dialog-actions class="button-section">
       <button mat-stroked-button color="primary" [disabled]="addForm.invalid" type="submit">Add</button>
       <button mat-stroked-button color="warn" (click)="close()">Cancel</button>
     </section>
   </form>
 
-</div> -->
-<app-register state="add" (postForm)="formAction($event)" (onChangeUserBase)="registerSubmit($event)"></app-register>
+</div>
+
+<!-- <app-register state="add" (postForm)="formAction($event)" (onChangeUserBase)="registerSubmit($event)"></app-register> -->

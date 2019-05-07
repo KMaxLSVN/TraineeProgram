@@ -1,30 +1,34 @@
-import { Component, OnInit, ViewChild, Inject } from '@angular/core';
-import { LocalStorage } from '../_services/local-storage.service';
-import { User } from '../_models';
-import { MatTableDataSource, MatPaginator, MatDialog, MatDialogConfig } from '@angular/material';
-import { AddComponent } from './dialogs/add/add.component';
-import { Observable } from 'rxjs';
-import { DeleteComponent } from './dialogs/delete/delete.component';
-import { filter } from 'rxjs/operators';
-import { RegisterComponent } from '../register/register.component';
-import { EditComponent } from './dialogs/edit/edit.component';
+import { Component, OnInit, ViewChild } from '@angular/core';
 
+import { MatTableDataSource, MatPaginator, MatDialog, MatDialogConfig } from '@angular/material';
+
+import { AddDialogComponent } from './dialogs/add-dialog/add-dialog.component';
+import { DeleteDialogComponent } from './dialogs/delete-dialog/delete-dialog.component';
+import { EditDialogComponent } from './dialogs/edit-dialog/edit-dialog.component';
+
+import { Observable } from 'rxjs';
+import { filter } from 'rxjs/operators';
+
+import { User } from '../../shared/_models';
+import { UserService } from 'src/app/shared/_services';
+import { LocalStorage } from '../../shared/_services/local-storage.service';
 
 @Component({
-  selector: 'app-users-base',
-  templateUrl: './users-base.component.html',
-  styleUrls: ['./users-base.component.scss'],
+  selector: 'app-users-list',
+  templateUrl: './users-list.component.html',
+  styleUrls: ['./users-list.component.scss'],
 })
-export class UsersBaseComponent implements OnInit {
+export class UsersListComponent implements OnInit {
 
   displayedColumns: string[] = ['position', 'firstName', 'lastName', 'email', 'password', 'actions'];
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(
+
     private db: LocalStorage,
     private dialog: MatDialog,
-    
+    private userService: UserService
 
   ) {
     this.dataSource = new MatTableDataSource(this.getUserBase());
@@ -44,10 +48,15 @@ export class UsersBaseComponent implements OnInit {
   }
 
   addNew(): void{
-    const addCompDialogRef = this.dialog.open(AddComponent);
-
-    addCompDialogRef.afterClosed().pipe(filter(result => result)).subscribe( result => {      
-      console.warn(`Dialog close. Result: ${result}`);
+    this.dialog
+      .open(AddDialogComponent)
+      .afterClosed()
+      .pipe(filter(result => result))
+      .subscribe(data => {
+        console.log('My condition:',data);
+        if(data.email){
+          this.userService.register(data).subscribe(result => {console.warn(result); this.dataSource.data = result});
+        }
     })
   }
 
@@ -65,7 +74,7 @@ export class UsersBaseComponent implements OnInit {
   };
 
     this.dialog
-      .open(AddComponent, dialogConfig)
+      .open(AddDialogComponent, dialogConfig)
       // .afterClosed()
       // .pipe(filter(result => result))
       // .subscribe( result => {
@@ -80,12 +89,16 @@ export class UsersBaseComponent implements OnInit {
       title: 'Edit user',
       user: user,
     }
-
-    this.dialog.open(EditComponent, dialogConfig)
+    
+    this.dialog
+              .open(EditDialogComponent, dialogConfig)
               .afterClosed()
               .pipe(filter(result => result))
               .subscribe(result => {
-                this.dataSource.data = this.db.updateUser(result);
+                console.log('My condition:', result)
+                if(result.email){
+                  this.dataSource.data = this.db.updateUser(result);
+                }
               });
 
   }
@@ -103,7 +116,7 @@ export class UsersBaseComponent implements OnInit {
           }
         }
     };
-      const dialogRef = this.dialog.open(DeleteComponent, dialogConfig);
+      const dialogRef = this.dialog.open(DeleteDialogComponent, dialogConfig);
       
   }
 

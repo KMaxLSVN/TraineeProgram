@@ -19,10 +19,10 @@ export class UserService {
         private db: LocalStorage,
     ){}
 
-    register(user: User) {
+    register(user: User): Observable<User[]> {
         let usersBase: User[] = this.db.getAllUsers();
         if (!usersBase) {
-            this.db.addUser(user);
+            usersBase = this.db.addUser(user);
             // Message to user
             this.toastr.success('This is just the beginning','First user!');
             this.toastr.info('User Base was created!','LocalStorage');
@@ -32,12 +32,12 @@ export class UserService {
                 this.toastr.warning('This Email is taken!');
                 return;
             }
-            this.db.addUser(user);
+            usersBase = this.db.addUser(user);
             // Message to user
             this.toastr.success('Congratulations!','You have been registered');
         }
-
-        return usersBase;
+        console.log('REGISTER:', usersBase);
+        return of(usersBase);
     }
 
 // register( user: User) {

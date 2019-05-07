@@ -6,14 +6,24 @@ import { AppRoutingModule } from './app-routing.module';
 import { Routes, RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
-import { BooksComponent } from './books/books.component';
+import { LoginComponent } from './pages/login/login.component';
+import { RegisterComponent } from './pages/register/register.component';
+import { BooksComponent } from './pages/books/books.component';
 import { BookComponent } from './book/book.component';
-import { NotFoundComponent } from './not-found/not-found.component';
-import { AdminComponent } from './admin/admin.component';
-import { AuthenticationService } from './_services/authentication.service';
-import { UserService } from './_services/user.service';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
+import { AdminComponent } from './components/admin/admin.component';
+import { AddBookComponent } from './add-book/add-book.component';
+import { HeaderComponent } from './pages/header/header.component';
+import { HomeComponent } from './pages/home/home.component';
+import { UsersListComponent } from './components/user-list/users-list.component';
+import { AddDialogComponent } from './components/user-list/dialogs/add-dialog/add-dialog.component';
+import { DeleteDialogComponent } from './components/user-list/dialogs/delete-dialog/delete-dialog.component';
+import { EditDialogComponent } from './components/user-list/dialogs/edit-dialog/edit-dialog.component';
+
+
+import { AuthenticationService } from './shared/_services/authentication.service';
+import { UserService } from './shared/_services/user.service';
+import { LocalStorage } from './shared/_services/local-storage.service';
 
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -32,13 +42,6 @@ import { HttpClientModule }   from '@angular/common/http';
 
 import { ToastrModule } from 'ngx-toastr';
 
-import { AddBookComponent } from './add-book/add-book.component';
-import { UsersBaseComponent } from './users-base/users-base.component';
-import { AddComponent } from './users-base/dialogs/add/add.component';
-import { DeleteComponent } from './users-base/dialogs/delete/delete.component';
-import { EditComponent } from './users-base/dialogs/edit/edit.component';
-import { HeaderComponent } from './pages/header/header.component';
-import { HomeComponent } from './pages/home/home.component';
 
 @NgModule({
   declarations: [
@@ -50,12 +53,12 @@ import { HomeComponent } from './pages/home/home.component';
     NotFoundComponent,
     AdminComponent,
     AddBookComponent,
-    UsersBaseComponent,
-    AddComponent,
-    DeleteComponent,
-    EditComponent,
     HeaderComponent,
     HomeComponent,
+    UsersListComponent,
+    AddDialogComponent,
+    DeleteDialogComponent,
+    EditDialogComponent,
   ],
   imports: [
     BrowserModule,
@@ -84,13 +87,14 @@ import { HomeComponent } from './pages/home/home.component';
     ToastrModule.forRoot(),
   ],
   entryComponents: [
-    AddComponent,
-    EditComponent,
-    DeleteComponent
+    AddDialogComponent,
+    EditDialogComponent,
+    DeleteDialogComponent
   ],
   providers: [
     AuthenticationService,
     UserService,
+    LocalStorage,
   ],
   bootstrap: [AppComponent]
 })

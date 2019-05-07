@@ -3,15 +3,15 @@
   <mat-sidenav #sidenav mode="push" class="side-menu">
     <button mat-raised-button color="warn" (click)="sidenav.toggle()" class="side-menu-item btn-hide">Hide</button>
     <nav class="side-menu-item">
-      <button mat-raised-button color="accent" (click)="toggleAddBook()">Add book</button>
-      <button mat-raised-button color="accent" (click)="showUserBase=!showUserBase">Users base</button>
+      <button mat-raised-button color="accent" (click)="toggleAddBook()">Add Book</button>
+      <button mat-raised-button color="accent" (click)="showUserList=!showUserList">Users List</button>
     </nav>
   </mat-sidenav>
   
   <mat-sidenav-content class="side-content">
     <button mat-raised-button color="warn" (click)="sidenav.toggle()" class="side-content-item">Admin panel</button>
     <app-add-book *ngIf='showAddBook'></app-add-book>
-    <app-users-base *ngIf='showUserBase'></app-users-base>
+    <app-users-list *ngIf='showUserList'></app-users-list>
   </mat-sidenav-content>
 
 </mat-sidenav-container>

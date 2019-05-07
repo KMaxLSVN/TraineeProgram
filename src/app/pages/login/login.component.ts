@@ -1,6 +1,6 @@
 import { Component, OnInit, } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AuthenticationService } from '../_services/';
+import { AuthenticationService } from '../../shared/_services';
 import { Router } from '@angular/router';
 
 
@@ -22,7 +22,7 @@ export class LoginComponent  implements OnInit  {
     private router: Router,
     ) {
     if (this.service.currentUserValue){
-      this.router.navigate(['/']);
+      this.router.navigate(['/books']);
     }
    }
 

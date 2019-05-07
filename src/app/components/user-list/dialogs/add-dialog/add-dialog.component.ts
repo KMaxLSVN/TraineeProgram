@@ -4,20 +4,20 @@ import {FormControl, Validators, FormGroup, FormBuilder} from '@angular/forms';
 
 
 @Component({
-  selector: 'app-add',
-  templateUrl: './add.component.html',
-  styleUrls: ['./add.component.scss']
+  selector: 'app-add-dialog',
+  templateUrl: './add-dialog.component.html',
+  styleUrls: ['./add-dialog.component.scss']
 })
-export class AddComponent implements OnInit {
+export class AddDialogComponent implements OnInit {
 
   addForm: FormGroup;
   formData: any;
 
   constructor(
 
-    public dialogRef: MatDialogRef<AddComponent>,
-    @Inject(MAT_DIALOG_DATA) public data,
     private formBuilder: FormBuilder,
+    public dialogRef: MatDialogRef<AddDialogComponent>,
+    @Inject(MAT_DIALOG_DATA) public data,
 
   ) {}
 
@@ -36,12 +36,13 @@ export class AddComponent implements OnInit {
     });
   }
 
-  submit(){
+  submit(): void {
     console.log(this.addForm);
+    this.dialogRef.close(this.addForm.value);
   }
 
-  close(): void{
-    this.dialogRef.close(this.formData);
+  close(): void {
+    this.dialogRef.close();
   }
 
   formAction(data){

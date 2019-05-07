@@ -1,5 +1,36 @@
+<h2 class="main-title">All you need to get the <a routerLink="/books">book</a> is only 3 steps!</h2>
 <mat-horizontal-stepper [linear]="isLinear">
-    <mat-step [stepControl]></mat-step>
-    <mat-step></mat-step>
-    <mat-step></mat-step>
+    <mat-step>
+        <ng-template matStepLabel>Find & Choose a book</ng-template>
+        <div class="stepper-content">
+            <span>
+                <a mat-stroked-button routerLink="/books">The largest selection of books in the world</a>
+            </span>
+        </div>
+        <div class="stepper-content">
+            <button mat-raised-button color="primary" matStepperNext>Next</button>
+        </div>
+    </mat-step>
+    <mat-step>
+        <ng-template matStepLabel>Login or register yourself</ng-template>
+        <div class="stepper-content user-nav">
+            <span>We are glad to welcome our <a mat-stroked-button routerLink="/login">users</a>!</span>
+            <span><a mat-stroked-button routerLink="/register">Not registered</a>? What are you waiting for?</span>
+        </div>
+        <div class="stepper-content">
+            <button mat-raised-button color="primary" matStepperPrevious>Back</button>
+            <button mat-raised-button color="primary" matStepperNext>Next</button>
+        </div>
+    </mat-step>
+    <mat-step>
+        <ng-template matStepLabel>Buy in one click!</ng-template>
+        <div class="stepper-content">
+            <span>
+                <a mat-stroked-button>Check your cart</a>
+            </span>
+        </div>
+        <div class="stepper-content">
+            <button mat-raised-button color="primary" matStepperPrevious>Back</button>
+        </div>
+    </mat-step>
 </mat-horizontal-stepper>

@@ -52,10 +52,10 @@
                 <mat-error *ngIf="f.password.invalid && f.password.dirty">Not a valid value</mat-error>
             </mat-form-field>
 
-            <div class="reg-btn">
-                <button mat-raised-button color="primary" type="button" routerLink="/login" *ngIf="state === 'registration'">Back</button>
-                <button mat-raised-button color="warn" type="button" *ngIf="state === 'add'" (click)="onCancel()">Cancel</button>
-                <button mat-raised-button color="warn" type="button" *ngIf="state === 'edit'" (click)="onCancel()">Cancel</button>
+            <div class="reg-btn" [ngSwitch]="state">
+                <button mat-raised-button color="primary" type="button" routerLink="/login" *ngSwitchDefault>Back</button>
+                <button mat-raised-button color="warn" type="button" *ngSwitchCase="'add'" (click)="onCancel()">Cancel</button>
+                <button mat-raised-button color="warn" type="button"  *ngSwitchCase="'edit'" (click)="onCancel()">Cancel</button>
                 <button mat-raised-button color="primary" type="submit" [disabled]="registerForm.invalid">{{btnName}}</button>
             </div>
         

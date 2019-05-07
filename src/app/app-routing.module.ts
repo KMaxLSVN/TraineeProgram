@@ -1,12 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { BooksComponent } from './books/books.component';
-import { LoginComponent } from './login/login.component';
-import { RegisterComponent } from './register/register.component';
+import { BooksComponent } from './pages/books/books.component';
+import { LoginComponent } from './pages/login/login.component';
+import { RegisterComponent } from './pages/register/register.component';
 import { BookComponent } from './book/book.component';
-import { NotFoundComponent } from './not-found/not-found.component';
+import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { AddBookComponent } from './add-book/add-book.component';
-import { UsersBaseComponent } from './users-base/users-base.component';
 import { HomeComponent } from './pages/home/home.component';
 
 

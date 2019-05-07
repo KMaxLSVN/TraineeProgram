@@ -39,10 +39,11 @@ export class LocalStorage {
                 break;
             }
         }
+        console.log('DELETE:', users);
         return of(users);
     }
 
-    updateUser(currentUser: User): User[]{
+    updateUser(currentUser: User): User[] {
         let users: User[] = this.getAllUsers();
         for(let i=0; i<=users.length; i++){
             if(currentUser.email == users[i].email){
@@ -61,8 +62,8 @@ export class LocalStorage {
         user.isAdmin = !!isAdmin;
         let usersBase = this.getAllUsers(false);
         isAdmin ? usersBase.unshift(user) : usersBase.push(user);
-        console.log(usersBase);
         this.saveToLocalStorage(usersBase);
+        console.log('addUser:' ,usersBase);
         return usersBase;
     }
 
