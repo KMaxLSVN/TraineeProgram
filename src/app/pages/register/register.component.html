@@ -11,7 +11,7 @@
                 <input matInput
                     placeholder="First Name"
                     type="name"
-                    id="inputFirstname"
+                    id="inputFirstName"
                     formControlName="firstName"
                     required>
                 <mat-error *ngIf="f.firstName.errors?.required">You must enter a value</mat-error>
@@ -22,11 +22,20 @@
                 <input matInput
                     placeholder="Last Name"
                     type="name"
-                    id="inputLastname"
+                    id="inputLastName"
                     formControlName="lastName"
                     required>
                 <mat-error *ngIf="f.lastName.errors?.required">You must enter a value</mat-error>
                 <mat-error *ngIf="f.lastName.invalid && f.lastName.dirty">Not a valid value</mat-error>
+            </mat-form-field>
+
+            <mat-form-field class="full-width">
+                <input matInput
+                    placeholder="Nickname"
+                    type="name"
+                    id="inputUserName"
+                    formControlName="userName">
+                <mat-error *ngIf="f.userName.invalid && f.userName.dirty">Not a valid value</mat-error>
             </mat-form-field>
 
             <mat-form-field class="full-width">

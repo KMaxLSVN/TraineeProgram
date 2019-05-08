@@ -28,13 +28,16 @@ export class RegisterComponent implements OnInit {
   model: User = <User>{};
   
   constructor(
-    private formBuilder: FormBuilder,
+
     private router: Router,
+    private formBuilder: FormBuilder,
+
     private service: AuthenticationService,
     private userService: UserService,
 
-    public dialogRef: MatDialogRef<RegisterComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: any,
+    // public dialogRef: MatDialogRef<RegisterComponent>,
+    // @Inject(MAT_DIALOG_DATA) public data: any,
+    
   ){
     if (this.service.currentUserValue) { 
       this.router.navigate(['/books']);
@@ -46,17 +49,19 @@ export class RegisterComponent implements OnInit {
     this.registerForm = this.formBuilder.group({
       firstName: ['', [Validators.required,
                       Validators.pattern("^[A-za-z0-9_-]{2,15}$")]
-    ],
+      ],
       lastName: ['', [Validators.required,
                       Validators.pattern("^[a-z0-9_-]{2,15}$")]
-    ],
+      ],
+      userName: [ null, Validators.pattern("^[a-z0-9_-]{2,15}$")
+      ],
       email: ['', [Validators.required,
                   // Validators.email,]
                   Validators.pattern("[a-zA-Z_]+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}")]
-    ],
+      ],
       password: ['', [Validators.required,
                       Validators.minLength(3)]
-    ]
+      ]
     })
 
     this.title = this.setTypeForm(this.state).title;
@@ -78,7 +83,7 @@ export class RegisterComponent implements OnInit {
     this.onChangeUserBase.emit(this.registerForm.value);
   }
 
-  public setTypeForm(stateType){
+  public setTypeForm(stateType: string){
     switch(stateType){
       case 'add':
         return {
@@ -108,16 +113,16 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  public onCancel(): void {
-    this.dialogRef.close();
-  }
+  // public onCancel(): void {
+  //   this.dialogRef.close();
+  // }
 
   private addUser(ifRedirect: boolean = true): void {
     let data = this.userService.register(this.registerForm.value);
     if(ifRedirect){
       this.router.navigate(['/login']);
     } else {
-      this.dialogRef.close(data);
+      // this.dialogRef.close(data);
     }
   }
 

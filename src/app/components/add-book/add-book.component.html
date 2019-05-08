@@ -1,0 +1,75 @@
+<mat-card>
+  
+  <mat-toolbar color="warn">
+    <mat-toolbar-row>
+      <span>Add book</span>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  
+  <div class="wrapper">
+    <form [formGroup]="bookForm" novalidate (ngSubmit)="submit()" class="form-book">
+      <div class="form-container">
+          <mat-form-field appearance="fill" color="primary">
+              <mat-label>Enter book's ID</mat-label>
+              <input
+                type="text" 
+                matInput
+                placeholder="ID"
+                formControlName="id">
+          </mat-form-field>
+        
+          <mat-form-field appearance="fill" color="primary">
+              <mat-label>Enter title</mat-label>
+              <input
+                type="text" 
+                matInput
+                placeholder="Title"
+                formControlName="title">
+          </mat-form-field>
+    
+          <mat-form-field appearance="fill" color="primary">
+              <mat-label>Enter author</mat-label>
+              <input
+                type="text" 
+                matInput
+                placeholder="Author"
+                formControlName="author">
+          </mat-form-field>
+          
+          <mat-form-field appearance="fill" color="primary">
+              <mat-label>Enter price</mat-label>
+              <input            
+                type="number" 
+                matInput
+                placeholder="Price"
+                formControlName="price">
+          </mat-form-field>
+    
+          <mat-form-field appearance="fill" color="primary">
+              <mat-label>Enter amount</mat-label>
+              <input
+                type="number"
+                matInput
+                placeholder="Amount"
+                formControlName="amount">
+          </mat-form-field>
+
+          <mat-form-field appearance="fill" color="primary">
+              <mat-label>Enter description</mat-label>
+              <input
+                type="text"
+                matInput
+                placeholder="Description"
+                formControlName="description">
+          </mat-form-field>
+
+      </div>
+      <div class="book-btn">
+        <button mat-raised-button color="primary" type="submit">Add book</button>
+        <button mat-raised-button color="accent" (click)='bookForm.reset()'>Reset</button>
+      </div>
+
+    </form>
+
+  </div>
+</mat-card>

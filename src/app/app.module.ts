@@ -8,11 +8,11 @@ import { Routes, RouterModule } from '@angular/router';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
-import { BooksComponent } from './pages/books/books.component';
+import { BooksListComponent } from './pages/books-list/books-list.component';
 import { BookComponent } from './book/book.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { AdminComponent } from './components/admin/admin.component';
-import { AddBookComponent } from './add-book/add-book.component';
+import { AddBookComponent } from './components/add-book/add-book.component';
 import { HeaderComponent } from './pages/header/header.component';
 import { HomeComponent } from './pages/home/home.component';
 import { UsersListComponent } from './components/user-list/users-list.component';
@@ -25,22 +25,10 @@ import { AuthenticationService } from './shared/_services/authentication.service
 import { UserService } from './shared/_services/user.service';
 import { LocalStorage } from './shared/_services/local-storage.service';
 
-import { MatInputModule } from '@angular/material/input';
-import { MatFormFieldModule } from '@angular/material/form-field';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { MatSidenavModule } from '@angular/material/sidenav';
-import { MatTableModule } from '@angular/material/table';
-import { MatIconModule } from '@angular/material/icon';
-import { MatTooltipModule } from '@angular/material/tooltip';
-import { MatPaginatorModule } from '@angular/material/paginator';
-import { MatDialogModule } from '@angular/material/dialog';
-import { MatCheckboxModule, MatStepperModule } from '@angular/material';
-
 import { HttpClientModule }   from '@angular/common/http';
 
 import { ToastrModule } from 'ngx-toastr';
+import { SharedModule } from './shared/shared.module';
 
 
 @NgModule({
@@ -48,7 +36,7 @@ import { ToastrModule } from 'ngx-toastr';
     AppComponent,
     LoginComponent,
     RegisterComponent,
-    BooksComponent,
+    BooksListComponent,
     BookComponent,
     NotFoundComponent,
     AdminComponent,
@@ -66,30 +54,18 @@ import { ToastrModule } from 'ngx-toastr';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     FormsModule,
-
-    MatInputModule,
-    MatFormFieldModule,
-    MatToolbarModule,
-    MatButtonModule,
-    MatCardModule,
-    MatSidenavModule,
-    MatTableModule,
-    MatIconModule,
-    MatTooltipModule,
-    MatPaginatorModule,
-    MatDialogModule,
-    MatCheckboxModule,
-    MatStepperModule,
+    // Angular Material
+    SharedModule,
 
     HttpClientModule,
-
+    // Angular Toastr from https://www.npmjs.com/package/ngx-toastr
     ToastrModule,
     ToastrModule.forRoot(),
   ],
   entryComponents: [
     AddDialogComponent,
     EditDialogComponent,
-    DeleteDialogComponent
+    DeleteDialogComponent,
   ],
   providers: [
     AuthenticationService,

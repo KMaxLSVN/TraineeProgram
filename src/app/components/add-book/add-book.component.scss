@@ -1,0 +1,12 @@
+.wrapper{
+    .form-book{
+        .form-container{
+            display: flex;
+            flex-direction: column;
+        }
+        .book-btn{
+            display: flex;
+            justify-content: space-between;
+        }
+    }
+}

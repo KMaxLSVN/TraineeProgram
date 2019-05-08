@@ -16,7 +16,6 @@ export class AuthenticationService {
     public currentUser: Observable<User>
 
     constructor(
-        private http: HttpClient,
         private router: Router,
         private toastr: ToastrService,
         private db: LocalStorage,

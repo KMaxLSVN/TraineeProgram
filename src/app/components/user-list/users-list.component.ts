@@ -20,7 +20,7 @@ import { LocalStorage } from '../../shared/_services/local-storage.service';
 })
 export class UsersListComponent implements OnInit {
 
-  displayedColumns: string[] = ['position', 'firstName', 'lastName', 'email', 'password', 'actions'];
+  displayedColumns: string[] = ['position', 'firstName', 'lastName', 'userName', 'email', 'password', 'actions'];
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 

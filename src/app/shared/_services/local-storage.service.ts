@@ -63,7 +63,6 @@ export class LocalStorage {
         let usersBase = this.getAllUsers(false);
         isAdmin ? usersBase.unshift(user) : usersBase.push(user);
         this.saveToLocalStorage(usersBase);
-        console.log('addUser:' ,usersBase);
         return usersBase;
     }
 

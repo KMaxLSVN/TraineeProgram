@@ -6,30 +6,31 @@
 
 .books-container{
     background-color: #c5cae9;
+    min-height: 300px;
     .wrapper{
         display: flex;
         padding: 10px;
         .item-container{
-            background-color: #8c9eff;
-            display: flex;
-            flex-direction: column;
-            padding: 5px;
-            border: 2px solid #5865ab;
-            border-radius: 5px;
+            max-width: 400px;
+            min-width: 300px;
+            margin-right: 30px;
             &:hover{
-                cursor: pointer;
                 background-color: #b0bbf7;
             }
             .book-cover{
                 padding: 10px;
-            }
-            .book-title,
-            .book-author,
-            .book-price {
                 display: flex;
                 justify-content: center;
-                padding: 20xp;
+                align-items: center;
+            }
+            .books-nav, .books-nav-admin{
+                display: flex;
+                justify-content: space-between;
+            }
+            .books-nav-admin{
+                padding-top: 20px;
             }
         }
+
     }
 }
