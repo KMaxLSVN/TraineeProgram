@@ -120,8 +120,4 @@ export class UsersListComponent implements OnInit {
       
   }
 
-  removeAllUsers(){
-    this.dataSource.data = [];
-  }
-
 }

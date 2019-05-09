@@ -9,7 +9,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/login/login.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { BooksListComponent } from './pages/books-list/books-list.component';
-import { BookComponent } from './book/book.component';
+import { BookDetailComponent } from './pages/book-detail/book-detail.component';
 import { NotFoundComponent } from './pages/not-found/not-found.component';
 import { AdminComponent } from './components/admin/admin.component';
 import { AddBookComponent } from './components/add-book/add-book.component';
@@ -29,6 +29,7 @@ import { HttpClientModule }   from '@angular/common/http';
 
 import { ToastrModule } from 'ngx-toastr';
 import { SharedModule } from './shared/shared.module';
+import { CartComponent } from './pages/cart/cart.component';
 
 
 @NgModule({
@@ -37,7 +38,7 @@ import { SharedModule } from './shared/shared.module';
     LoginComponent,
     RegisterComponent,
     BooksListComponent,
-    BookComponent,
+    BookDetailComponent,
     NotFoundComponent,
     AdminComponent,
     AddBookComponent,
@@ -47,6 +48,7 @@ import { SharedModule } from './shared/shared.module';
     AddDialogComponent,
     DeleteDialogComponent,
     EditDialogComponent,
+    CartComponent,
   ],
   imports: [
     BrowserModule,

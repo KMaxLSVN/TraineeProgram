@@ -1,0 +1,10 @@
+.book-detail-container{
+    width: 80%;
+    margin: 0 auto;
+    background-color: #d7ccc8;
+    .book-nav{
+        display: flex;
+        justify-content: space-around;
+        padding: 20px 0;
+    }
+}

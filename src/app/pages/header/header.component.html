@@ -17,7 +17,10 @@
         <div class="navbar-section-wrapper">
             <a *ngIf="!currentUser" mat-raised-button color="link" class="navbar-section-item" routerLink="/login">Login</a>
             <div *ngIf="currentUser" class="navbar-section-currentUser">
-                <div class="navbar-currentUser-item" contenteditable="true"><i>{{currentUser.email}}</i></div>
+                <button mat-icon-button>
+                    <i class="material-icons md-32"matTooltip="Cart" routerLink="/cart">shopping_cart</i>
+                </button>
+                <div class="navbar-currentUser-item" ><i>{{currentUser.email}}</i></div>
                 <a  mat-raised-button color="link" class="navbar-currentUser-item" (click)="logout()">Logout</a>
             </div>
         </div>

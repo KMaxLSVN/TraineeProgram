@@ -29,12 +29,16 @@
             </mat-card-content>
             <mat-card-actions>
                 <div class="books-nav">
-                    <button mat-raised-button>Chart</button>
-                    <button mat-raised-button>Details</button>
+                    <button mat-icon-button color="accent" matTooltip="Buy this book" (click)="onClickCart()">
+                        <mat-icon aria-label="Add book to the cart">add_shopping_cart</mat-icon>
+                    </button>
+                    <button mat-icon-button color="primary" matTooltip="More about book">
+                        <mat-icon aria-label="Get information about book" [routerLink]="['/book', item.id]">info</mat-icon>
+                    </button>
                 </div>
                 <div class="books-nav-admin" *ngIf="isAdmin">
                     <button mat-raised-button color="warn">Edit</button>
-                    <button mat-raised-button color="warn">Delete</button>
+                    <button mat-raised-button color="warn" (click)="deleteItem(item)">Delete</button>
                 </div>
             </mat-card-actions>
         </mat-card>

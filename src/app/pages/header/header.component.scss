@@ -31,16 +31,21 @@
                 color: #5c928d;
             }
             .navbar-section-currentUser{
+                width: 100%;
                 display: flex;
-                align-items: flex-end;
+                justify-content: space-between;
                 font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
                 font-size: 30px;
                 .navbar-currentUser-item{
                     color: #5c928d;
                     i{
                         color: #3f51b5;
-                        margin-right: 10px;
                     }
+                }
+                .material-icons.md-32 {
+                    font-size: 32px;
+                    color: #5c928d;
+                    cursor: pointer;
                 }
             }
         }

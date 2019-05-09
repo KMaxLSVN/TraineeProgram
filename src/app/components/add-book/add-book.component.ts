@@ -27,7 +27,7 @@ export class AddBookComponent implements OnInit {
       title: [null, [Validators.pattern("^[A-za-z0-9_-]{2,15}$"),
                     Validators.required]
       ],
-      author: [null, [Validators.pattern("^[A-za-z0-9_-]{2,15}$"),
+      authors: [null, [Validators.pattern("^[A-za-z0-9_-]{2,15}$"),
                     Validators.required]
       ],
       price: [null, [Validators.minLength(2),

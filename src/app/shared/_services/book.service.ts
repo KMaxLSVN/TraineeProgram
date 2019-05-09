@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of } from 'rxjs';
+import { Observable, of, BehaviorSubject } from 'rxjs';
 
 import { Book } from '../_models/book';
 import { ToastrService } from 'ngx-toastr';
@@ -11,14 +11,20 @@ const BOOK_KEY = 'booksBase';
 })
 export class BookSevice {
 
-    private books: Book[];
+    private booksSubject: BehaviorSubject<Book[]>;
+    public bookList: Observable<Book[]>;
+    public books: Book[];
 
     constructor(
         private toastr: ToastrService,
-    ){}
+    ){
+        this.booksSubject = new BehaviorSubject<Book[]>(JSON.parse(localStorage.getItem(BOOK_KEY,)));
+        this.bookList = this.booksSubject.asObservable();
+    }
 
     private saveToLocalStorage(items: Book[]){
         localStorage.setItem(BOOK_KEY, JSON.stringify(items));
+        this.booksSubject.next(items);
     }    
 
     createBook(item: Book): Book[] {
@@ -29,9 +35,9 @@ export class BookSevice {
     }
 
     readBooks(): Book[] {
-        return JSON.parse(localStorage.getItem(BOOK_KEY)) || [];
-       // this.books = JSON.parse(localStorage.getItem(BOOK_KEY)) || [];
-       // return [...this.books];
+        // return JSON.parse(localStorage.getItem(BOOK_KEY)) || [];
+       this.books = JSON.parse(localStorage.getItem(BOOK_KEY)) || [];
+       return [...this.books];
     }
 
     updateBook(item: Book): Book[]{
@@ -68,7 +74,7 @@ export class BookSevice {
         })
     }
 
-    addBook(item: Book): Observable<Book[]> {
+addBook(item: Book): Observable<Book[]> {
         let books: Book[] = this.readBooks();
         if(books.length === 0) {
             books = this.createBook(item);

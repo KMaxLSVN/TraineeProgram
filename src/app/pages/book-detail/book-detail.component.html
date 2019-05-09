@@ -1,0 +1,17 @@
+<div class="book-detail-container">
+    <section class="book-container">
+        <mat-grid-list rowHeight="100px" cols='5'>
+            <mat-grid-tile
+            *ngFor="let tile of tiles"
+            [colspan]="tile.cols"
+            [rowspan]="tile.rows"
+            [style.background]="tile.color">
+            {{tile.content}}        
+            </mat-grid-tile>
+        </mat-grid-list>
+    </section>
+    <nav class="book-nav">
+        <button mat-raised-button routerLink="/books">Back</button>
+        <button mat-raised-button color="primary">Add to cart</button>
+    </nav>
+</div>
