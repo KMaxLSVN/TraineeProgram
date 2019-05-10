@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 
-import { BookSevice } from 'src/app/shared/_services';
+import { BookSevice, CartService } from 'src/app/shared/_services';
 import { Book } from 'src/app/shared/_models';
 
 export interface Tile {
@@ -29,6 +29,7 @@ export interface Tile {
     constructor(
       private activateRouter: ActivatedRoute,
       private bookService: BookSevice,
+      private cartService: CartService,
     ) {
       // Route parameters | Dynamic id
       this.subscription = activateRouter.params.subscribe(params => this.id=params['id']);
@@ -45,6 +46,10 @@ export interface Tile {
     }
   
     ngOnInit() {
+    }
+
+    addToCart(){
+      this.cartService.addItem(this.book);
     }
   
   }

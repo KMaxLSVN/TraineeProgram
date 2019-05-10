@@ -1,10 +1,66 @@
 <mat-card>
-  <mat-card-header color="primary">
-    <mat-card-title>Cart will be here</mat-card-title>
-  </mat-card-header>
+  <!-- header -->
+  <mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <span>Cart</span>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  <!-- cart table -->
+  <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+    <!-- header message-->
+    <ng-container matColumnDef="headerMessage">
+        <td mat-header-cell *matHeaderCellDef colspan="6" class="table-header"> 
+            {{dataSource.data && dataSource.data.length ? dataSource.data.length : 'No'}} book(s) added
+        </td>
+    </ng-container>
+    <!-- Cover -->
+    <ng-container matColumnDef="cover">
+        <!-- <th mat-header-cell *matHeaderCellDef> No. </th> -->
+        <td mat-cell *matCellDef="let element"> Base64 </td>
+    </ng-container>
+    <!-- Title -->
+    <ng-container matColumnDef="title">
+        <!-- <th mat-header-cell *matHeaderCellDef>Title</th> -->
+        <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+    </ng-container>
+    <!-- Authors -->
+    <ng-container matColumnDef="authors">
+        <!-- <th mat-header-cell *matHeaderCellDef>Authors</th> -->
+        <td mat-cell *matCellDef="let element">{{element.authors}}</td>
+    </ng-container>
+    <!-- Price -->
+    <ng-container matColumnDef="price">
+        <!-- <th mat-header-cell *matHeaderCellDef>Price</th> -->
+        <td mat-cell *matCellDef="let element">{{element.price}}</td>
+    </ng-container>
+    <!-- Amount -->
+    <ng-container matColumnDef="amount">
+        <!-- <th mat-header-cell *matHeaderCellDef>Amount</th> -->
+        <td mat-cell *matCellDef="let element">{{element.amount}}</td>
+    </ng-container>
+    <!-- Action -->
+    <ng-container matColumnDef="actions">
+        <!-- <th mat-header-cell *matHeaderCellDef class="table-cell-center">
+            <button mat-icon-button color="warn" matTooltip="Clear the cart">
+                <mat-icon>remove_shopping_cart</mat-icon>
+            </button>
+        </th> -->
+        <td mat-cell *matCellDef="let element" class="table-cell-center">
+            <button mat-icon-button color="warn" matTooltip="Remove this book">
+                <mat-icon class="material-icons">delete</mat-icon>
+            </button>
+        </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="['headerMessage']"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+
   <mat-card-content>
-    <div>
-      Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi adipisci itaque, aliquid deleniti laudantium mollitia earum fugiat debitis consectetur nisi. Exercitationem delectus autem quisquam at quidem, doloremque earum aut maiores?
-    </div>
   </mat-card-content>
+  <mat-card-actions>
+    <button mat-raised-button color="warn" (click)="DeleteAllItems()">Delete All</button>
+    <button mat-raised-button color="accent">Delete Current</button>
+  </mat-card-actions>
 </mat-card>

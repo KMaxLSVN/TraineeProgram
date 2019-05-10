@@ -19,17 +19,22 @@ import { UsersListComponent } from './components/user-list/users-list.component'
 import { AddDialogComponent } from './components/user-list/dialogs/add-dialog/add-dialog.component';
 import { DeleteDialogComponent } from './components/user-list/dialogs/delete-dialog/delete-dialog.component';
 import { EditDialogComponent } from './components/user-list/dialogs/edit-dialog/edit-dialog.component';
+import { CartComponent } from './pages/cart/cart.component';
 
 
+
+import { HttpClientModule }   from '@angular/common/http';
+// External libs 
+import { ToastrModule } from 'ngx-toastr';
+import { BrowserCookiesModule } from '@ngx-utils/cookies/browser';
+// Angular Material
+import { SharedModule } from './shared/shared.module';
+// App services
+import { BookSevice } from './shared/_services';
+import { CartService } from './shared/_services/cart.service';
 import { AuthenticationService } from './shared/_services/authentication.service';
 import { UserService } from './shared/_services/user.service';
 import { LocalStorage } from './shared/_services/local-storage.service';
-
-import { HttpClientModule }   from '@angular/common/http';
-
-import { ToastrModule } from 'ngx-toastr';
-import { SharedModule } from './shared/shared.module';
-import { CartComponent } from './pages/cart/cart.component';
 
 
 @NgModule({
@@ -52,17 +57,18 @@ import { CartComponent } from './pages/cart/cart.component';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     AppRoutingModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
     FormsModule,
     // Angular Material
     SharedModule,
-
-    HttpClientModule,
     // Angular Toastr from https://www.npmjs.com/package/ngx-toastr
     ToastrModule,
     ToastrModule.forRoot(),
+    // Angular Cookie from https://github.com/ngx-utils/cookies
+    BrowserCookiesModule.forRoot(),
   ],
   entryComponents: [
     AddDialogComponent,
@@ -73,6 +79,8 @@ import { CartComponent } from './pages/cart/cart.component';
     AuthenticationService,
     UserService,
     LocalStorage,
+    BookSevice,
+    CartService,
   ],
   bootstrap: [AppComponent]
 })

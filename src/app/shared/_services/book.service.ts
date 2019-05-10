@@ -74,7 +74,7 @@ export class BookSevice {
         })
     }
 
-addBook(item: Book): Observable<Book[]> {
+    addBook(item: Book): Observable<Book[]> {
         let books: Book[] = this.readBooks();
         if(books.length === 0) {
             books = this.createBook(item);
