@@ -1,7 +1,10 @@
 import { Injectable } from '@angular/core';
 
 import { CookiesService } from '@ngx-utils/cookies/src/cookies.service';
+import { ToastrService } from 'ngx-toastr';
 import { Book } from '../_models';
+
+import { BehaviorSubject, Observable, of } from 'rxjs';
 
 const C_BOOK_KEY = 'book';
 
@@ -10,15 +13,29 @@ const C_BOOK_KEY = 'book';
 })
 export class CartService {
 
+  private cartSubject: BehaviorSubject<Book[]>;
+  public cartList: Observable<Book[]>;
   public cart: any;//Book[];
 
   constructor(
+
     private cookieService: CookiesService,
-  ) { }
+    private toastr: ToastrService,
+
+  ) {
+    
+    this.cartSubject = new BehaviorSubject<Book[]>(this.readCart());
+    this.cartList = this.cartSubject.asObservable();
+
+  }
+
+  private saveToCookie(items: Book[]): void{
+    this.cookieService.putObject(C_BOOK_KEY, items);
+    this.cartSubject.next(items);
+  }
 
   readCart(){
     this.cart = this.cookieService.getObject(C_BOOK_KEY) || [];
-    console.log([...this.cart]);
     return [...this.cart];
   }
 
@@ -33,8 +50,7 @@ export class CartService {
   createItem(item: Book){
     let cart = this.readCart();
     cart.push(item);
-    this.cookieService.putObject(C_BOOK_KEY, cart);
-    console.log(cart);
+    this.saveToCookie(cart);
     return cart;
   }
 
@@ -55,20 +71,26 @@ export class CartService {
     return cart;
   }
 
-  deleteItem(item: Book){
+  deleteItem(item: Book): Observable<Book[]>{
     let cart = this.readCart();
     for(let i=0; i<=cart.length; i++){
       if(item.id == this.cart[i].id){
         cart.splice(i,1);
-        this.cookieService.putObject(C_BOOK_KEY, cart);
+        this.saveToCookie(cart);
         break;
       }
     }
-    return cart;
+    return of(cart);
   }
 
-  deleteAll(){
+  deleteAll(): Observable<Book[]>{
+    debugger
+    let cart = this.readCart();
+    if(cart.length === 0) {
+      this.toastr.info('Cart is empty');
+    }
     this.cookieService.remove(C_BOOK_KEY);
+    return of(cart);
   }
   
 }

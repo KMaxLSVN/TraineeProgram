@@ -17,9 +17,15 @@
         <div class="navbar-section-wrapper">
             <a *ngIf="!currentUser" mat-raised-button color="link" class="navbar-section-item" routerLink="/login">Login</a>
             <div *ngIf="currentUser" class="navbar-section-currentUser">
-                <button mat-icon-button>
-                    <i class="material-icons md-32"matTooltip="Cart" routerLink="/cart">shopping_cart</i>
-                </button>
+                <div class="cart-container">
+                    <button mat-icon-button>
+                        <i class="material-icons md-32"matTooltip="Cart" routerLink="/cart">shopping_cart</i>
+                    </button>
+                    <div class="response">
+                        <span>{{books.length && books ? books.length : null}}</span>
+                        <span>Total price</span>
+                    </div>
+                </div>
                 <div class="navbar-currentUser-item" ><i>{{currentUser.email}}</i></div>
                 <a  mat-raised-button color="link" class="navbar-currentUser-item" (click)="logout()">Logout</a>
             </div>

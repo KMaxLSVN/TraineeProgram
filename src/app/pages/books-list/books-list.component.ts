@@ -2,9 +2,9 @@ import { Component, OnInit } from '@angular/core';
 
 import { Router } from '@angular/router';
 
-import { AuthenticationService, BookSevice } from '../../shared/_services';
+import { AuthenticationService, BookSevice, CartService } from '../../shared/_services';
 import { Book, User } from 'src/app/shared/_models';
-import { Toast, ToastrService } from 'ngx-toastr';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
     selector: 'app-books-list',
@@ -22,6 +22,7 @@ import { Toast, ToastrService } from 'ngx-toastr';
 
       private authService: AuthenticationService,
       private bookService: BookSevice,
+      private cartService: CartService,
 
       private router: Router,
       private toastr: ToastrService,
@@ -40,9 +41,9 @@ import { Toast, ToastrService } from 'ngx-toastr';
     ngOnInit() {
     }
 
-    onClickCart(){
+    onClickCart(elem){
       if(this.currentUser){
-        alert('Add book to cart');
+        this.cartService.addItem(elem);
       } else {
         this.toastr.info('You should to log in at first');
         this.router.navigate(['/login']);

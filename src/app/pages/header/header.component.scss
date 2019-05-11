@@ -47,6 +47,17 @@
                     color: #5c928d;
                     cursor: pointer;
                 }
+                .cart-container{
+                    display: flex;
+                    .response>*{
+                        font-size: 16px;
+                        color: #3f51b5;
+                    }
+                    .response{
+                        display: flex;
+                        flex-direction: column;
+                    }
+                }
             }
         }
     }

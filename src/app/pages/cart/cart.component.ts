@@ -9,18 +9,15 @@ import { MatTableDataSource } from '@angular/material';
 })
 export class CartComponent implements OnInit {
 
-  displaydColumns: string[] = ['cover','title', 'authors', 'price', 'amount', 'actions'];
+  displayedColumns: string[] = ['cover','title', 'authors', 'price', 'amount', 'actions'];
   dataSource: MatTableDataSource<any>;
 
   constructor(
 
     private cartService: CartService,
 
-
-
   ) {
     this.dataSource = new MatTableDataSource(this.getDataBase());
-    console.warn(this.cartService.readCart());
   }
 
   ngOnInit() {
@@ -28,12 +25,14 @@ export class CartComponent implements OnInit {
 
   getDataBase(): any[] {
     let cart = this.cartService.readCart();
-    console.log('Cart without:', cart);
     return cart;
   }
 
-  DeleteAllItems(){
-    console.log('cart is clear');
-    this.cartService.deleteAll();
+  DeleteBook(elem): void{
+    this.cartService.deleteItem(elem).subscribe(response => {this.dataSource.data = response});
+  }
+
+  DeleteAllBooks(){
+    this.cartService.deleteAll().subscribe(response => (this.dataSource.data = response));
   }
 }

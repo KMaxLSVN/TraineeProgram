@@ -4,5 +4,21 @@
     .mat-toolbar-row{
         justify-content: center;
     }
-
+    table{
+        width: 100%;
+        .table-header{
+            text-align: center;
+        }
+        tr:hover{
+            cursor: pointer;
+            background-color: #E8EAF6;
+        }
+    }
+    .mat-card-actions{
+        display: flex;
+        justify-content: space-around;
+        .total-price{
+            font-weight: bold;
+        }
+    }
 }

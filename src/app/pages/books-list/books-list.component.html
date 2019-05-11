@@ -29,9 +29,10 @@
             </mat-card-content>
             <mat-card-actions>
                 <div class="books-nav">
-                    <button mat-icon-button color="accent" matTooltip="Buy this book" (click)="onClickCart()">
+                    <button mat-icon-button color="primary" matTooltip="Add to cart" (click)="onClickCart(item)">
                         <mat-icon aria-label="Add book to the cart">add_shopping_cart</mat-icon>
                     </button>
+                    <button mat-mini-fab color="accent" matTooltip="Buy book" (click)="onClickCart(item)" routerLink="/cart">Buy</button>
                     <button mat-icon-button color="primary" matTooltip="More about book">
                         <mat-icon aria-label="Get information about book" [routerLink]="['/book', item.id]">info</mat-icon>
                     </button>
