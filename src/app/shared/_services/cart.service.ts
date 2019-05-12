@@ -84,13 +84,14 @@ export class CartService {
   }
 
   deleteAll(): Observable<Book[]>{
-    debugger
     let cart = this.readCart();
     if(cart.length === 0) {
       this.toastr.info('Cart is empty');
+      return;
     }
     this.cookieService.remove(C_BOOK_KEY);
-    return of(cart);
+    this.cartSubject.next([]);
+    return of(null);
   }
   
 }

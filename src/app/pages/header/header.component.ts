@@ -24,7 +24,10 @@ export class HeaderComponent implements OnInit {
     public cartService: CartService,
   ) {
     this.service.currentUser.subscribe(x => this.currentUser = x);
-    this.cartService.cartList.subscribe(response => this.books = response);
+    this.cartService.cartList.subscribe(response => {
+      this.books = response; 
+      console.log(response);
+    });
   }
 
   ngOnInit() {

@@ -28,11 +28,11 @@ export class CartComponent implements OnInit {
     return cart;
   }
 
-  DeleteBook(elem): void{
-    this.cartService.deleteItem(elem).subscribe(response => {this.dataSource.data = response});
+  deleteBook(elem): void{
+    this.cartService.deleteItem(elem).subscribe(response => this.dataSource.data = response);
   }
 
-  DeleteAllBooks(){
-    this.cartService.deleteAll().subscribe(response => (this.dataSource.data = response));
+  deleteAllBooks(){
+    this.cartService.deleteAll().subscribe(response => this.dataSource.data = response);
   }
 }
