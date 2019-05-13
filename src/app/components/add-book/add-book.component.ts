@@ -39,6 +39,7 @@ export class AddBookComponent implements OnInit {
       description: [null, [Validators.pattern("^[A-za-z0-9_-]{5,50}$")]
 
       ],
+      cover: [null],
     })
 
   }

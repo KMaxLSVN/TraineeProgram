@@ -10,7 +10,7 @@
 
     <ng-container matColumnDef="headerMessage">
         <td mat-header-cell *matHeaderCellDef colspan="7" class="table-header"> 
-            {{dataSource.data && dataSource.data.length ? dataSource.data.length : 'No'}} book(s) added
+            {{sumQuantityResult() ? sumQuantityResult() : 'No'}} book(s) added
         </td>
     </ng-container>
 
@@ -36,11 +36,19 @@
         <td mat-cell *matCellDef="let element">{{element.price}}$</td>
     </ng-container>
     <ng-container matColumnDef="amount">
-        <td mat-cell *matCellDef="let element">{{element.amount}}</td>
+        <td mat-cell *matCellDef="let element">
+            <button mat-icon-button color="primary" matTooltip="One less" (click)="decrement(element)">
+                <mat-icon>remove</mat-icon>
+            </button>
+            <span>{{element.quantity}}</span>
+            <button mat-icon-button color="primary" matTooltip="One more" (click)="increment(element)">
+                <mat-icon>add</mat-icon>
+            </button>
+        </td>
     </ng-container>
     <ng-container matColumnDef="actions">
         <td mat-cell *matCellDef="let element">          
-            <button mat-icon-button color="warn" matTooltip="Remove book"(click)="deleteBook(element)">
+            <button mat-icon-button color="warn" matTooltip="Remove book" (click)="deleteBook(element)">
                 <mat-icon class="material-icons">clear</mat-icon>
             </button>
         </td>
@@ -54,7 +62,7 @@
     <button mat-raised-button color="primary" routerLink="/books">Back</button>
     <button mat-raised-button color="warn" (click)="deleteAllBooks()">Clear Cart</button>
     <div>
-        <span class="total-price">Total price: $</span>
+        <span class="total-price">Total price: {{sumPriceResult()}} $</span>
         <button mat-raised-button color="accent">Buy</button>
     </div>
   </mat-card-actions>

@@ -17,6 +17,9 @@ export class HeaderComponent implements OnInit {
 
   currentUser: User;
   books: Book[];
+  quantity: number;
+  price: any;
+  title: string;
 
   constructor(
     public router: Router,
@@ -25,8 +28,10 @@ export class HeaderComponent implements OnInit {
   ) {
     this.service.currentUser.subscribe(x => this.currentUser = x);
     this.cartService.cartList.subscribe(response => {
-      this.books = response; 
-      console.log(response);
+      this.books = response;
+      this.quantity = this.cartService.sumQuantity();
+      this.price = this.cartService.sumPrice();
+      this.title = 'Total price'; 
     });
   }
 
@@ -35,6 +40,7 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.service.logout();
+    this.cartService.deleteAll();
     this.router.navigate(['/login']);
   }
 

@@ -22,8 +22,8 @@
                         <i class="material-icons md-32"matTooltip="Cart" routerLink="/cart">shopping_cart</i>
                     </button>
                     <div class="response">
-                        <span>{{books.length && books ? books.length : null}}</span>
-                        <span>Total price</span>
+                        <span>{{quantity ? quantity : null}}</span>
+                        <span>{{price ? price : null}}</span>
                     </div>
                 </div>
                 <div class="navbar-currentUser-item" ><i>{{currentUser.email}}</i></div>

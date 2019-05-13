@@ -32,7 +32,23 @@ export class CartComponent implements OnInit {
     this.cartService.deleteItem(elem).subscribe(response => this.dataSource.data = response);
   }
 
-  deleteAllBooks(){
+  deleteAllBooks(): void{
     this.cartService.deleteAll().subscribe(response => this.dataSource.data = response);
+  }
+
+  increment(elem): void{
+    this.cartService.changeQuantity(elem, true);
+  }
+
+  decrement(elem): void{
+    this.cartService.changeQuantity(elem, false);
+  }
+
+  sumQuantityResult(): number{
+    return this.cartService.sumQuantity();
+  }
+
+  sumPriceResult(): number{
+    return this.cartService.sumPrice();
   }
 }

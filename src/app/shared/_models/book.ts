@@ -8,4 +8,5 @@ export interface Book {
     rating?: number;
     image?: string;
     description?: string;
+    quantity?: number;
 }
