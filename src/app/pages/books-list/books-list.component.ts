@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 
 import { Router } from '@angular/router';
 
@@ -18,6 +18,8 @@ import { ToastrService } from 'ngx-toastr';
     public items: Book[];
     public currentUser: User;
 
+    public inputValue: string = '';
+
     constructor(
 
       private authService: AuthenticationService,
@@ -32,10 +34,11 @@ import { ToastrService } from 'ngx-toastr';
       // Dinamic Render Books List
       this.bookService.bookList.subscribe( result => {
         this.items = result;
-      })
-      console.log(this.items);
+      });
 
-      this.authService.currentUser.subscribe(response => this.currentUser = response)
+      this.authService.currentUser.subscribe(response => this.currentUser = response);
+
+
     }
   
     ngOnInit() {
@@ -53,6 +56,11 @@ import { ToastrService } from 'ngx-toastr';
     deleteItem(elem: Book){
       console.log(elem);
       this.bookService.deleteBook(elem).subscribe(response => this.items = response);
+    }
+
+    doSomeThing(result){
+      console.log(result);
+      this.inputValue= result;
     }
   
   }

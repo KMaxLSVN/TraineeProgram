@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { MaterialModule } from './ui/material/material.module';
+import { SearchPipe } from './pipes/search.pipe';
 
 @NgModule({
     imports: [ MaterialModule ],
-    exports: [ MaterialModule ],
-    declarations: [],
+    exports: [ MaterialModule, SearchPipe ],
+    declarations: [SearchPipe],
     providers: [],
 })
 

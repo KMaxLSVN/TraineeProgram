@@ -27,7 +27,7 @@ import { HttpClientModule }   from '@angular/common/http';
 // External libs 
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserCookiesModule } from '@ngx-utils/cookies/browser';
-// Angular Material
+// Angular Material and Pipe
 import { SharedModule } from './shared/shared.module';
 // App services
 import { BookSevice } from './shared/_services';
@@ -35,6 +35,7 @@ import { CartService } from './shared/_services/cart.service';
 import { AuthenticationService } from './shared/_services/authentication.service';
 import { UserService } from './shared/_services/user.service';
 import { LocalStorage } from './shared/_services/local-storage.service';
+import { SearchBooksComponent } from './components/search-books/search-books.component';
 
 
 @NgModule({
@@ -54,6 +55,7 @@ import { LocalStorage } from './shared/_services/local-storage.service';
     DeleteDialogComponent,
     EditDialogComponent,
     CartComponent,
+    SearchBooksComponent,
   ],
   imports: [
     BrowserModule,
@@ -62,7 +64,7 @@ import { LocalStorage } from './shared/_services/local-storage.service';
     ReactiveFormsModule,
     BrowserAnimationsModule,
     FormsModule,
-    // Angular Material
+    // Angular Material and Pipe
     SharedModule,
     // Angular Toastr from https://www.npmjs.com/package/ngx-toastr
     ToastrModule,

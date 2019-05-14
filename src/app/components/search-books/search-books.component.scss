@@ -1,0 +1,19 @@
+.search-books{
+    min-height: 100px;
+    padding: 50px 200px;
+    box-sizing: border-box;
+    .search-title, .search-input{
+        font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        color: #3f51b5;
+    }
+    .search-input{
+        width: 100%;
+        min-height: 30px;
+        padding: 10px;
+        box-sizing: border-box;
+    }
+
+    .search-books-item{
+        box-sizing: border-box;
+    }
+}

@@ -107,7 +107,13 @@ export class CartService {
   }
 
   updateCartQuantity(item: Book): Book[]{
+   
+
     let cart: Book[] = this.readCart();
+    // for(let c of cart){
+    //   c.quantity = item.quantity;
+    // }
+
     for(let i=0; i<=cart.length; i++) {
       if(item.id === cart[i].id) {
         cart[i].quantity = item.quantity;

@@ -1,0 +1,8 @@
+<section class="search-books">
+  <div class="search-books-item">
+    <h3 class="search-title">Are you looking for specific book?</h3>
+  </div>
+  <div class="search-books-item">
+    <input type="text" class="search-input" placeholder="Search book..." [ngModel]='model' autofocus (ngModelChange)='changed($event)'>
+  </div>
+</section>

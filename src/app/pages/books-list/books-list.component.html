@@ -3,8 +3,9 @@
 </mat-toolbar>
 
 <section class="books-container">
+    <app-search-books (onSearchPicked)="doSomeThing($event)"></app-search-books>
     <div class="wrapper">
-        <mat-card class="item-container" *ngFor="let item of items;">
+        <mat-card class="item-container" *ngFor="let item of items | search: {title: inputValue};">
             <mat-card-header>
                 <mat-card-title>{{item.title}}</mat-card-title>
             </mat-card-header>
