@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { FormGroup, FormBuilder, Validators, FormArray, FormGroupDirective } from '@angular/forms';
 import { BookSevice } from 'src/app/shared/_services';
 
 @Component({
@@ -21,36 +21,66 @@ export class AddBookComponent implements OnInit {
   ngOnInit() {
 
     this.bookForm = this.formBuilder.group({
-      id: [null, [Validators.minLength(3),
+      id: ['', [Validators.minLength(3),
                   Validators.required]
       ],
-      title: [null, [Validators.pattern("^[A-za-z0-9_-]{2,15}$"),
+      title: ['', [Validators.pattern("^[A-za-z0-9_-]{2,15}$"),
                     Validators.required]
       ],
-      authors: [null, [Validators.pattern("^[A-za-z0-9_-]{2,15}$"),
+      authors: this.formBuilder.array([
+        this.formBuilder.control ('', [Validators.pattern("^[A-za-z0-9_-]{2,15}$"),
+        Validators.required])
+      ]),
+      
+      price: ['', [Validators.minLength(2),
                     Validators.required]
       ],
-      price: [null, [Validators.minLength(2),
+      amount: ['', [Validators.maxLength(3),
                     Validators.required]
       ],
-      amount: [null, [Validators.maxLength(3),
-                    Validators.required]
-      ],
-      description: [null, [Validators.pattern("^[A-za-z0-9_-]{5,50}$")]
-
-      ],
-      cover: [null],
+      description: [''],
+      cover: [''],
     })
+
+
 
   }
 
-  submit(){
-    if(this.bookForm.invalid){
+  get authors() {
+    return this.bookForm.get('authors') as FormArray;
+  }
+
+  addAuthor() {
+    this.authors.push(this.formBuilder.control(''));
+  }
+
+
+  addCover(event){
+    const file = event.target.files[0];
+    console.log(file);
+    if(file.size >= 2e+6) {
+      console.log('load another image');
       return;
     }
-    console.log(this.bookForm.value);
-    this.bookService.addBook(this.bookForm.value);
-    this.bookForm.reset();
+    const reader = new FileReader();
+    reader.onload = e => {
+      this.bookForm.controls.cover.patchValue = e.target['result'];
+      console.log(this.bookForm.controls);
+    }
+    reader.readAsDataURL(file);
+  }
+
+
+  submit(formDirective: FormGroupDirective): void {
+    if(this.bookForm.valid){
+      console.log(this.bookForm.value);
+      let book = this.bookForm.value;
+      book['image'] = this.bookForm.controls.cover.patchValue;
+      console.log(book);
+      this.bookService.addBook(book);
+      formDirective.resetForm();
+      this.bookForm.reset();
+    }
   }
 
 }

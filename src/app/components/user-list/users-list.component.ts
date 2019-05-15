@@ -73,13 +73,6 @@ export class UsersListComponent implements OnInit {
       }
   };
 
-    this.dialog
-      .open(AddDialogComponent, dialogConfig)
-      // .afterClosed()
-      // .pipe(filter(result => result))
-      // .subscribe( result => {
-      //   console.warn(result);
-      // });
   }
 
   editItem(user: User){
@@ -89,17 +82,12 @@ export class UsersListComponent implements OnInit {
       title: 'Edit user',
       user: user,
     }
+
+    const dialogRef = this.dialog.open(EditDialogComponent, dialogConfig);
     
-    this.dialog
-              .open(EditDialogComponent, dialogConfig)
-              .afterClosed()
+    dialogRef.afterClosed()
               .pipe(filter(result => result))
-              .subscribe(result => {
-                console.log('My condition:', result)
-                if(result.email){
-                  this.dataSource.data = this.db.updateUser(result);
-                }
-              });
+              .subscribe(result => {this.dataSource.data = result;});
 
   }
 

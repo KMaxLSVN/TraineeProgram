@@ -5,6 +5,7 @@ import { Router } from '@angular/router';
 import { AuthenticationService, BookSevice, CartService } from '../../shared/_services';
 import { Book, User } from 'src/app/shared/_models';
 import { ToastrService } from 'ngx-toastr';
+import { observable } from 'rxjs';
 
 @Component({
     selector: 'app-books-list',
@@ -19,6 +20,7 @@ import { ToastrService } from 'ngx-toastr';
     public currentUser: User;
 
     public inputValue: string = '';
+    public imageSrc: string[];
 
     constructor(
 
@@ -34,6 +36,11 @@ import { ToastrService } from 'ngx-toastr';
       // Dinamic Render Books List
       this.bookService.bookList.subscribe( result => {
         this.items = result;
+        console.log(this.items);
+
+        this.imageSrc = this.items.map(obj => obj.image);
+        // this.imageSrc = this.items[0].image;
+        console.log(this.imageSrc);
       });
 
       this.authService.currentUser.subscribe(response => this.currentUser = response);

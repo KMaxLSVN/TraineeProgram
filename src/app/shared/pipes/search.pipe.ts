@@ -12,6 +12,7 @@ export class SearchPipe implements PipeTransform {
       return allBooks;
     }
     return allBooks.filter( item => item.title.toLowerCase().indexOf(filter.title.toLowerCase()) !== -1 );
+    // || item.authors.some(result => result.toLowerCase().indexOf(filter.title.toLowerCase()))
   }
 
 }

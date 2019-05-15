@@ -7,7 +7,7 @@
   </mat-toolbar>
   
   <div class="wrapper">
-    <form [formGroup]="bookForm" novalidate (ngSubmit)="submit()" class="form-book">
+    <form [formGroup]="bookForm" novalidate (ngSubmit)="submit(formDirective)" class="form-book" #formDirective="ngForm">
       <div class="form-container">
           <mat-form-field appearance="fill" color="primary">
               <mat-label>Enter book's ID</mat-label>
@@ -26,15 +26,20 @@
                 placeholder="Title"
                 formControlName="title">
           </mat-form-field>
-    
-          <mat-form-field appearance="fill" color="primary">
-              <mat-label>Enter authors</mat-label>
-              <input
-                type="text" 
-                matInput
-                placeholder="Authors"
-                formControlName="authors">
-          </mat-form-field>
+          <div formArrayName="authors">
+            <mat-form-field appearance="fill" color="primary" *ngFor="let authors of authors.controls; let i=index" class="input-padding">
+              <!-- The repeated authors template -->
+                <mat-label>Enter authors</mat-label>
+                <input
+                  type="text" 
+                  matInput
+                  placeholder="Authors"
+                  [formControlName]="i">
+            </mat-form-field>
+            <button mat-icon-button color="primary" matTooltip="Add author" (click)="addAuthor()">
+                <mat-icon>add</mat-icon>
+            </button>
+          </div>
           
           <mat-form-field appearance="fill" color="primary">
               <mat-label>Enter price</mat-label>
@@ -63,17 +68,23 @@
                 formControlName="description">
           </mat-form-field>
 
-          
-          <input
-            type="file"
-            name="image"
-            placeholder="Cover"
-            formControlName="cover">
+          <div class="input-file">
+            <button mat-button color="primary">
+              <input
+                type="file"
+                name="image"
+                placeholder="Cover"
+                formControlName="cover"
+                (change)="addCover($event)"
+                accept=".jpg, .jpeg, .png"
+                >
+            </button>
+          </div>
+
 
       </div>
       <div class="book-btn">
         <button mat-raised-button color="primary" type="submit">Add book</button>
-        <button mat-raised-button color="accent" (click)='bookForm.reset()'>Reset</button>
       </div>
 
     </form>
