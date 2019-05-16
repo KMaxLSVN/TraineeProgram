@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray, FormGroupDirective } from '@angular/forms';
 import { BookSevice } from 'src/app/shared/_services';
+import { ImageCroppedEvent } from 'ngx-image-cropper';
+import { Book } from 'src/app/shared/_models';
 
 @Component({
   selector: 'app-add-book',
@@ -9,7 +11,14 @@ import { BookSevice } from 'src/app/shared/_services';
 })
 export class AddBookComponent implements OnInit {
 
+  // Image Cropper
+  imageChangedEvent: any = '';
+  croppedImage: any = '';
+
+  book: Book;
   bookForm: FormGroup;
+
+  private imageSrc: string = '';
 
   constructor(
 
@@ -64,22 +73,52 @@ export class AddBookComponent implements OnInit {
     }
     const reader = new FileReader();
     reader.onload = e => {
+      // review
       this.bookForm.controls.cover.patchValue = e.target['result'];
-      console.log(this.bookForm.controls);
+      // review
+      this.imageSrc = e.target['result'];
     }
     reader.readAsDataURL(file);
+  }
+
+  // Image Cropper
+  fileChangeEvent(event: any): void {
+    this.imageChangedEvent = event;
+  }
+  imageCropped(event: ImageCroppedEvent) {
+    this.croppedImage = event.base64;
+    console.log(event);
+  }
+  imageLoaded() {
+    // show cropper
+    console.log('Image loaded')
+  }
+  cropperReady() {
+    // cropper ready
+    console.log('Cropper ready')
+  }
+  loadImageFailed() {
+    // show message
+    console.log('Load failed');
   }
 
 
   submit(formDirective: FormGroupDirective): void {
     if(this.bookForm.valid){
       console.log(this.bookForm.value);
-      let book = this.bookForm.value;
-      book['image'] = this.bookForm.controls.cover.patchValue;
-      console.log(book);
-      this.bookService.addBook(book);
+      this.book = this.bookForm.value;
+      // if(this.bookForm.controls.cover.patchValue){
+      //   book['image'] = this.bookForm.controls.cover.patchValue;
+      // } else {
+      //   book['image'] = '';
+      // }
+      console.log('onSubmit croppedImage' ,this.croppedImage);
+      this.book['image'] = this.croppedImage;
+      console.log(this.book);
+      this.bookService.addBook(this.book);
       formDirective.resetForm();
       this.bookForm.reset();
+      this.imageChangedEvent = null;
     }
   }
 

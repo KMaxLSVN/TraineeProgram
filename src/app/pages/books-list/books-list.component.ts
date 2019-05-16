@@ -39,8 +39,6 @@ import { observable } from 'rxjs';
         console.log(this.items);
 
         this.imageSrc = this.items.map(obj => obj.image);
-        // this.imageSrc = this.items[0].image;
-        console.log(this.imageSrc);
       });
 
       this.authService.currentUser.subscribe(response => this.currentUser = response);

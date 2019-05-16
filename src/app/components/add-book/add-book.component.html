@@ -68,7 +68,7 @@
                 formControlName="description">
           </mat-form-field>
 
-          <div class="input-file">
+          <!-- <div class="input-file">
             <button mat-button color="primary">
               <input
                 type="file"
@@ -79,12 +79,48 @@
                 accept=".jpg, .jpeg, .png"
                 >
             </button>
+            <div *ngIf="imageSrc">
+                <img [src]="imageSrc" alt="Image preview" style="max-width:100px;max-height:100px">
+            </div>
+          </div> -->
+
+          <div class="input-file">
+            <div class="input-file-title">Add book cover:</div>
+            <button mat-raised-button>
+              <mat-icon>add_photo_alternate</mat-icon>
+              <input
+                    #_fileInput
+                    type="file"
+                    name="image"
+                    placeholder="Cover"
+                    formControlName="cover"
+                    (change)="fileChangeEvent($event)"
+                    accept=".jpg, .jpeg, .png">
+              </button>
+
+            <image-cropper
+              [imageChangedEvent]="imageChangedEvent"
+              [maintainAspectRatio]="true"
+              [aspectRatio]="4 / 3"
+              [resizeToWidth]="32"
+              format="png"
+              (imageCropped)="imageCropped($event)"
+              (imageLoaded)="imageLoaded()"
+              (cropperReady)="cropperReady()"
+              (loadImageFailed)="loadImageFailed()"
+            ></image-cropper>
+
+            <img *ngIf="imageChangedEvent" [src]="croppedImage" />
+
+            <!-- <div *ngIf="imageSrc">
+              <img [src]="imageSrc" alt="Image preview" style="max-width:100px;max-height:100px">
+            </div> -->
           </div>
 
 
       </div>
       <div class="book-btn">
-        <button mat-raised-button color="primary" type="submit">Add book</button>
+        <button mat-raised-button color="primary" type="submit" >Add book</button>
       </div>
 
     </form>
