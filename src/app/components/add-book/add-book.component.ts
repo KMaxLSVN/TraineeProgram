@@ -51,8 +51,6 @@ export class AddBookComponent implements OnInit {
       cover: [''],
     })
 
-
-
   }
 
   get authors() {
@@ -64,22 +62,22 @@ export class AddBookComponent implements OnInit {
   }
 
 
-  addCover(event){
-    const file = event.target.files[0];
-    console.log(file);
-    if(file.size >= 2e+6) {
-      console.log('load another image');
-      return;
-    }
-    const reader = new FileReader();
-    reader.onload = e => {
-      // review
-      this.bookForm.controls.cover.patchValue = e.target['result'];
-      // review
-      this.imageSrc = e.target['result'];
-    }
-    reader.readAsDataURL(file);
-  }
+  // addCover(event){
+  //   const file = event.target.files[0];
+  //   console.log(file);
+  //   if(file.size >= 2e+6) {
+  //     console.log('load another image');
+  //     return;
+  //   }
+  //   const reader = new FileReader();
+  //   reader.onload = e => {
+  //     // review
+  //     this.bookForm.controls.cover.patchValue = e.target['result'];
+  //     // review
+  //     this.imageSrc = e.target['result'];
+  //   }
+  //   reader.readAsDataURL(file);
+  // }
 
   // Image Cropper
   fileChangeEvent(event: any): void {
@@ -87,19 +85,6 @@ export class AddBookComponent implements OnInit {
   }
   imageCropped(event: ImageCroppedEvent) {
     this.croppedImage = event.base64;
-    console.log(event);
-  }
-  imageLoaded() {
-    // show cropper
-    console.log('Image loaded')
-  }
-  cropperReady() {
-    // cropper ready
-    console.log('Cropper ready')
-  }
-  loadImageFailed() {
-    // show message
-    console.log('Load failed');
   }
 
 
@@ -112,7 +97,6 @@ export class AddBookComponent implements OnInit {
       // } else {
       //   book['image'] = '';
       // }
-      console.log('onSubmit croppedImage' ,this.croppedImage);
       this.book['image'] = this.croppedImage;
       console.log(this.book);
       this.bookService.addBook(this.book);
