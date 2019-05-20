@@ -27,6 +27,7 @@ import { HttpClientModule }   from '@angular/common/http';
 // External libs 
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserCookiesModule } from '@ngx-utils/cookies/browser';
+import { ImageCropperModule } from 'ngx-image-cropper';
 // Angular Material and Pipe
 import { SharedModule } from './shared/shared.module';
 // App services
@@ -71,6 +72,8 @@ import { SearchBooksComponent } from './components/search-books/search-books.com
     ToastrModule.forRoot(),
     // Angular Cookie from https://github.com/ngx-utils/cookies
     BrowserCookiesModule.forRoot(),
+    // Angular Image Cropper from https://www.npmjs.com/package/ngx-image-cropper
+    ImageCropperModule,
   ],
   entryComponents: [
     AddDialogComponent,

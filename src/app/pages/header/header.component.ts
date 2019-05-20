@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 import { User } from '../../shared/_models/users';
 import { Book } from 'src/app/shared/_models';
@@ -20,6 +21,8 @@ export class HeaderComponent implements OnInit {
   quantity: number;
   price: any;
   title: string;
+  // Environment
+  env = environment;
 
   constructor(
     public router: Router,

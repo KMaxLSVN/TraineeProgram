@@ -3,6 +3,17 @@
         .form-container{
             display: flex;
             flex-direction: column;
+            .input-padding{
+                margin-left: 10px;
+            }
+            .input-file{
+                padding-bottom: 10px;
+                &-title{
+                    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+                    color: #3f51b5;
+                    padding-bottom: 5px;
+                }
+            }
         }
         .book-btn{
             display: flex;

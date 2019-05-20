@@ -7,6 +7,10 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
+  // For environment prod
+  linear: any;
+  isLinear: any;
+
   constructor() { }
 
   ngOnInit() {

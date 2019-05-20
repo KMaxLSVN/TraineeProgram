@@ -14,6 +14,7 @@ export class SearchBooksComponent implements OnInit {
 
   @Output() onSearchPicked: EventEmitter<any> = new EventEmitter<any>();
   modelChanged: Subject<string> = new Subject<string>();
+  model: Subject<string>;
 
   constructor(
   ) {
