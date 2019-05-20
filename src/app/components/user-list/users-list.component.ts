@@ -38,7 +38,7 @@ export class UsersListComponent implements OnInit {
     this.dataSource.paginator = this.paginator;
   }
 
-  private applyFilter(value: any){
+  public applyFilter(value: any){
     this.dataSource.filter = value.trim().toLowerCase();
   }
 

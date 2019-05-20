@@ -9,6 +9,8 @@ import { LocalStorage } from 'src/app/shared/_services/local-storage.service';
 })
 export class DeleteDialogComponent implements OnInit {
 
+  checkboxFlag: boolean;
+
   constructor(
     public dialogRef: MatDialogRef<DeleteDialogComponent>,
     public db: LocalStorage,
