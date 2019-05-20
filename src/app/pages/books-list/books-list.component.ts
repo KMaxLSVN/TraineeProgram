@@ -44,6 +44,14 @@ import { ToastrService } from 'ngx-toastr';
     ngOnInit() {
     }
 
+    // @IsCurrentUser({
+    //   ifState: this.cartService.addItem,
+    //   elseState()  {
+    //     this.toastr.info('You should to log in at first');
+    //     this.router.navigate(['/login']);
+    //   }
+    // })
+    
     onClickCart(elem){
       if(this.currentUser){
         this.cartService.addItem(elem);
