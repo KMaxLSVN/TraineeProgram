@@ -2,16 +2,16 @@ import { Component, OnInit, Input, Output, EventEmitter, Inject } from '@angular
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, } from '@angular/forms';
 
-import { AuthenticationService } from '../../shared/_services';
+import { AuthenticationService, ApiService } from '../../shared/_services';
 import { UserService } from '../../shared/_services';
 import { User } from '../../shared/_models';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
 @Component({
-    selector: 'app-register',
-    templateUrl: './register.component.html',
-    styleUrls: ['./register.component.scss']
-  })
+  selector: 'app-register',
+  templateUrl: './register.component.html',
+  styleUrls: ['./register.component.scss']
+})
 
 export class RegisterComponent implements OnInit {
 
@@ -26,7 +26,7 @@ export class RegisterComponent implements OnInit {
   registerForm: FormGroup;
 
   model: User = <User>{};
-  
+
   constructor(
 
     private router: Router,
@@ -35,47 +35,49 @@ export class RegisterComponent implements OnInit {
     private service: AuthenticationService,
     private userService: UserService,
 
+    private api: ApiService,
+
     // public dialogRef: MatDialogRef<RegisterComponent>,
     // @Inject(MAT_DIALOG_DATA) public data: any,
-    
-  ){
-    if (this.service.currentUserValue) { 
+
+  ) {
+    if (this.service.currentUserValue) {
       this.router.navigate(['/books']);
     }
   }
-  
+
   ngOnInit() {
 
     this.registerForm = this.formBuilder.group({
       firstName: ['', [Validators.required,
-                      Validators.pattern("^[A-za-z0-9_-]{2,15}$")]
+      Validators.pattern("^[A-za-z0-9_-]{2,15}$")]
       ],
       lastName: ['', [Validators.required,
-                      Validators.pattern("^[a-z0-9_-]{2,15}$")]
+      Validators.pattern("^[a-z0-9_-]{2,15}$")]
       ],
-      userName: [ null, Validators.pattern("^[a-z0-9_-]{2,15}$")
+      userName: [null, Validators.pattern("^[a-z0-9_-]{2,15}$")
       ],
       email: ['', [Validators.required,
-                  // Validators.email,]
-                  Validators.pattern("[a-zA-Z_]+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}")]
+      // Validators.email,]
+      Validators.pattern("[a-zA-Z_]+@[a-zA-Z_]+?\.[a-zA-Z]{2,3}")]
       ],
       password: ['', [Validators.required,
-                      Validators.minLength(3)]
+      Validators.minLength(3)]
       ]
     })
 
     this.title = this.setTypeForm(this.state).title;
-    this.btnName = this.setTypeForm(this.state).btnName;      
-      
+    this.btnName = this.setTypeForm(this.state).btnName;
+
   }
 
-  get f() { 
+  get f() {
     return this.registerForm.controls;
   }
 
   public onSubmit() {
     console.log(this.registerForm);
-    if (this.registerForm.invalid){
+    if (this.registerForm.invalid) {
       return;
     }
     this.setTypeForm(this.state).confirm();
@@ -83,8 +85,8 @@ export class RegisterComponent implements OnInit {
     this.onChangeUserBase.emit(this.registerForm.value);
   }
 
-  public setTypeForm(stateType: string){
-    switch(stateType){
+  public setTypeForm(stateType: string) {
+    switch (stateType) {
       case 'add':
         return {
           title: 'Add User',
@@ -117,24 +119,33 @@ export class RegisterComponent implements OnInit {
   //   this.dialogRef.close();
   // }
 
-  private addUser(ifRedirect: boolean = true): void {
+  private addUser(ifRedirect: boolean = true) {
+
+    // api service
+    const user: User = this.registerForm.value;
+    this.api.addUser(user).subscribe(data => {
+      console.log(data);
+    }, error => {
+      console.log(error);
+    });
+
     let data = this.userService.register(this.registerForm.value);
-    if(ifRedirect){
+    if (ifRedirect) {
       this.router.navigate(['/login']);
     } else {
       // this.dialogRef.close(data);
     }
   }
 
-  private editUser(){
+  private editUser() {
     console.log('edit');
   }
 
-  private onPostForm(){
+  private onPostForm() {
     this.postForm.emit({
       state: this.state,
       data: this.registerForm.value
     })
   }
-  
+
 }

@@ -4,6 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../_models';
 
 import { Observable } from 'rxjs';
+import { environment } from 'src/environments/environment';
 
 const httpOption = {
   headers: new HttpHeaders({
@@ -17,8 +18,6 @@ const httpOption = {
 })
 export class ApiService {
 
-  baseUrl: string = 'http://localhost:3000/users/';
-
   constructor(
 
     private http: HttpClient,
@@ -26,10 +25,10 @@ export class ApiService {
   ) { }
 
   getUsers(){
-    return this.http.get(this.baseUrl);
+    return this.http.get(environment.host);
   }
 
   addUser(user: User): Observable<User>{
-    return this.http.post<User>(this.baseUrl, user, httpOption);
+    return this.http.post<User>(environment.host + environment.add, user, httpOption);
   }
 }

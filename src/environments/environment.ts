@@ -4,7 +4,10 @@
 
 export const environment = {
   production: false,
-  state: 'development'
+  state: 'development',
+  host: 'http://localhost:3000/v1/',
+  add: 'register',
+  
 };
 
 /*
