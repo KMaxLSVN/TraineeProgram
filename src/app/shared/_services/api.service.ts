@@ -24,11 +24,29 @@ export class ApiService {
 
   ) { }
 
-  getUsers(){
-    return this.http.get(environment.host);
+  login(data: User){
+    return this.http.post(environment.host + environment.auth, data);
   }
 
-  addUser(user: User): Observable<User>{
-    return this.http.post<User>(environment.host + environment.add, user, httpOption);
+  
+
+  getUsers(): Observable<User>{
+    return this.http.get<User>(environment.host + environment.getAllUsers);
+  }
+
+  getUserById(id: string) {
+    return this.http.get(environment.host + environment.getUser + id);
+  }
+
+  addUser(data: User): Observable<User>{
+    return this.http.post<User>(environment.host + environment.addUser, data, httpOption);
+  }
+
+  updateUser(data: User): Observable<User>{
+    return this.http.put<User>(environment.host + environment.getUser + data.id, data, httpOption);
+  }
+
+  deleteUser(id: string): Observable<User>{
+    return this.http.delete<User>(environment.host + environment.getUser + id);
   }
 }
