@@ -6,8 +6,7 @@ import { User } from '../../shared/_models/users';
 import { Book } from 'src/app/shared/_models';
 
 import { AuthenticationService } from '../../shared/_services/authentication.service';
-import { CartService } from 'src/app/shared/_services';
-
+import { CartService, ApiService, AuthService } from 'src/app/shared/_services';
 
 @Component({
   selector: 'app-header',
@@ -28,6 +27,9 @@ export class HeaderComponent implements OnInit {
     public router: Router,
     public service: AuthenticationService,
     public cartService: CartService,
+
+    private api: ApiService,
+    private auth: AuthService,
   ) {
     this.service.currentUser.subscribe(x => this.currentUser = x);
     this.cartService.cartList.subscribe(response => {
@@ -43,6 +45,7 @@ export class HeaderComponent implements OnInit {
 
   logout() {
     this.service.logout();
+    this.auth.logout();
     this.cartService.deleteAll();
     this.router.navigate(['/login']);
   }

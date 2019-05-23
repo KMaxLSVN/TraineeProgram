@@ -2,9 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { User } from '../_models';
+import { environment } from 'src/environments/environment';
 
 import { Observable } from 'rxjs';
-import { environment } from 'src/environments/environment';
+import { map } from 'rxjs/operators';
 
 const httpOption = {
   headers: new HttpHeaders({
@@ -24,12 +25,7 @@ export class ApiService {
 
   ) { }
 
-  login(data: User){
-    return this.http.post(environment.host + environment.auth, data);
-  }
-
   
-
   getUsers(): Observable<User>{
     return this.http.get<User>(environment.host + environment.getAllUsers);
   }

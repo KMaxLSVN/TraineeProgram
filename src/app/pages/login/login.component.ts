@@ -1,6 +1,6 @@
 import { Component, OnInit, } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AuthenticationService } from '../../shared/_services';
+import { AuthenticationService, ApiService, AuthService } from '../../shared/_services';
 import { Router } from '@angular/router';
 
 
@@ -20,6 +20,9 @@ export class LoginComponent  implements OnInit  {
 
     private service: AuthenticationService,
     private router: Router,
+
+    private api: ApiService,
+    private auth: AuthService,
     ) {
     if (this.service.currentUserValue){
       this.router.navigate(['/books']);
@@ -45,8 +48,14 @@ export class LoginComponent  implements OnInit  {
     if (this.loginForm.invalid){
       return;
     } else {      
-      this.service.login(this.f.email.value, this.f.password.value);
-    }    
+      this.service.login(this.f.email.value, this.f.password.value);      
+      this.auth.login('admin@shop.com', 'password').subscribe(data => {
+        console.log(data)
+      }, error => {
+        console.log(error);
+      }
+      )
+    }
     return console.log(this.loginForm);;
   }
 

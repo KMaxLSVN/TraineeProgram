@@ -21,9 +21,8 @@ import { DeleteDialogComponent } from './components/user-list/dialogs/delete-dia
 import { EditDialogComponent } from './components/user-list/dialogs/edit-dialog/edit-dialog.component';
 import { CartComponent } from './pages/cart/cart.component';
 
-
-
 import { HttpClientModule }   from '@angular/common/http';
+import { httpInterceptorProviders } from './http-interceptors/index';
 // External libs 
 import { ToastrModule } from 'ngx-toastr';
 import { BrowserCookiesModule } from '@ngx-utils/cookies/browser';
@@ -86,6 +85,7 @@ import { SearchBooksComponent } from './components/search-books/search-books.com
     LocalStorage,
     BookSevice,
     CartService,
+    httpInterceptorProviders,
   ],
   bootstrap: [AppComponent]
 })
