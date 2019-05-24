@@ -10,7 +10,7 @@ import { map, tap } from 'rxjs/operators';
 const httpOption = {
   headers: new HttpHeaders({
     'Content-Type': 'application/json',
-    'Authorization': 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluQHNob3AuY29tIiwiaXNBZG1pbiI6dHJ1ZSwiaWF0IjoxNTU4NzAxNjk3LCJleHAiOjE1NTg3MDUyOTd9.DMmKh2gX-jkalUPfhh4kQJH-K3E35ZcxPUfV0hfn2vc'
+    'Authorization': 'my-auth-token'
   })
 }
 
@@ -23,8 +23,8 @@ export class ApiService {
     private http: HttpClient,
   ) { }
   
-  getUsers(): Observable<any[]>{
-    return this.http.get<any>(environment.host + environment.getAllUsers).pipe( map(res => { return res.data }) );
+  getUsers(): Observable<User[]>{
+    return this.http.get<any>(environment.host + environment.getAllUsers).pipe( map(res => res.data as User[]) );
   }
 
   getUserById(id: string) {
