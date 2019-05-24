@@ -55,8 +55,10 @@ export class LoginComponent  implements OnInit  {
         console.log(error);
       }
       )
+
+      this.api.getUsers().subscribe(res => console.log('DB API',res));
     }
-    return console.log(this.loginForm);;
+    return console.log(this.loginForm);
   }
 
 }

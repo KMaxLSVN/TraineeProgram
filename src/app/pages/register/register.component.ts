@@ -15,9 +15,8 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 
 export class RegisterComponent implements OnInit {
 
-  @Input() title = 'Registration';
-  @Input() btnName: string = 'Register';
-  @Input() state: string = 'registration';
+  title = 'Registration';
+  btnName: string = 'Register';
 
   @Output() postForm: EventEmitter<any> = new EventEmitter;
 
@@ -28,7 +27,6 @@ export class RegisterComponent implements OnInit {
   model: User = <User>{};
 
   constructor(
-
     private router: Router,
     private formBuilder: FormBuilder,
 
@@ -36,10 +34,6 @@ export class RegisterComponent implements OnInit {
     private userService: UserService,
 
     private api: ApiService,
-
-    // public dialogRef: MatDialogRef<RegisterComponent>,
-    // @Inject(MAT_DIALOG_DATA) public data: any,
-
   ) {
     if (this.service.currentUserValue) {
       this.router.navigate(['/books']);
@@ -66,9 +60,6 @@ export class RegisterComponent implements OnInit {
       ]
     })
 
-    this.title = this.setTypeForm(this.state).title;
-    this.btnName = this.setTypeForm(this.state).btnName;
-
   }
 
   get f() {
@@ -76,13 +67,20 @@ export class RegisterComponent implements OnInit {
   }
 
   public onSubmit() {
-    console.log(this.registerForm);
     if (this.registerForm.invalid) {
       return;
     }
-    this.setTypeForm(this.state).confirm();
-    this.onPostForm();
-    this.onChangeUserBase.emit(this.registerForm.value);
+
+    this.api.addUser(this.registerForm.value).subscribe(data => {
+      console.log('Submit reg api data:',data);
+    }, error => {
+      console.log('Submit reg api error',error);
+    });
+    this.router.navigate(['/login']);
+
+    // this.setTypeForm('').confirm();
+    // this.onPostForm();
+    // this.onChangeUserBase.emit(this.registerForm.value);
   }
 
   public setTypeForm(stateType: string) {
@@ -115,25 +113,19 @@ export class RegisterComponent implements OnInit {
     }
   }
 
-  // public onCancel(): void {
-  //   this.dialogRef.close();
-  // }
-
   private addUser(ifRedirect: boolean = true) {
 
     // api service
-    const user: User = this.registerForm.value;
-    this.api.addUser(user).subscribe(data => {
-      console.log(data);
-    }, error => {
-      console.log(error);
-    });
+    // const user: User = this.registerForm.value;
+    // this.api.addUser(user).subscribe(data => {
+    //   console.log(data);
+    // }, error => {
+    //   console.log(error);
+    // });
 
     let data = this.userService.register(this.registerForm.value);
     if (ifRedirect) {
       this.router.navigate(['/login']);
-    } else {
-      // this.dialogRef.close(data);
     }
   }
 
@@ -143,7 +135,7 @@ export class RegisterComponent implements OnInit {
 
   private onPostForm() {
     this.postForm.emit({
-      state: this.state,
+      state: 'this.state',
       data: this.registerForm.value
     })
   }

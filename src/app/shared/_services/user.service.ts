@@ -5,6 +5,7 @@ import { User } from '../_models';
 import { ToastrService } from 'ngx-toastr';
 import { LocalStorage } from './local-storage.service';
 import { Observable, of } from 'rxjs';
+import { ApiService } from './api.service';
 
 @Injectable({ 
     providedIn: 'root',
@@ -12,10 +13,16 @@ import { Observable, of } from 'rxjs';
 export class UserService {
 
     constructor(
-
         private toastr: ToastrService,
         private db: LocalStorage,
+        private api: ApiService,
     ){}
+
+    // registerAPI(user: User): Observable<User[]>{
+    //     let db: User[] = this.api.getUsers();
+
+    //     return of(db);
+    // }
 
     register(user: User): Observable<User[]> {
         let usersBase: User[] = this.db.getAllUsers();
