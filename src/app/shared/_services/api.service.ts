@@ -27,7 +27,7 @@ export class ApiService {
     return this.http.get<any>(environment.host + environment.getAllUsers).pipe( map(res => res.data as User[]) );
   }
 
-  getUserById(id: string) {
+  getUserById(id: number) {
     return this.http.get(environment.host + environment.getUser + id);
   }
 

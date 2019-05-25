@@ -20,6 +20,15 @@ export class UserService {
 
     // registerAPI(user: User): Observable<User[]>{
     //     let db: User[] = this.api.getUsers();
+    //     if(!db) {
+    //         db = this.api.addUser;
+    //     } else {
+    //         let isUserExist = this.api.getUserById(user.id);
+    //         if(isUserExist){
+    //             return;
+    //         }
+    //         db = this.api.addUser(user);
+    //     }
 
     //     return of(db);
     // }
