@@ -22,19 +22,19 @@ export class LoggingInterceptor implements HttpInterceptor {
       .pipe(
         tap(
           event => {
-            ok = event instanceof HttpResponse ? 'succeeded' : '';
+            // ok = event instanceof HttpResponse ? 'succeeded' : '';
             if(event instanceof HttpResponse){
               if(event.body && event.body.success){
                 this.toastr.success(event.body.message , "Dev test", {timeOut: 10000});
               }
             }
         },
-        finalize(() => {
-          const elapsed = Date.now() - started;
-          const msg = `${req.method} "${req.urlWithParams}"
-             ${ok} in ${elapsed} ms.`;
-          this.toastr.show(msg,'', {timeOut: 10000});
-        })
+        // finalize(() => {
+        //   const elapsed = Date.now() - started;
+        //   const msg = `${req.method} "${req.urlWithParams}"
+        //      ${ok} in ${elapsed} ms.`;
+        //   this.toastr.show(msg,'', {timeOut: 10000});
+        // })
         )
       );
   }

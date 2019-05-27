@@ -6,6 +6,8 @@ import { AuthenticationService, ApiService } from '../../shared/_services';
 import { UserService } from '../../shared/_services';
 import { User } from '../../shared/_models';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
+import { HttpErrorResponse } from '@angular/common/http';
+import { throwError } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -17,6 +19,7 @@ export class RegisterComponent implements OnInit {
 
   title = 'Registration';
   btnName: string = 'Register';
+  error: string = '';
 
   @Output() postForm: EventEmitter<any> = new EventEmitter;
 
@@ -66,17 +69,19 @@ export class RegisterComponent implements OnInit {
     return this.registerForm.controls;
   }
 
-  public onSubmit() {
+  public async onSubmit() {
     if (this.registerForm.invalid) {
       return;
     }
 
+
     this.api.addUser(this.registerForm.value).subscribe(data => {
       console.log('Submit reg api data:',data);
+      this.router.navigate(['/login']);
     }, error => {
-      console.log('Submit reg api error',error);
+      console.log('Submit reg api',error);
+      this.error = error;
     });
-    this.router.navigate(['/login']);
 
     // this.setTypeForm('').confirm();
     // this.onPostForm();

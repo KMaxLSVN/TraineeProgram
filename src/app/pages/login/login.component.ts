@@ -56,7 +56,7 @@ export class LoginComponent  implements OnInit  {
       }
       )
 
-      this.api.getUsers().subscribe(res => console.log('DB API',res));
+      // this.api.getUsers().subscribe(res => console.log('DB API',res));
     }
     return console.log(this.loginForm);
   }

@@ -63,6 +63,7 @@
 
             <div class="reg-btn">
                 <button mat-raised-button color="primary" type="button" routerLink="/login">Back</button>
+                <div *ngIf="error">{{error}}</div>
                 <button mat-raised-button color="primary" type="submit" [disabled]="registerForm.invalid">{{btnName}}</button>
             </div>
         
