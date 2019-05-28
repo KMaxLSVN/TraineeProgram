@@ -40,7 +40,6 @@ export class ErrorInterceptor implements HttpInterceptor {
                                 break;
                             case 400:
                                 errorMessage = error.error.message;
-                                // I don't know
                                 break;
                             default:
                                 errorMessage = this.toastr.error(error.error.message, `${error.status}` , {timeOut: 10000});

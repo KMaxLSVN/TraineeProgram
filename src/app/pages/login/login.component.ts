@@ -1,14 +1,12 @@
 import { Component, OnInit, } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
-import { AuthenticationService, ApiService, AuthService } from '../../shared/_services';
+import { AuthService } from '../../shared/_services';
 import { Router } from '@angular/router';
-
 
 @Component({
   selector: 'app-login',
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss']
-
 })
 
 export class LoginComponent  implements OnInit  {
@@ -17,16 +15,13 @@ export class LoginComponent  implements OnInit  {
 
   constructor( 
     private formBuilder: FormBuilder,
-
-    private service: AuthenticationService,
     private router: Router,
 
-    private api: ApiService,
     private auth: AuthService,
     ) {
-    if (this.service.currentUserValue){
-      this.router.navigate(['/books']);
-    }
+    // if (!this.auth.isAuthenticated()){
+    //   this.router.navigate(['/books']);
+    // }
    }
 
   ngOnInit() {
@@ -47,19 +42,16 @@ export class LoginComponent  implements OnInit  {
   onSubmit(){
     if (this.loginForm.invalid){
       return;
-    } else {      
-      this.service.login(this.f.email.value, this.f.password.value);      
-      this.auth.login('admin@shop.com', 'password').subscribe(data => {
-        console.log(data)
+    } else {
+      this.auth.login(this.f.email.value, this.f.password.value).subscribe(data => {
+        console.log(data);
+        this.router.navigate(['/books']);
       }, error => {
-        console.log(error);
-      }
-      )
-
-      // this.api.getUsers().subscribe(res => console.log('DB API',res));
+        console.log(error)
+      })
     }
-    return console.log(this.loginForm);
   }
+
 
 }
 

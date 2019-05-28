@@ -58,15 +58,15 @@
             </td>
         </ng-container>
         <!-- Footer Message -->
-        <ng-container matColumnDef="footerMessage">
+        <!-- <ng-container matColumnDef="footerMessage">
             <td mat-footer-cell *matFooterCellDef colspan="7" class="table-footer"> 
                 {{dataSource.data && dataSource.data.length ? dataSource.data.length : 'No'}} user(s) registered
             </td>
-        </ng-container>
+        </ng-container> -->
     
         <tr mat-header-row *matHeaderRowDef="displayedColumns;"></tr>
         <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-        <tr mat-footer-row *matFooterRowDef="['footerMessage']" ></tr>
+        <!-- <tr mat-footer-row *matFooterRowDef="['footerMessage']" ></tr> -->
     </table>
     <!-- Pagination -->
     <mat-paginator [length]="10"

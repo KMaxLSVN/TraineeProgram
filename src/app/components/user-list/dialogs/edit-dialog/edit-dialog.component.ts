@@ -2,6 +2,7 @@ import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, FormControl, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { LocalStorage } from 'src/app/shared/_services/local-storage.service';
+import { ApiService } from 'src/app/shared/_services';
 
 @Component({
   selector: 'app-edit-dialog',
@@ -17,6 +18,8 @@ export class EditDialogComponent implements OnInit {
     private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<EditDialogComponent>,
     private db: LocalStorage,
+
+    private api: ApiService,
     @Inject(MAT_DIALOG_DATA) public data: any,
 
   ) { }
@@ -38,7 +41,8 @@ export class EditDialogComponent implements OnInit {
     if(this.editForm.dirty){
       let result = this.editForm.value;
       result.email = this.data.user.email;
-      this.dialogRef.close(this.db.updateUser(result));
+      // this.dialogRef.close(this.db.updateUser(result));
+      this.dialogRef.close(this.api.updateUser(result));
     }
   }
 

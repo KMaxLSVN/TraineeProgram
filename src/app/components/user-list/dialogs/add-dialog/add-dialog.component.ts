@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
 import { FormControl, Validators, FormGroup, FormBuilder } from '@angular/forms';
+import { ApiService } from 'src/app/shared/_services';
 
 
 @Component({
@@ -17,6 +18,8 @@ export class AddDialogComponent implements OnInit {
 
     private formBuilder: FormBuilder,
     public dialogRef: MatDialogRef<AddDialogComponent>,
+
+    private api: ApiService,
     @Inject(MAT_DIALOG_DATA) public data,
 
   ) {}
@@ -38,23 +41,13 @@ export class AddDialogComponent implements OnInit {
 
   submit(): void {
     console.log(this.addForm);
-    this.dialogRef.close(this.addForm.value);
+    // this.dialogRef.close(this.addForm.value);
+    this.dialogRef.close(this.api.addUser(this.addForm.value).subscribe(res => res))
   }
 
   close(): void {
     this.dialogRef.close();
   }
 
-  formAction(data){
-    console.log(data);
-    // this.data.callback(data.data);
-
-    // this.close();
-  }
-
-  registerSubmit(data){
-    console.log(data);
-    this.data.callback(data);
-  }
 
 }

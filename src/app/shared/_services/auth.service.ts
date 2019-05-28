@@ -2,8 +2,10 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 
 import { environment } from 'src/environments/environment';
+import { User } from '../_models';
 
 import { map } from 'rxjs/operators';
+import { Observable, BehaviorSubject, Subject } from 'rxjs';
 
 import * as jwt_decode from "jwt-decode";
 
@@ -12,17 +14,32 @@ import * as jwt_decode from "jwt-decode";
 })
 export class AuthService {
 
+  private currentUser = new Subject<string>();
+
+  currentUser$ = this.currentUser.asObservable();
+
   constructor(
     private http: HttpClient,
   ) { }
 
-  getAuthToken(): string{
+   getAuthToken(): string{
     return (JSON.parse(localStorage.getItem('currentUserAPI')) || {}).token;
+    // return this.currentUserSubject.value.token;
   }
 
   isAuthenticated(): boolean {
     const status = this.getAuthToken();
-    return (status !== null);
+    // return (status !== null);
+    return !!status;
+  }
+
+  isAdmin(): boolean{
+    return this.getDecodedAuthToken().isAdmin;
+  }
+
+  currentEmail(){
+    return this.getDecodedAuthToken().email;
+    // return this.currentUser.next(this.getDecodedAuthToken().email);
   }
 
   getDecodedAuthToken(){

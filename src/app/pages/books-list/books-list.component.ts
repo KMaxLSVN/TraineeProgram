@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 
 import { Router } from '@angular/router';
 
-import { AuthenticationService, BookSevice, CartService } from '../../shared/_services';
+import { AuthenticationService, BookSevice, CartService, AuthService } from '../../shared/_services';
 import { Book, User } from 'src/app/shared/_models';
 import { ToastrService } from 'ngx-toastr';
 
@@ -29,14 +29,16 @@ import { ToastrService } from 'ngx-toastr';
       private router: Router,
       private toastr: ToastrService,
 
+      private auth: AuthService,
+
     ) {
-      this.isAdmin = this.authService.isAdmin;
+      this.isAdmin = this.auth.isAdmin();
       // Dinamic Render Books List
       this.bookService.bookList.subscribe( result => {
         this.items = result;
       });
-
-      this.authService.currentUser.subscribe(response => this.currentUser = response);
+      // this.currentUser = this.auth.currentEmail();
+      // this.authService.currentUser.subscribe(response => this.currentUser = response);
 
 
     }

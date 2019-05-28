@@ -7,6 +7,7 @@ import { Book } from 'src/app/shared/_models';
 
 import { AuthenticationService } from '../../shared/_services/authentication.service';
 import { CartService, ApiService, AuthService } from 'src/app/shared/_services';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-header',
@@ -15,7 +16,8 @@ import { CartService, ApiService, AuthService } from 'src/app/shared/_services';
 })
 export class HeaderComponent implements OnInit {
 
-  currentUser: User;
+  currentUser: any;
+
   books: Book[];
   quantity: number;
   price: any;
@@ -31,7 +33,14 @@ export class HeaderComponent implements OnInit {
     private api: ApiService,
     private auth: AuthService,
   ) {
-    this.service.currentUser.subscribe(x => this.currentUser = x);
+    // this.service.currentUser.subscribe(x => this.currentUser = x);
+    this.currentUser = this.auth.currentEmail();
+
+    // this.auth.currentUser$.subscribe(res => this.currentUser = res);
+
+    console.log(this.currentUser);
+
+
     this.cartService.cartList.subscribe(response => {
       this.books = response;
       this.quantity = this.cartService.sumQuantity();

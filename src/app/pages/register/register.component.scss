@@ -20,5 +20,9 @@
     .reg-btn {
         display: flex;
         justify-content: space-between;
+        .user-errorMsg{
+            color: #f44336;
+            font-size: 18px;
+        }
     }
 }

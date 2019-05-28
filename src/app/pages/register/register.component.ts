@@ -1,13 +1,9 @@
-import { Component, OnInit, Input, Output, EventEmitter, Inject } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormBuilder, FormGroup, Validators, } from '@angular/forms';
 
-import { AuthenticationService, ApiService } from '../../shared/_services';
-import { UserService } from '../../shared/_services';
+import { ApiService, AuthService } from '../../shared/_services';
 import { User } from '../../shared/_models';
-import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material';
-import { HttpErrorResponse } from '@angular/common/http';
-import { throwError } from 'rxjs';
 
 @Component({
   selector: 'app-register',
@@ -19,7 +15,7 @@ export class RegisterComponent implements OnInit {
 
   title = 'Registration';
   btnName: string = 'Register';
-  error: string = '';
+  errorMsg: string = '';
 
   @Output() postForm: EventEmitter<any> = new EventEmitter;
 
@@ -33,12 +29,10 @@ export class RegisterComponent implements OnInit {
     private router: Router,
     private formBuilder: FormBuilder,
 
-    private service: AuthenticationService,
-    private userService: UserService,
-
+    private auth: AuthService,
     private api: ApiService,
   ) {
-    if (this.service.currentUserValue) {
+    if ((this.auth.isAuthenticated())) {
       this.router.navigate(['/books']);
     }
   }
@@ -73,76 +67,13 @@ export class RegisterComponent implements OnInit {
     if (this.registerForm.invalid) {
       return;
     }
-
-
     this.api.addUser(this.registerForm.value).subscribe(data => {
-      console.log('Submit reg api data:',data);
+      console.log('Reg data:',data);
       this.router.navigate(['/login']);
     }, error => {
-      console.log('Submit reg api',error);
-      this.error = error;
+      this.errorMsg = error;
     });
 
-    // this.setTypeForm('').confirm();
-    // this.onPostForm();
-    // this.onChangeUserBase.emit(this.registerForm.value);
-  }
-
-  public setTypeForm(stateType: string) {
-    switch (stateType) {
-      case 'add':
-        return {
-          title: 'Add User',
-          btnName: 'Add',
-          confirm: () => {
-            console.log(this);
-            this.addUser(false);
-          }
-        };
-      case 'edit':
-        return {
-          title: 'Edit User',
-          btnName: 'Edit',
-          confirm: () => {
-            this.editUser();
-          }
-        };
-      default:
-        return {
-          title: 'Registeration',
-          btnName: 'Register',
-          confirm: () => {
-            this.addUser();
-          }
-        };
-    }
-  }
-
-  private addUser(ifRedirect: boolean = true) {
-
-    // api service
-    // const user: User = this.registerForm.value;
-    // this.api.addUser(user).subscribe(data => {
-    //   console.log(data);
-    // }, error => {
-    //   console.log(error);
-    // });
-
-    let data = this.userService.register(this.registerForm.value);
-    if (ifRedirect) {
-      this.router.navigate(['/login']);
-    }
-  }
-
-  private editUser() {
-    console.log('edit');
-  }
-
-  private onPostForm() {
-    this.postForm.emit({
-      state: 'this.state',
-      data: this.registerForm.value
-    })
   }
 
 }

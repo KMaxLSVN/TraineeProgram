@@ -6,11 +6,10 @@ import { AddDialogComponent } from './dialogs/add-dialog/add-dialog.component';
 import { DeleteDialogComponent } from './dialogs/delete-dialog/delete-dialog.component';
 import { EditDialogComponent } from './dialogs/edit-dialog/edit-dialog.component';
 
-import { Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
 
 import { User } from '../../shared/_models';
-import { UserService } from 'src/app/shared/_services';
+import { UserService, ApiService } from 'src/app/shared/_services';
 import { LocalStorage } from '../../shared/_services/local-storage.service';
 
 @Component({
@@ -20,31 +19,39 @@ import { LocalStorage } from '../../shared/_services/local-storage.service';
 })
 export class UsersListComponent implements OnInit {
 
+
   displayedColumns: string[] = ['position', 'firstName', 'lastName', 'userName', 'email', 'password', 'actions'];
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(
 
+    private api: ApiService,
     private db: LocalStorage,
     private dialog: MatDialog,
     private userService: UserService
 
   ) {
-    this.dataSource = new MatTableDataSource(this.getUserBase());
+    // this.dataSource = new MatTableDataSource(this.getUserBase());
   }
 
   ngOnInit() {
-    this.dataSource.paginator = this.paginator;
+    // this.dataSource.paginator = this.paginator;
+    this.renderMatTable();
   }
 
   public applyFilter(value: any){
     this.dataSource.filter = value.trim().toLowerCase();
   }
 
-  private getUserBase(){
-    let userBase = this.db.getAllUsers();
-    return userBase;
+  public renderMatTable = () => {
+    // let userBase = this.db.getAllUsers();
+    this.api.getUsers().subscribe(res => {
+      console.log(res);
+      this.dataSource = new MatTableDataSource();
+      this.dataSource.data = res as User[];
+      this.dataSource.paginator = this.paginator;
+    });
   }
 
   addNew(): void{
@@ -52,27 +59,15 @@ export class UsersListComponent implements OnInit {
       .open(AddDialogComponent)
       .afterClosed()
       .pipe(filter(result => result))
-      .subscribe(data => {
-        console.log('My condition:',data);
-        if(data.email){
-          this.userService.register(data).subscribe(result => {console.warn(result); this.dataSource.data = result});
-        }
+      .subscribe(data => {        
+          // this.userService.register(data).subscribe(result => {console.warn(result); this.dataSource.data = result});
+
+          // this.api.addUser(data).subscribe( res => {this.dataSource.data.push(res); console.log(data)} );
+
+          console.log(data);
+          this.dataSource.data.push(data);
+        
     })
-  }
-
-  addItem(): void{
-    let dialogConfig: MatDialogConfig = {};
-    let _this = this;
-
-    dialogConfig.data = {
-      title: 'Add user',
-      callback(result){
-        console.warn(result);
-        // _this.dataSource.data.push(result);
-        _this.dataSource.data = [..._this.dataSource.data, result];
-      }
-  };
-
   }
 
   editItem(user: User){
@@ -87,7 +82,7 @@ export class UsersListComponent implements OnInit {
     
     dialogRef.afterClosed()
               .pipe(filter(result => result))
-              .subscribe(result => {this.dataSource.data = result;});
+              .subscribe(result => this.dataSource.data = result);
 
   }
 
@@ -100,7 +95,7 @@ export class UsersListComponent implements OnInit {
         name: user,
         callback(status: boolean){
           if(status){
-            _this.db.deleteUser(user).subscribe((result: any) => _this.dataSource.data = result);
+            _this.api.deleteUser(user.id).subscribe((result: any) => _this.dataSource.data = result);
           }
         }
     };
