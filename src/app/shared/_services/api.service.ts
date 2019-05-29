@@ -1,12 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 
 import { User } from '../_models';
 import { environment } from 'src/environments/environment';
 
-import { Observable, of, throwError, BehaviorSubject } from 'rxjs';
-import { map, tap } from 'rxjs/operators';
-import { catchError } from 'rxjs/operators'; 
+import { Observable, of, BehaviorSubject } from 'rxjs';
+import { map } from 'rxjs/operators';
 
 const httpOption = {
   headers: new HttpHeaders({

@@ -7,13 +7,15 @@ import {
 import { ToastrService } from 'ngx-toastr';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 
 
 @Injectable()
 export class ErrorInterceptor implements HttpInterceptor {
   constructor(
-      private toastr: ToastrService
+      private toastr: ToastrService,
+      private router: Router,
       ) {}
 
       intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>{
@@ -35,7 +37,7 @@ export class ErrorInterceptor implements HttpInterceptor {
                                 break;
                             case 401:
                                 errorMessage = this.toastr.error(error.error.message, `${error.status}` , {timeOut: 10000});
-
+                                this.router.navigate(['/login']);
                                 // redirect to login component
                                 break;
                             case 400:

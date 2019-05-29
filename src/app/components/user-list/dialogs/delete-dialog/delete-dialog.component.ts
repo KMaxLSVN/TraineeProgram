@@ -1,6 +1,7 @@
 import { Component, OnInit, Inject } from '@angular/core';
 import {MAT_DIALOG_DATA, MatDialogRef} from '@angular/material';
 import { LocalStorage } from 'src/app/shared/_services/local-storage.service';
+import { ApiService } from 'src/app/shared/_services';
 
 @Component({
   selector: 'app-delete-dialog',
@@ -14,6 +15,7 @@ export class DeleteDialogComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<DeleteDialogComponent>,
     public db: LocalStorage,
+    private api: ApiService,
     @Inject(MAT_DIALOG_DATA) public data: any,
 
   ) {    
@@ -24,13 +26,16 @@ export class DeleteDialogComponent implements OnInit {
   }
 
   close(): void{
-    this.confirmDelete(false);
+    // this.confirmDelete(false);
     this.dialogRef.close();
   }
 
   confirmDelete(status: boolean): void {
-      this.data.callback(status);
-      this.dialogRef.close();
+      // this.data.callback(status);
+      this.api.deleteUser(this.data.user.id).subscribe(res => {
+        console.log(res);
+        this.dialogRef.close(this.data.user.id);
+      })
   }
 
 }

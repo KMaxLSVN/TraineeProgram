@@ -14,7 +14,7 @@ import * as jwt_decode from "jwt-decode";
 })
 export class AuthService {
 
-  private currentUser = new Subject<string>();
+  private currentUser = new Subject<any>();
 
   currentUser$ = this.currentUser.asObservable();
 
@@ -24,7 +24,6 @@ export class AuthService {
 
    getAuthToken(): string{
     return (JSON.parse(localStorage.getItem('currentUserAPI')) || {}).token;
-    // return this.currentUserSubject.value.token;
   }
 
   isAuthenticated(): boolean {
@@ -38,8 +37,10 @@ export class AuthService {
   }
 
   currentEmail(){
-    return this.getDecodedAuthToken().email;
+    // return this.getDecodedAuthToken().email;
     // return this.currentUser.next(this.getDecodedAuthToken().email);
+    let email = this.getDecodedAuthToken().email;
+    return this.currentUser.next(email);
   }
 
   getDecodedAuthToken(){
@@ -56,13 +57,15 @@ export class AuthService {
       .pipe( map((data: any) => {
         if(data && data.token){
           localStorage.setItem('currentUserAPI', JSON.stringify(data));
+          this.currentEmail();
           return true;
         }
-      }) )
+      }) );
   }
 
   logout(){
     localStorage.removeItem('currentUserAPI');
+    this.currentUser.next();
   }
 
 }

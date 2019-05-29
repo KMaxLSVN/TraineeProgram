@@ -16,7 +16,7 @@ import { Subscription } from 'rxjs';
 })
 export class HeaderComponent implements OnInit {
 
-  currentUser: any;
+  currentUser: any = '';
 
   books: Book[];
   quantity: number;
@@ -34,12 +34,11 @@ export class HeaderComponent implements OnInit {
     private auth: AuthService,
   ) {
     // this.service.currentUser.subscribe(x => this.currentUser = x);
-    this.currentUser = this.auth.currentEmail();
 
-    // this.auth.currentUser$.subscribe(res => this.currentUser = res);
+    // this.currentUser = this.auth.currentEmail();
 
-    console.log(this.currentUser);
-
+    // Render current user email
+    this.auth.currentUser$.subscribe(res => this.currentUser = res);
 
     this.cartService.cartList.subscribe(response => {
       this.books = response;
@@ -47,13 +46,15 @@ export class HeaderComponent implements OnInit {
       this.price = this.cartService.sumPrice();
       this.title = 'Total price'; 
     });
+
   }
 
-  ngOnInit() {
+  ngOnInit() {    
+    this.auth.currentEmail();
+    
   }
 
   logout() {
-    this.service.logout();
     this.auth.logout();
     this.cartService.deleteAll();
     this.router.navigate(['/login']);

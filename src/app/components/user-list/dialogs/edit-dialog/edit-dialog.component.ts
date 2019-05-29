@@ -42,7 +42,11 @@ export class EditDialogComponent implements OnInit {
       let result = this.editForm.value;
       result.email = this.data.user.email;
       // this.dialogRef.close(this.db.updateUser(result));
-      this.dialogRef.close(this.api.updateUser(result));
+      
+      // this.dialogRef.close(this.api.updateUser(result));
+      this.api.updateUser(result).subscribe(res => {
+        this.dialogRef.close(res);
+      })
     }
   }
 

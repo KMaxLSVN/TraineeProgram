@@ -63,7 +63,7 @@ export class RegisterComponent implements OnInit {
     return this.registerForm.controls;
   }
 
-  public async onSubmit() {
+  public onSubmit() {
     if (this.registerForm.invalid) {
       return;
     }
