@@ -41,11 +41,9 @@ export class AddDialogComponent implements OnInit {
 
   submit(): void {
     console.log(this.addForm);
-    // this.dialogRef.close(this.addForm.value);
     this.api.addUser(this.addForm.value).subscribe(res=>{
       this.dialogRef.close(res);
     })
-    // this.dialogRef.close(this.api.addUser(this.addForm.value).subscribe(res => res))
   }
 
   close(): void {

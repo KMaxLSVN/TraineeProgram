@@ -40,12 +40,13 @@ export class EditDialogComponent implements OnInit {
   submit(){
     if(this.editForm.dirty){
       let result = this.editForm.value;
-      result.email = this.data.user.email;
+      // result.email = this.data.user.email;
+      result.id = this.data.user.id;
       // this.dialogRef.close(this.db.updateUser(result));
       
       // this.dialogRef.close(this.api.updateUser(result));
       this.api.updateUser(result).subscribe(res => {
-        this.dialogRef.close(res);
+        this.dialogRef.close(result);
       })
     }
   }

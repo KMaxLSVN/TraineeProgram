@@ -56,6 +56,7 @@ export class UsersListComponent implements OnInit {
   public renderMatTable = () => {
     // let userBase = this.db.getAllUsers();
     this.api.getUsers().subscribe(res => {
+      res.shift();
       this.dataSource = new MatTableDataSource();
       this.dataSource.data = res as User[];
       this.dataSource.paginator = this.paginator;
@@ -67,11 +68,7 @@ export class UsersListComponent implements OnInit {
       .open(AddDialogComponent)
       .afterClosed()
       .pipe(filter(result => result))
-      .subscribe(data => {        
-          // this.userService.register(data).subscribe(result => {console.warn(result); this.dataSource.data = result});
-
-          // this.api.addUser(data).subscribe( res => {this.dataSource.data.push(res); console.log(data)} );
-          console.log(data);
+      .subscribe(data => {
           const newData = this.dataSource.data;
           newData.push(data);
           this.dataSource.data = newData;
@@ -91,8 +88,13 @@ export class UsersListComponent implements OnInit {
     dialogRef.afterClosed()
               .pipe(filter(result => result))
               .subscribe(res => {
-                console.log(res);
-                this.dataSource.data = res;
+                const newDataIndex = this.dataSource.data.findIndex(obj => obj.id === res.id);
+                const newData = {...this.dataSource.data[newDataIndex], firstName: res.firstName, lastName: res.lastName};
+                this.dataSource.data = [
+                  ...this.dataSource.data.slice(0,newDataIndex),
+                  newData,
+                  ...this.dataSource.data.slice(newDataIndex+1),
+                ];
               });
 
   }
@@ -104,11 +106,6 @@ export class UsersListComponent implements OnInit {
     dialogConfig.data = {
         title: 'Remove user',
         user: user,
-        // callback(status: boolean){
-        //   if(status){
-        //     _this.api.deleteUser(user.id).subscribe((result: any) => _this.dataSource.data = result);
-        //   }
-        // }
     };
       const dialogRef = this.dialog.open(DeleteDialogComponent, dialogConfig);
 
@@ -117,8 +114,7 @@ export class UsersListComponent implements OnInit {
         .pipe(filter(result=>result))
         .subscribe(res => {
           console.log(res);
-          const newData = this.dataSource.data;
-          newData.filter(elem => elem.id != res );
+          const newData = this.dataSource.data.filter(elem => elem.id != res );
           this.dataSource.data = newData;
         })
       
