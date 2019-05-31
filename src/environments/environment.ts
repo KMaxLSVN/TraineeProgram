@@ -9,7 +9,9 @@ export const environment = {
   getAllUsers: 'users',
   addUser: 'register',
   getUser: 'users/',
-  auth: 'authenticate'
+  auth: 'authenticate',
+  books: 'books/',
+  
 };
 
 /*

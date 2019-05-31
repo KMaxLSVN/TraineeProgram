@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { User } from '../_models';
 import { environment } from 'src/environments/environment';
 
-import { Observable, of, BehaviorSubject } from 'rxjs';
+import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 const httpOption = {
@@ -18,7 +18,6 @@ const httpOption = {
   providedIn: 'root'
 })
 export class ApiService {
-
 
   constructor(
     private http: HttpClient,

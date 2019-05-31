@@ -1,5 +1,6 @@
 export interface Book {
     id: number;
+    bookCode: string;
     title: string;
     authors: string[];
     price: number;

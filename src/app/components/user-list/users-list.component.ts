@@ -25,8 +25,6 @@ export class UsersListComponent implements OnInit {
   dataSource: MatTableDataSource<any>;
   @ViewChild(MatPaginator) paginator: MatPaginator;
   
-  private usersBase: User[];
-  private dataChange: BehaviorSubject<User[]>;
 
   constructor(
 
@@ -37,17 +35,12 @@ export class UsersListComponent implements OnInit {
   ) {
     // this.dataSource = new MatTableDataSource(this.getUserBase());
 
-    this.usersBase = [];
-    this.dataChange = <BehaviorSubject<User[]>>new BehaviorSubject([]);
   }
 
   ngOnInit() {
     this.renderMatTable();
   }
 
-  get _usersBase() {
-    return this.dataChange.asObservable();
-  }
 
   public applyFilter(value: any){
     this.dataSource.filter = value.trim().toLowerCase();

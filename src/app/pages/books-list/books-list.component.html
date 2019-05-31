@@ -41,7 +41,7 @@
                     </button>
                     <button mat-mini-fab color="accent" matTooltip="Buy book" (click)="onClickCart(item)" routerLink="/cart">Buy</button>
                     <button mat-icon-button color="primary" matTooltip="More about book">
-                        <mat-icon aria-label="Get information about book" [routerLink]="['/book', item.id]">info</mat-icon>
+                        <mat-icon aria-label="Get information about book" [routerLink]="['/book', item.bookCode]">info</mat-icon>
                     </button>
                 </div>
                 <div class="books-nav-admin" *ngIf="isAdmin">

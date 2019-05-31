@@ -10,12 +10,12 @@
     <form [formGroup]="bookForm" novalidate (ngSubmit)="submit(formDirective)" class="form-book" #formDirective="ngForm">
       <div class="form-container">
           <mat-form-field appearance="fill" color="primary">
-              <mat-label>Enter book's ID</mat-label>
+              <mat-label>Enter book's code</mat-label>
               <input
                 type="text" 
                 matInput
-                placeholder="ID"
-                formControlName="id">
+                placeholder="Book code"
+                formControlName="bookCode">
           </mat-form-field>
         
           <mat-form-field appearance="fill" color="primary">
@@ -68,22 +68,6 @@
                 formControlName="description">
           </mat-form-field>
 
-          <!-- <div class="input-file">
-            <button mat-button color="primary">
-              <input
-                type="file"
-                name="image"
-                placeholder="Cover"
-                formControlName="cover"
-                (change)="addCover($event)"
-                accept=".jpg, .jpeg, .png"
-                >
-            </button>
-            <div *ngIf="imageSrc">
-                <img [src]="imageSrc" alt="Image preview" style="max-width:100px;max-height:100px">
-            </div>
-          </div> -->
-
           <div class="input-file">
             <div class="input-file-title">Add book cover:</div>
             <button mat-raised-button>
@@ -109,9 +93,6 @@
 
             <img *ngIf="imageChangedEvent" [src]="croppedImage" />
 
-            <!-- <div *ngIf="imageSrc">
-              <img [src]="imageSrc" alt="Image preview" style="max-width:100px;max-height:100px">
-            </div> -->
           </div>
 
 

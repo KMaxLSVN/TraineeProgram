@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormArray, FormGroupDirective } from '@angular/forms';
-import { BookSevice } from 'src/app/shared/_services';
+import { BookSevice, BooksService } from 'src/app/shared/_services';
 import { ImageCroppedEvent } from 'ngx-image-cropper';
 import { Book } from 'src/app/shared/_models';
 
@@ -24,13 +24,14 @@ export class AddBookComponent implements OnInit {
 
     private formBuilder: FormBuilder,
     private bookService: BookSevice,
+    private booksService: BooksService,
 
   ) { }
 
   ngOnInit() {
 
     this.bookForm = this.formBuilder.group({
-      id: ['', [Validators.minLength(3),
+      bookCode: ['', [Validators.minLength(3),
                   Validators.required]
       ],
       title: ['', [Validators.pattern("^[A-za-z0-9_-]{2,15}$"),
@@ -92,14 +93,10 @@ export class AddBookComponent implements OnInit {
     if(this.bookForm.valid){
       console.log(this.bookForm.value);
       this.book = this.bookForm.value;
-      // if(this.bookForm.controls.cover.patchValue){
-      //   book['image'] = this.bookForm.controls.cover.patchValue;
-      // } else {
-      //   book['image'] = '';
-      // }
       this.book['image'] = this.croppedImage;
       console.log(this.book);
-      this.bookService.addBook(this.book);
+      // this.bookService.addBook(this.book);
+      this.booksService.addBook(this.book).subscribe(res => res);
       formDirective.resetForm();
       this.bookForm.reset();
       this.imageChangedEvent = null;

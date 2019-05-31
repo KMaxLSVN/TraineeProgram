@@ -8,6 +8,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Observable, throwError } from 'rxjs';
 import { retry, catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
+import { AuthService } from '../shared/_services';
 
 
 
@@ -16,6 +17,7 @@ export class ErrorInterceptor implements HttpInterceptor {
   constructor(
       private toastr: ToastrService,
       private router: Router,
+      private auth: AuthService,
       ) {}
 
       intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>{
@@ -37,6 +39,7 @@ export class ErrorInterceptor implements HttpInterceptor {
                                 break;
                             case 401:
                                 errorMessage = this.toastr.error(error.error.message, `${error.status}` , {timeOut: 10000});
+                                this.auth.logout();
                                 this.router.navigate(['/login']);
                                 // redirect to login component
                                 break;

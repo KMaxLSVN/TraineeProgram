@@ -13,17 +13,32 @@ export class HomeComponent implements OnInit {
   linear: any;
   isLinear: any;
 
+  isAuthenticated: boolean;
+
   constructor(
     private auth: AuthService,
     private router: Router,
-  ) { 
+  ) {
+    this. isAuthenticated = this.auth.isAuthenticated();
   }
 
   ngOnInit() {
-    const token = this.auth.getDecodedAuthToken();
-    if(!token.exp){
-      this.auth.logout();
-      this.router.navigate(['/login']);
+    // const token = this.auth.getAuthToken();
+    // if(token){
+
+    //   this.auth.logout();
+    //   this.router.navigate(['/login']);
+    // }
+
+    
+  }
+
+  trigger(status: boolean): void {
+    debugger
+    if(status){
+      this.router.navigate(['/cart'])
+    } else {
+      this.router.navigate(['/login'])
     }
   }
 

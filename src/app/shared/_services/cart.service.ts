@@ -143,7 +143,7 @@ export class CartService {
   sumPrice(): number{
     let data = this.readCart();
     return data.reduce( (accumulator, item) => {
-      return (accumulator + (item.quantity * item.price)); 
+      return (accumulator + (item.quantity * item.price)).toFixed(2); 
     }, 0);
   }
   

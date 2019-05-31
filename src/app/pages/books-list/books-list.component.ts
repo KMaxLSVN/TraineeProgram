@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 
 import { Router } from '@angular/router';
 
-import { AuthenticationService, BookSevice, CartService, AuthService } from '../../shared/_services';
+import { AuthenticationService, BookSevice, CartService, AuthService, BooksService } from '../../shared/_services';
 import { Book, User } from 'src/app/shared/_models';
 import { ToastrService } from 'ngx-toastr';
 
@@ -14,7 +14,7 @@ import { ToastrService } from 'ngx-toastr';
   export class BooksListComponent implements OnInit {
 
     public isAdmin: boolean;
-    // public book: Book[];
+    public isAuthenticated: boolean;
     public items: Book[];
     public currentUser: User;
 
@@ -24,6 +24,8 @@ import { ToastrService } from 'ngx-toastr';
 
       private authService: AuthenticationService,
       private bookService: BookSevice,
+
+      private booksService: BooksService,
       private cartService: CartService,
 
       private router: Router,
@@ -33,10 +35,15 @@ import { ToastrService } from 'ngx-toastr';
 
     ) {
       this.isAdmin = this.auth.isAdmin();
+      this.isAuthenticated = this.auth.isAuthenticated();
       // Dinamic Render Books List
-      this.bookService.bookList.subscribe( result => {
-        this.items = result;
-      });
+      // this.bookService.bookList.subscribe( result => {
+      //   this.items = result;
+      // });
+      this.booksService.getBooks('1').subscribe(res => {
+        this.items = res;
+      })
+
       // this.currentUser = this.auth.currentEmail();
       // this.authService.currentUser.subscribe(response => this.currentUser = response);
 
@@ -55,7 +62,7 @@ import { ToastrService } from 'ngx-toastr';
     // })
     
     onClickCart(elem){
-      if(this.currentUser){
+      if(this.isAuthenticated){
         this.cartService.addItem(elem);
       } else {
         this.toastr.info('You should to log in at first');
@@ -64,8 +71,12 @@ import { ToastrService } from 'ngx-toastr';
     }
 
     deleteItem(elem: Book){
-      console.log(elem);
-      this.bookService.deleteBook(elem).subscribe(response => this.items = response);
+      // this.bookService.deleteBook(elem).subscribe(response => this.items = response);
+      this.booksService.deleteBook(elem.bookCode).subscribe(res => {
+        console.log(res, this.items);
+        const newData = this.items.filter(el => el.bookCode != elem.bookCode);
+        this.items = newData;
+      })
     }
 
     doSomeThing(result){
