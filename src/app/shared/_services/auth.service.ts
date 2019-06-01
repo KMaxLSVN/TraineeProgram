@@ -40,7 +40,8 @@ export class AuthService {
     // return this.getDecodedAuthToken().email;
     // return this.currentUser.next(this.getDecodedAuthToken().email);
     let email = this.getDecodedAuthToken().email;
-    return this.currentUser.next(email);
+    this.currentUser.next(email);
+    return email;
   }
 
   getDecodedAuthToken(){
@@ -53,7 +54,7 @@ export class AuthService {
   }
 
   login(email: string, password: string){
-    return this.http.post(environment.host + environment.auth, {email, password})
+    return this.http.post(environment.host + environment.auth, {email, password}, {withCredentials: true})
       .pipe( map((data: any) => {
         if(data && data.token){
           localStorage.setItem('currentUserAPI', JSON.stringify(data));
@@ -66,6 +67,10 @@ export class AuthService {
   logout(){
     localStorage.removeItem('currentUserAPI');
     this.currentUser.next();
+  }
+
+  getSession(){
+    return this.http.get(environment.host + 'session',{withCredentials: true});
   }
 
 }

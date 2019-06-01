@@ -24,7 +24,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     // const token = this.auth.getAuthToken();
-    // if(token){
+    // if(token.exp){
 
     //   this.auth.logout();
     //   this.router.navigate(['/login']);
@@ -34,7 +34,6 @@ export class HomeComponent implements OnInit {
   }
 
   trigger(status: boolean): void {
-    debugger
     if(status){
       this.router.navigate(['/cart'])
     } else {

@@ -49,8 +49,16 @@ export class HeaderComponent implements OnInit {
 
   }
 
-  ngOnInit() {    
-    this.auth.currentEmail();
+  ngOnInit() {
+    if(this.auth.currentEmail()){
+      this.auth.getSession().subscribe(res => {
+        console.log(res);
+      }, err => {
+        console.log(err);
+        this.logout();
+      })
+    }
+   
     
   }
 

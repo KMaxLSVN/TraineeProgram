@@ -46,7 +46,11 @@ export class ErrorInterceptor implements HttpInterceptor {
                             case 400:
                                 errorMessage = error.error.message;
                                 break;
+                            case 500:
+                                errorMessage = this.toastr.error(error.error.message, `${error.status}` , {timeOut: 10000});
+                                break;
                             default:
+                                console.log(error)
                                 errorMessage = this.toastr.error(error.error.message, `${error.status}` , {timeOut: 10000});
                                 // redirect to page something go wrong
                         }
